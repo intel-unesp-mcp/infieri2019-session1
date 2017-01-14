@@ -26,7 +26,7 @@ models, aiming to demonstrate the processing power of the Intel® Xeon Phi™
 product family.
 
 Participants will have access to a heterogeneous computing system
-equipped with Intel Xeon processors and Intel® Xeon Phi™ coprocessors, as
+equipped with Intel Xeon® processors and Intel® Xeon Phi™ coprocessors, as
 well as Intel software development tools. The computing system, a
 state-of-the-art server with two Intel Xeon processors (16 cores, 2
 threads/core) and three Intel® Xeon Phi™ coprocessors (171 cores, 4
@@ -52,7 +52,7 @@ and run simple C/C++ applications directly into the coprocessors, and
 then compile and run example codes based on shared-memory parallelism
 with OpenMP and Cilk Plus and distributed-memory parallelism with MPI.
 They will also work on MPI application examples that should be executed
-simultaneously on the Xeon processors and the Xeon Phi™ coprocessors,
+simultaneously on the Xeon® processors and the Xeon Phi™ coprocessors,
 explore the use of Intel Math Kernel Library (MKL), and develop insights
 on tuning parallel applications.
 
@@ -75,7 +75,7 @@ factor of a PCI express device. Intel’s James Reinders has deﬁned the
 purpose of Intel® Xeon Phi™ coprocessors in the following way[^1]: “*Intel
 Xeon Phi™ coprocessors are designed to extend the reach of applications
 that have demonstrated the ability to fully utilize the scaling
-capabilities of Intel Xeon processor-based systems and fully exploit
+capabilities of Intel Xeon® processor-based systems and fully exploit
 available processor vector capabilities or memory bandwidth.*” It cannot
 be used as a stand-alone processor. However, up to eight Intel® Xeon Phi™
 coprocessors can be used in a single chassis[^2]. Each coprocessor
@@ -83,7 +83,7 @@ features more than 50 cores clocked at 1 GHz or more, supporting 64-bit
 x86 instructions. The exact number of cores depends on the model and the
 generation of the product. These in-order cores support four-way hyper-
 threading, resulting in more than 200 logical cores. Cores of Intel Xeon
-Phi coprocessors are interconnected by a high-speed bidirectional ring,
+Phi™ coprocessors are interconnected by a high-speed bidirectional ring,
 which unites L2 caches of the cores into a large coherent aggregate
 cache over 25 MB in size. The coprocessor also has over 6 GB of onboard
 GDDR5 memory. The speed and energy efficiency of Intel® Xeon Phi™
@@ -95,7 +95,7 @@ reciprocal, square root, power and exponent operations, commonly used in
 physical modeling and statistical analysis. The theoretical peak
 performance of an Intel® Xeon Phi™ coprocessor is 1 TFLOP/s in double
 precision. This performance is achieved at the same power consumption as
-in two Intel Xeon processors, which yield up to 300 GFLOP/s.
+in two Intel Xeon® processors, which yield up to 300 GFLOP/s.
 
 In order to completely utilize the full power of Intel® Xeon Phi™
 coprocessors (as well as Intel Xeon-based systems), applications must
@@ -111,14 +111,14 @@ utilize several levels of parallelism:
     employ the 512-bit vector units.
 
 The novelty of developer experience in Intel® Xeon Phi™ coprocessor is the
-continuity of the programming model between Xeon processor and Xeon Phi™
+continuity of the programming model between Xeon® processor and Xeon Phi™
 coprocessor programming:
 
 1.  The same C, C++ or Fortran code can be compiled into applications
-    for Intel Xeon processors and Intel® Xeon Phi™ coprocessors.
+    for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors.
     Cross-platform porting is possible with only code re-compilation.
 
-2.  The same parallel frameworks are supported by the Intel Xeon and
+2.  The same parallel frameworks are supported by the Intel Xeon® and
     Intel® Xeon Phi™ architectures. MPI can be used to scale in
     distributed or shared memory with Intel® Xeon Phi™ coprocessors acting
     as individual cluster nodes. OpenMP, Intel Cilk Plus, Intel
@@ -145,7 +145,7 @@ coprocessor programming:
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_
     <http://www.colfax-intl.com/nd/xeonphi/book.aspx>
 
--   _An Overview of Programming for Intel Xeon processors and Intel® Xeon Phi™ coprocessors_
+-   _An Overview of Programming for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors_
     <http://software.intel.com/sites/default/files/article/330164/an-overview-of-programming-for-intel-xeon-processors-and-intel-xeon-phi-coprocessors.pdf>
 
 -   _Intel® Xeon Phi™ Coprocessor Developer´s Quick Start Guide_
@@ -164,7 +164,7 @@ coprocessor programming:
 
 This document assumes that the testing platform has been setup and is
 ready to use. We will be using a state-of-the-art server - loaned by
-Intel - with two Intel Xeon processors (16 cores, 2 threads/core) and
+Intel - with two Intel Xeon® processors (16 cores, 2 threads/core) and
 three Intel® Xeon Phi™ coprocessors (171 cores, 4 threads/core), as well
 as several Intel software development tools. To simplify nomenclature,
 we will refer to the testing platform as “the host” (or “the host
@@ -207,13 +207,13 @@ for managing the coprocessor operating environment.
 ### 1.2 Overview of the Xeon Phi™ hardware architecture ###
 
 Intel® Xeon Phi™ coprocessors have been designed as a supplement to the
-Intel Xeon processor family. These computing accelerators feature the
+Intel Xeon® processor family. These computing accelerators feature the
 MIC (Many Integrated Core) architecture, which enables fast and
 energy-efficient execution of High Performance Computing (HPC)
 applications utilizing massive thread parallelism, vector arithmetic and
 streamlined memory access. The term “Many Integrated Core” is used to
 distinguish the Intel® Xeon Phi™ product family from the “Multi-Core”
-family of Intel Xeon processors.
+family of Intel Xeon® processors.
 
 The Xeon Phi™ card can be thought of as a computer board containing the
 coprocessor silicon chip with up to 61 cores, their associated caches,
@@ -224,7 +224,7 @@ computer system. The whole coprocessor card is what is commonly just
 called the Xeon Phi™ coprocessor. A schematic view of the key components
 of the coprocessor card is shown in Figure 1. The flash memory is used
 to store the coprocessor bootstrap code, similar to the BIOS in an Intel
-Xeon processor platform. The System Management Controller (SMC) handles
+Xeon® processor platform. The System Management Controller (SMC) handles
 information coming from sensors that measure temperature, voltage, and
 current. The different Xeon Phi™ coprocessor models vary on such factors
 as number of cores, memory size and speed, thermal solutions and form
@@ -302,7 +302,7 @@ components to operate properly and interoperate with other hardware
 components in a system. The system software component of the Xeon Phi™
 coprocessor, known as the Intel Many Integrated Core (MIC) Platform
 Software Stack (MPSS), provides this functionality. When installing
-coprocessors for use in an Intel Xeon processor platform for the first
+coprocessors for use in an Intel Xeon® processor platform for the first
 time, an early step that needs to be done is to download, install, and
 launch the latest version of Intel MPSS.
 
@@ -379,7 +379,7 @@ is carried over the PCIe bus instead of network interconnects.
 **Figure 3: Simplified view of the Intel® Xeon Phi™ software stack**
 
 The careful examination of the software stack represented in Figure 3
-reveals two principal ways of accessing the Xeon Phi™™ coprocessor:
+reveals two principal ways of accessing the Xeon Phi™ coprocessor:
 
 -   Offload (green line): applications are started and run on the
     host processor. Selected compute-intensive and highly parallel parts
@@ -393,7 +393,7 @@ reveals two principal ways of accessing the Xeon Phi™™ coprocessor:
     of directives.
 
 -   Native (red line): applications can be run natively on the Xeon
-    Phi coprocessors. To the applications, the coprocessor looks like a
+    Phi™ coprocessors. To the applications, the coprocessor looks like a
     standalone multicore computer. Users can log in directly onto the
     Xeon Phi™ via ssh and execute applications, just as they are used to
     from the host system. Applications are compiled on the host for
@@ -424,7 +424,7 @@ coprocessor can be chosen for optimal performance.
 
 ![infieri01_pic04](img/infieri01_pic04.png)
 
-**Figure 4: Programming models for an Intel Xeon platform with Xeon Phi™ coprocessors**
+**Figure 4: Programming models for an Intel Xeon® platform with Xeon Phi™ coprocessors**
 
 Included in Figure 4 is a conceptual view of how code might be launched
 and executed in the key enabled programming uses. From left to right
@@ -447,7 +447,7 @@ The Intel MPI library supports all these programming execution models.
 MPI is the de facto library-based communication environment used to
 enable parallel applications to run, communicate, and scale across
 multiple processing cores, either between the multiple cores in a single
-Intel Xeon processor platform or across a connected network of nodes in
+Intel Xeon® processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
 
@@ -760,7 +760,7 @@ there is one, or run in the host if not.
 
 The first example uses the directive `#pragma offload target(mic)`,
 which informs the compiler that the segment of the code immediately
-below it (and delimited with brackets) should be executed on an Intel
+below it (and delimited with brackets) should be executed on an Intel®
 Xeon Phi™ coprocessor. Take a look at the content of the source file
 `hello-offload1.c` in `/home/traineeN/source-files/session1`, then compile
 and run it:
@@ -881,7 +881,7 @@ source code and the mpirun utility to run the binary in the host system:
 
 Notice that the output is not ordered by rank; this occurs because each
 logical thread executes independently. Let us now compile, upload the
-binary and run the same code natively on the Intel Xeon coprocessor mic0
+binary and run the same code natively on the Intel Xeon® coprocessor mic0
 (and do the same for mic1 and mic2):
   
 ```
@@ -918,8 +918,8 @@ method. For more details please check the link below (Chapter 3):
 
 <http://software.intel.com/en-us/articles/using-the-intel-mpi-library-on-intel-xeon-phi-coprocessor-systems>
 
-Let us start by generating binaries for the Xeon processors and the Xeon
-Phi coprocessors, and then transfer the corresponding binary to the
+Let us start by generating binaries for the Xeon® processors and the Xeon
+Phi™ coprocessors, and then transfer the corresponding binary to the
 coprocessors:
 
 ``` 
@@ -986,7 +986,7 @@ James Reinders (Elsevier, 2013).
 ### 3.2 Hands-on Activities ###
 
 **3.2.1** In this activity we will compile a code that uses only one
-core of the Intel Xeon coprocessor. Take a look at the `helloflops1.c`
+core of the Intel Xeon® coprocessor. Take a look at the `helloflops1.c`
 code in `/home/traineeN/source-files/session1` (use `less`, as the file
 has over 90 lines). Line 72 of the code is related to an important
 compute capability of the Xeon Phi™: the availability of fused multiply
@@ -1219,7 +1219,7 @@ In this activity you are invited to run the N-body simulation described
 in the white paper mentioned in the very beginning of this lab workbook
 (page 4, “Before you start”). This article is a good reference to review
 when evaluating how to write high-performance code for the Intel Xeon
-Phi coprocessor.
+Phi™ coprocessor.
 
 ### 4.2 Activities ###
 
