@@ -722,13 +722,16 @@ variable, so we need to set it first:
   [phi01]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
   [phi01]$ micnativeloadex ./hello.mic –d 0
   ```
+
   > Hello world! I have 228 logical cores.
 
+  
   ```
   [phi01]$ micnativeloadex ./hello.mic –d 1
   ```
 
   > Hello world! I have 228 logical cores.
+ 
 
   ```
   [phi01]$ micnativeloadex ./hello.mic –d 2
