@@ -1091,7 +1091,7 @@ effectively used. This code gets close to the theoretical peak
 performance expected for one core of the Xeon Phi coprocessor.
 
 Now open the source code using vi and go to line 55. Change the number
-of threads in omp\_set\_num\_threads() to 3 or 4. Remember that the
+of threads in ´omp_set_num_threads()´ to ´3´ or ´4´. Remember that the
 maximum number of threads that each Xeon Phi core can handle is 4, so if
 you use a number greater than 4, the first four threads will be assigned
 to one core and the next ones will be assigned to (an)other core(s). The
@@ -1099,12 +1099,12 @@ authors of this code wrote it in such a way that the maximum performance
 is achieved with only two threads per core; thus we will not achieve
 peak performance because each set of four threads will be assigned to a
 single core. Check this by changing the number of threads in
-omp\_set\_num\_threads(), first to 3 or 4, and then to a number greater
-than 4, recompile the code, upload it to the coprocessors and run again.
+`omp_set_num_threads()`, first to `3` or `4`, and then to a number greater
+than `4`, recompile the code, upload it to the coprocessors and run again.
 You will see that the performance should remain more or less the same.
 
-**3.2.3** The next code, hello-flops3.c, is an updated version of
-hello-flops2.c. It allows that each new thread is assigned to one core
+**3.2.3** The next code, `hello-flops3.c`, is an updated version of
+`hello-flops2.c`. It allows that each new thread is assigned to one core
 until the maximum number of cores available. Subsequent threads will
 then be reassigned to the remaining cores in the same manner. If the
 code runs e.g. in a 60-core coprocessor and we define 120 threads, then
@@ -1113,53 +1113,46 @@ the coprocessor cores. We should then get close to the coprocessor's
 theoretical peak performance.
 
 Have a look at the source code. The way that threads are distributed is
-controlled by the KMP\_AFFINITY value. If it is set to "compact", the
+controlled by the `KMP_AFFINITY` value. If it is set to `compact`, the
 OpenMP runtime will assign threads to each core first before using the
-next one. On the other hand, if it is set to "scatter", threads will be
+next one. On the other hand, if it is set to `scatter`, threads will be
 scattered across the cores.
 
-Let us compile hello-flops3.c and upload it to one of the coprocessors
+Let us compile `hello-flops3.c` and upload it to one of the coprocessors
 using the same command-line commands we have been using so far:
 
-  
+``` 
 [phi01]$ icc -openmp -mmic -O3 hello-flops3.c -o hello-flops3
-
 [phi01]$ scp hello-flops3 mic0:
+``` 
   
-  
-
 Before running the compiled code, we need to define the following
 environment variables at each of the coprocessors' command prompts:
 
-  
+``` 
 [phi01]$ ssh mic0
-
-[phi01-mic]$ export OMP\_NUM\_THREADS=2
-
-[phi01-mic]$ export KMP\_AFFINITY=compact
-  
-  
+[phi01-mic]$ export OMP_NUM_THREADS=2
+[phi01-mic]$ export KMP_AFFINITY=compact
+``` 
 
 Execute the binary on the coprocessor, and take note of the results:
 
+```
 [phi01-mic]$ ./hello-flops3
-  
+``` 
 
 What did you get? The same results we have got using the previous code.
 Look how we have defined the environment variables: two threads only,
-and assigned to one core (affinity value = compact). Let us now make a
+and assigned to one core `affinity value = compact`. Let us now make a
 change in the environment variables (XXX must be two times the number of
 cores available: - 114 in our case):
 
-  
+``` 
 [phi01-mic]$ ssh mic0
-
-[phi01-mic]$ export OMP\_NUM\_THREADS=XXX (XXX = 114)
-
-[phi01-mic]$ export KMP\_AFFINITY=scatter
+[phi01-mic]$ export OMP_NUM_THREADS=XXX (XXX = 114)
+[phi01-mic]$ export KMP_AFFINITY=scatter
+``` 
   
-  
-
 Run again and check the results. Change the environment variables to
 different settings, rerun the code, and compare the results obtained.
 How much did you get? Have you approached the Intel Xeon Phi peak
@@ -1167,56 +1160,59 @@ performance?
 
 **3.2.4** In the previous three activities we have been using the
 programming model known as native mode, in which we compile programs
-with the -mmic compiler option; the executable can then run directly on
+with the `-mmic` compiler option; the executable can then run directly on
 the coprocessors. Now let us try the offload programming model, as we
 have seen in previous exercises. In this programming model, a program
 running on the host can offload portions of code to a coprocessor
 installed on the same platform.
 
-Take a look at source code hello-flops3-offload.c. This code will be
+Take a look at source code `hello-flops3-offload.c`. This code will be
 compiled to run on the host processor, and parts of it will be
 transferred from host to coprocessor. If no coprocessor is available,
 then the block of code that could be offloaded to the coprocessor runs
-on the host. Compile hello-flops3-offload.c using the command-line
+on the host. Compile `hello-flops3-offload.c` using the command-line
 syntax shown below:
 
+```
 [phi01]$ icc –openmp –O3 hello-flops3–offload.c –o hello-flops3-offload
-  
+``` 
 
 Before executing it, we need to set up the environment variables the
 code requires. Enter the following lines on the host console:
 
-  
-[phi01]$ export MIC\_ENV\_PREFIX=MIC
-
-[phi01]$ export MIC\_OMP\_NUM\_THREADS=114
-
-[phi01]$ export MIC\_KMP\_AFFINITY=scatter
-  
+``` 
+[phi01]$ export MIC_ENV_PREFIX=MIC
+[phi01]$ export MIC_OMP_NUM_THREADS=114
+[phi01]$ export MIC_KMP_AFFINITY=scatter
+``` 
   
 
 Check the syntax of the commands by issuing:
 
+```
 [phi01]$ env | grep MIC
-  
+``` 
 
 If everything is ok, launch the code:
 
+```
 [phi01]$ ./hello-flops3-offload
-  
+``` 
 
 Check the results and compare with the results obtained in the previous
 activity for the mic0 coprocessor. The code as it is will run on mic0.
 If you want to run it on mic1, change lines 37, 38, 55, and 75 from
-“*target (mic)*” to “*target (mic:1)*”. Then recompile the source code
+`target (mic)` to `target (mic:1)`. Then recompile the source code
 and, before launching it, modify the environment variable
-MIC\_OMP\_NUM\_THREADS to the appropriate number of threads (228).
+`MIC_OMP_NUM_THREADS` to the appropriate number of threads (`228`).
 
-**Practical Exercises - Part 4**
+______
 
-**Running a basic N-body simulation**
+# Practical Exercises - Part 4 #
 
-**4.1 Goals**
+## Running a basic N-body simulation ##
+
+### 4.1 Goals ###
 
 In this activity you are invited to run the N-body simulation described
 in the white paper mentioned in the very beginning of this lab workbook
@@ -1224,16 +1220,16 @@ in the white paper mentioned in the very beginning of this lab workbook
 when evaluating how to write high-performance code for the Intel Xeon
 Phi coprocessor.
 
-**4.2 Activities**
+### 4.2 Activities ###
 
 Please read carefully and refer to the white paper below for compiler
 instructions (Listings 2, 3, 5, and 6). The source codes (listings 1 and
 4) can be found on the host system in the usual location
-(/home/traineeN/source-files/session1). Please refer to the teaching
+`/home/traineeN/source-files/session1`. Please refer to the teaching
 assistant(s) if you have any question.
 
-A. Vladimirov, V. Karpusenko, “*Test-driving Intel Xeon Phi coprocessors
-with a basic N-body simulation*”, Colfax International, January 2013.
+A. Vladimirov, V. Karpusenko, “_Test-driving Intel Xeon Phi coprocessors
+with a basic N-body simulation_”, Colfax International, January 2013.
 Available at
 
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
