@@ -888,9 +888,9 @@ binary and run the same code natively on the Intel Xeon coprocessor mic0
 [phi01]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
 [phi01]$ scp hello-mpi.mic mic0:
 [phi01]$ ssh mic0
-[phi01-mic]$ mpirun -n XXX ./hello-mpi.mic (XXX = 228 in our case)
+[phi01-mic]$ mpirun -n XXX ./hello-mpi.mic 
 ```
-  
+**(XXX = 228 in our case)**  
 
 **2.2.7** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
