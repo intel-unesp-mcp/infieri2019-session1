@@ -1092,7 +1092,7 @@ effectively used. This code gets close to the theoretical peak
 performance expected for one core of the Xeon Phi coprocessor.
 
 Now open the source code using vi and go to line 55. Change the number
-of threads in ´omp_set_num_threads()´ to ´3´ or ´4´. Remember that the
+of threads in `omp_set_num_threads()` to `3` or `4`. Remember that the
 maximum number of threads that each Xeon Phi core can handle is 4, so if
 you use a number greater than 4, the first four threads will be assigned
 to one core and the next ones will be assigned to (an)other core(s). The
