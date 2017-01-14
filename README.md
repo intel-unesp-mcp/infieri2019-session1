@@ -905,8 +905,8 @@ launch the binary. Check the result.
 
 ```
 [phi01]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
-[phi01]$ export MIC\_ENV\_PREFIX=PHI
-[phi01]$ export PHI\_OMP\_NUM\_THREADS=4
+[phi01]$ export MIC_ENV_PREFIX=PHI
+[phi01]$ export PHI_OMP_NUM_THREADS=4
 [phi01]$ mpirun -n 4 ./hello-mpi-omp-offload
 ```
 
@@ -965,6 +965,7 @@ available threads (716):
 ```
 [phi01]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 228 \~/montecarlo.mic : -host mic1 -n 228 \~/montecarlo.mic : -host mic2 -n 228 \~/montecarlo.mic
 ```
+______
 
 # Practical Exercises - Part 3 #
 
@@ -981,11 +982,11 @@ Part 3 have been extracted from the *highly recommended* book “*Intel
 Xeon Phi Coprocessor High-Performance Programming*”, by Jim Jeffers and
 James Reinders (Elsevier, 2013).
 
-**3.2 Hands-on Activities**
+### 3.2 Hands-on Activities ###
 
 **3.2.1** In this activity we will compile a code that uses only one
-core of the Intel Xeon coprocessor. Take a look at the helloflops1.c
-code in /home/traineeN/source-files/session1 (use ´*less*´, as the file
+core of the Intel Xeon coprocessor. Take a look at the `helloflops1.c`
+code in `/home/traineeN/source-files/session1` (use `less`, as the file
 has over 90 lines). Line 72 of the code is related to an important
 compute capability of the Xeon Phi: the availability of fused multiply
 and add (FMA), a floating-point operation that computes the product of
@@ -1034,20 +1035,16 @@ something near 34 GigaFLOPS per core.
 Let us now compile the hello-flops1.c code, upload it to one of the
 coprocessors, and run it:
 
-  
+```
 [phi01]$ icc -mmic -O3 hello-flops1.c -o hello-flops1
-
 [phi01]$ scp hello-flops1 mic0:
-
 [phi01]$ ssh mic0
-
 [phi01-mic]$ ./hello-flops1
+```
 
-  Initializing
-
-  Starting Compute
-
-  GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415
+> Initializing
+Starting Compute
+GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415
   
   
 
