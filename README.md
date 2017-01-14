@@ -1044,7 +1044,9 @@ coprocessors, and run it:
 
 > Initializing
 
+
 > Starting Compute
+
 
 > GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415
   
