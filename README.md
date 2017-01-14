@@ -1025,7 +1025,7 @@ For the Intel Xeon Phi model 3120A we get:
 * 1.100 GHz x 57 cores x 16 x 2 = 2006.4 GigaFLOPS
   
 
-and for the Intel Xeon Phi model 5110P:
+And for the Intel Xeon Phi model 5110P:
 
 * 1.053 GHz x 60 cores x 16 x 2 = 2021.8 GigaFLOPS
   
