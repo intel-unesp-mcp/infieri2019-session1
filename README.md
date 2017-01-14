@@ -82,7 +82,7 @@ coprocessors can be used in a single chassis[^2]. Each coprocessor
 features more than 50 cores clocked at 1 GHz or more, supporting 64-bit
 x86 instructions. The exact number of cores depends on the model and the
 generation of the product. These in-order cores support four-way hyper-
-threading, resulting in more than 200 logical cores. Cores of Intel Xeon
+threading, resulting in more than 200 logical cores. Cores of Intel® Xeon
 Phi™ coprocessors are interconnected by a high-speed bidirectional ring,
 which unites L2 caches of the cores into a large coherent aggregate
 cache over 25 MB in size. The coprocessor also has over 6 GB of onboard
