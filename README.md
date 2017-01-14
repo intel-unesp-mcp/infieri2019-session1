@@ -1040,15 +1040,11 @@ coprocessors, and run it:
 [phi01]$ scp hello-flops1 mic0:
 [phi01]$ ssh mic0
 [phi01-mic]$ ./hello-flops1
-```
+```  
 
-> Initializing
-
-
-> Starting Compute
-
-
-> GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415
+> Initializing  
+Starting Compute  
+GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415  
   
   
 
