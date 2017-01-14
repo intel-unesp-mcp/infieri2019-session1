@@ -1085,8 +1085,8 @@ directive `–openmp`):
 ```  
   
 > Initializing  
-> Starting Compute on 2 threads  
-> GFlops = 51.200, Secs = 1.469, GFlops per sec = 34.856  
+Starting Compute on 2 threads  
+GFlops = 51.200, Secs = 1.469, GFlops per sec = 34.856  
   
   
 
