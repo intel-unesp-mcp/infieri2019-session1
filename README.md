@@ -72,7 +72,7 @@ We will refer again to this white paper later on in this training.
 
 Intel® Xeon Phi™ coprocessor is a symmetric multiprocessor in the form
 factor of a PCI express device. Intel’s James Reinders has deﬁned the
-purpose of Intel® Xeon Phi™ coprocessors in the following way[^1]: “*Intel
+purpose of Intel® Xeon Phi™ coprocessors in the following way[^1]: “*Intel®
 Xeon Phi™ coprocessors are designed to extend the reach of applications
 that have demonstrated the ability to fully utilize the scaling
 capabilities of Intel Xeon® processor-based systems and fully exploit
