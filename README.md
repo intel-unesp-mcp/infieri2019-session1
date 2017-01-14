@@ -189,7 +189,7 @@ $ ssh –X phi01.ncc.unesp.br –l traineeN
 Please refer to the teaching assistant(s) for more details.
 
 
-## Practical Exercises - Part 1 ##
+# Practical Exercises - Part 1 #
 
 ## Introduction to the Intel Xeon Phi coprocessor ##
 
@@ -294,7 +294,7 @@ per second) directly connected to the Intel Xeon Phi coprocessor.
 For more detailed information please refer to ”Intel Xeon Phi
 Coprocessor: System Software Developers Guide".
 
-### 1.3 Overview of the Xeon Phi system software and programming models ##
+### 1.3 Overview of the Xeon Phi system software and programming models ###
 
 The Intel Xeon Phi coprocessor needs support from system software
 components to operate properly and interoperate with other hardware
@@ -423,8 +423,7 @@ coprocessor can be chosen for optimal performance.
 
 ![infieri01_pic04](img/infieri01_pic04.png)
 
-**Figure 4: Programming models for an Intel Xeon platform with Xeon Phi
-coprocessors**
+**Figure 4: Programming models for an Intel Xeon platform with Xeon Phi coprocessors**
 
 Included in Figure 4 is a conceptual view of how code might be launched
 and executed in the key enabled programming uses. From left to right
@@ -458,7 +457,7 @@ console and use the command `ssh` to login to the host `phi01.ncc.unesp.br`
 as user traineeN (N = 1 … 16; please check with the teaching assistant
 which number has been assigned to you):
 
-```  
+```
 $ ssh –X traineeN@phi01.ncc.unesp.br
 ```
 
@@ -525,11 +524,11 @@ percentage utilization, of the corresponding Xeon Phi coprocessor.
 
 To close the GUI application, type `fg` in the console and then hit ^C.
 For more information, please check the documentation available at
-/opt/intel/mic/sysmgmt/docs/en\_US/ (use scp to copy the pdf file to
+`/opt/intel/mic/sysmgmt/docs/en_US/` (use scp to copy the pdf file to
 your local desktop).
 
 **Note:** If your workstation does not have X11, you will get the error
-message: “*micsmc-gui: cannot connect to X server*”. Alternatively, you
+message: `micsmc-gui: cannot connect to X server`. Alternatively, you
 can use the command below:
 
 ```
@@ -608,11 +607,13 @@ host system, and then transfer it to one of the coprocessor cards using
 Verify also if you are able to transfer the same file directly from one
 coprocessor card to another one.
 
-**Practical Exercices - Part 2**
+______
 
-**Compiling and running trivially simple applications**
+# Practical Exercices - Part 2 #
 
-**2.1 Goals**
+## Compiling and running trivially simple applications ##
+
+### 2.1 Goals ###
 
 Traditionally, “Hello World” programs are used to illustrate basic
 syntax; most of the examples of this session will follow this tradition.
@@ -622,7 +623,7 @@ will also learn how to offload parts of the code or specific function
 calls of an executable running on the host to the coprocessor, and will
 have the opportunity to play with simple MPI and OpenMP examples.
 
-**2.2 Hands-on Activities**
+### 2.2 Hands-on Activities ##
 
 **2.2.1** A development system with Intel Xeon Phi coprocessors must
 have the Intel software development tools installed, such as compilers,
@@ -640,8 +641,8 @@ commands in the host system console:
   ```
 
 **2.2.2** Let us begin with an extremely trivial code just to check if
-everything is running fine. Take a look at the source code hello.c
-located at /home/traineeN/source-files/session1, then compile and
+everything is running fine. Take a look at the source code `hello.c`
+located at `/home/traineeN/source-files/session1`, then compile and
 execute it:
 
   ```
@@ -710,7 +711,7 @@ locally:
 coprocessors from the host system, using the `micnativeloadex` utility.
 It automatically copies the native binary to a specified coprocessor,
 checks library dependencies and also copies them prior to execution. By
-default, micnativeloadex redirects output from the application running
+default, `micnativeloadex` redirects output from the application running
 on the coprocessor back to the host system console. The output of the
 application is redirected back to the console of the host system. The
 location of the Intel compiler runtime libraries for Intel Xeon Phi
@@ -736,7 +737,7 @@ variable, so we need to set it first:
   > Hello world! I have 228 logical cores.
   
 
-The micnativeloadex utility can also be used to check the library
+The `micnativeloadex` utility can also be used to check the library
 dependencies of the binary code, by using the option `–l`:
 
   ```
@@ -757,7 +758,7 @@ The first example uses the directive `#pragma offload target(mic)`,
 which informs the compiler that the segment of the code immediately
 below it (and delimited with brackets) should be executed on an Intel
 Xeon Phi coprocessor. Take a look at the content of the source file
-hello-offload1.c in `/home/traineeN/source-files/session1`, then compile
+`hello-offload1.c` in `/home/traineeN/source-files/session1`, then compile
 and run it:
 
   ```
@@ -791,48 +792,47 @@ content of the source file `hello-offload3.c`, then compile and run it:
   ```
   [phi01]$ icc hello-offload3.c –o hello-offload3
   [phi01]$ ./hello-offload3
+  ```
   
-  
-
-Set ENV\_VAR to a certain value, run the binary again and compare the
+Set `ENV_VAR` to a certain value, run the binary again and compare the
 output with the previous run:
-
   
-  [phi01]$ export ENV\_VAR=any-value
-
+  ```
+  [phi01]$ export ENV_VAR=any-value
   [phi01]$ ./hello-offload3
-  
+  ```
   
 
-Define any value for MIC\_ENV\_PREFIX (e.g. MIC, PHI, etc), and run
+Define any value for `MIC_ENV_PREFIX` (e.g. MIC, PHI, etc), and run
 again, comparing the output with the previous runs:
 
- 
-  [phi01]$ export MIC\_ENV\_PREFIX=PHI
-
+  ``` 
+  [phi01]$ export MIC_ENV_PREFIX=PHI
   [phi01]$ ./hello-offload3
+  ```
 
+Now define a different value for `PHI_ENV_VAR` and run once again:
 
-Now define a different value for PHI\_ENV\_VAR and run once again:
-
-  
-  [phi01]$ export PHI\_ENV\_VAR=any-other-value
-
+  ```
+  [phi01]$ export PHI_ENV_VAR=any-other-value
   [phi01]$ ./hello-offload3
-  
+  ```
   
 
-**Note:** to undefine an environment variable use the command ‘*unset*’:
-unset MIC\_ENV\_PREFIX
+**Note:** to undefine an environment variable use the command `unset`:
+  
+  ```
+  unset MIC_ENV_PREFIX
+  ```
 
 **2.2.5** We can generate diagnostic output for offload applications
 that utilize Intel Xeon Phi coprocessors by using the environment
-variable OFFLOAD\_REPORT, which controls the verbosity of the diagnostic
-output: OFFLOAD\_REPORT = 1 produces output including the offload
-locations and times; OFFLOAD\_REPORT = 2 adds information regarding data
-traffic. If OFFLOAD\_REPORT is set to 0 or not defined, no diagnostic
-output is produced. Set the OFFLOAD\_REPORT environment variable to 1,
-and 2 and run hello-offload1, or hello-offload2, or hello-offload3
+variable `OFFLOAD_REPORT`, which controls the verbosity of the diagnostic
+output: `OFFLOAD_REPORT = 1` produces output including the offload
+locations and times; `OFFLOAD_REPORT = 2` adds information regarding data
+traffic. If `OFFLOAD_REPORT` is set to 0 or not defined, no diagnostic
+output is produced. Set the `OFFLOAD_REPORT` environment variable to 1,
+and 2 and run `hello-offload1`, or `hello-offload2`, or `hello-offload3`
 again, and check the results.
 
 **2.2.6** One major difference between programming for a single system
@@ -855,65 +855,57 @@ ranks.
 
 Let us start with a trivially simple “Hello World” application for MPI.
 Take a look at the hello-mpi.c source code. MPI implementations
-typically provide compiler wrappers (e.g. mpicc, mpiicc, mpiicpc, etc)
+typically provide compiler wrappers (e.g. `mpicc`, `mpiicc`, `mpiicpc`, etc)
 to simplify the process of building MPI programs, and utilities (e.g.
-mpirun, mpiexec) to launch them. In order to verify that the wrappers
+`mpirun`, `mpiexec`) to launch them. In order to verify that the wrappers
 and utilities are all set, run the following commands:
 
-  
+  ``` 
   [phi01]$ mpiicc -v
-
   [phi01]$ mpiicpc -v
-
   [phi01]$ mpirun -info
-  
+  ```
   
 
 Let us start by using the mpiicc wrapper to compile the hello-mpi.c
 source code and the mpirun utility to run the binary in the host system:
 
- 
+  ```
   [phi01]$ mpiicc hello-mpi.c -o hello-mpi
-
   [phi01]$ mpirun -n 32 ./hello-mpi
-
+  ```
 
 Notice that the output is not ordered by rank; this occurs because each
 logical thread executes independently. Let us now compile, upload the
 binary and run the same code natively on the Intel Xeon coprocessor mic0
 (and do the same for mic1 and mic2):
-
   
+  ```
   [phi01]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
-
   [phi01]$ scp hello-mpi.mic mic0:
-
   [phi01]$ ssh mic0
-
   [phi01-mic]$ mpirun -n XXX ./hello-mpi.mic (XXX = 228 in our case)
-  
+  ```
   
 
 **2.2.7** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
 code to two coprocessors in such a way that each thread also says
 “hello”. This is accomplished by means of OpenMP. The number of threads
-will be controlled by the environment variable PHI\_OMP\_NUM\_THREADS.
+will be controlled by the environment variable `PHI_OMP_NUM_THREADS`.
 The information contained in this environment variable should be passed
 to the coprocessors, so we also need to tell the compiler that any
 variable starting with PHI refers to the coprocessors. We can do this by
-using the variable MIC\_ENV\_PREFIX. Take a look at code
-hello-mpi-omp-offload.c and try to understand it; then compile it, and
+using the variable `MIC_ENV_PREFIX`. Take a look at code
+`hello-mpi-omp-offload.c` and try to understand it; then compile it, and
 launch the binary. Check the result.
 
+  ```
   [phi01]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
-
   [phi01]$ export MIC\_ENV\_PREFIX=PHI
-
   [phi01]$ export PHI\_OMP\_NUM\_THREADS=4
-
   [phi01]$ mpirun -n 4 ./hello-mpi-omp-offload
-
+  ```
 
 **2.2.8** In this final activity for Part 2 we will work on a more
 realistic MPI application. Take a look at the source file montecarlo.c,
@@ -926,60 +918,56 @@ Let us start by generating binaries for the Xeon processors and the Xeon
 Phi coprocessors, and then transfer the corresponding binary to the
 coprocessors:
 
-  
+  ``` 
   [phi01]$ mpiicc montecarlo.c -o montecarlo
-
   [phi01]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
-
   [phi01]$ scp montecarlo.mic mic0:
-
   [phi01]$ scp montecarlo.mic mic1:
-
   [phi01]$ scp montecarlo.mic mic2:
-
+  ```
 
 We are going to learn how we can launch an MPI job on the coprocessors
 from the host system. First we need to set an additional environment
-variable on the host, I\_MPI\_MIC, to enable the MPI communication
+variable on the host, `I_MPI_MIC`, to enable the MPI communication
 between host and coprocessors (valid values are: enable|yes|on|1):
 
-  [phi01]$ export I\_MPI\_MIC=enable
-  
+  ```
+  [phi01]$ export I_MPI_MIC=enable
+  ```
 
 Now execute the application on the host and then on the coprocessors,
-using the the flags –host and –n, which specifies the host name and the
+using the the flags `–host` and `–n`, which specifies the host name and the
 number of MPI processes, respectively (be patient, execution time is
 longer compared to the previous exercises):
 
-  
+  ```
   [phi01]$ mpirun -host localhost -n 32 ./montecarlo
-
   [phi01]$ mpirun -host mic0 -n 228 \~/montecarlo.mic
-
   [phi01]$ mpirun -host mic1 -n 228 \~/montecarlo.mic
-
   [phi01]$ mpirun -host mic2 -n 228 \~/montecarlo.mic
-  
+  ```
   
 
 In order to start the application on two coprocessors simultaneously, we
 can specify the list of hosts and their respective parameters using the
 separator ‘:’, as shown below:
 
+  ```
   [phi01]$ mpirun -host mic0 -n 228 \~/montecarlo.mic : -host mic1 –n 228 \~/montecarlo.mic : -host mic2 –n 228
-  
+  ```
 
 Using this syntax, let us now execute the MPI application using all
 available threads (716):
 
+  ```
   [phi01]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 228 \~/montecarlo.mic : -host mic1 -n 228 \~/montecarlo.mic : -host mic2 -n 228 \~/montecarlo.mic
-  
+  ```
 
-**Practical Exercises - Part 3**
+# Practical Exercises - Part 3 #
 
-**High Performance Test-Drive**
+## High Performance Test-Drive ##
 
-**3.1 Goals**
+### 3.1 Goals ###
 
 In this new set of activities we will use simple code examples to
 leverage the Intel Xeon Phi coprocessor towards peak performance, thus
