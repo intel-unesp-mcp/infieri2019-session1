@@ -1072,25 +1072,23 @@ coprocessor must be running more than one thread.
 
 So our current goal now is to enable at least one more thread on a
 single core to enable our code to run closer to the core's peak
-performance. The code hello-flops2.c does that using OpenMP directives.
-Take a look at the code (less hello-flops2.c) and then repeat the
+performance. The code `hello-flops2.c` does that using OpenMP directives.
+Take a look at the code `less hello-flops2.c` and then repeat the
 compile – upload – run sequence (do not forget to use the compiler
-directive –openmp):
+directive `–openmp`):
 
-  
+``` 
 [phi01]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
-
 [phi01]$ scp hello-flops2 mic0:
-
 [phi01]$ ssh mic0
-
 [phi01-mic]$ ./hello-flops2
+```  
+  
+> Initializing  
 
-  Initializing
+> Starting Compute on 2 threads  
 
-  Starting Compute on 2 threads
-
-  GFlops = 51.200, Secs = 1.469, GFlops per sec = 34.856
+> GFlops = 51.200, Secs = 1.469, GFlops per sec = 34.856  
   
   
 
