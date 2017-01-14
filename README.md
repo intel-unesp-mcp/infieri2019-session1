@@ -597,7 +597,7 @@ tool (`scp`). We are going to use this mechanism in the following
 activities to transfer executables compiled in the host system to the
 coprocessors.
 
-Close the connection with mic0 using exit (or \^D), and repeat the
+Close the connection with mic0 using exit (or ^D), and repeat the
 previous command sequence on the second and third coprocessors (mic1 and
 mic2). Check the number of cores, the available memory, and the IP
 address of the second coprocessor.
