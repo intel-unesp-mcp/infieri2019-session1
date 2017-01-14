@@ -718,26 +718,26 @@ location of the Intel compiler runtime libraries for Intel Xeon Phi
 coprocessors is defined by the `SINK_LD_LIBRARY_PATH` environment
 variable, so we need to set it first:
 
-  ```
-  [phi01]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
-  [phi01]$ micnativeloadex ./hello.mic –d 0
-  ```
+```
+[phi01]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
+[phi01]$ micnativeloadex ./hello.mic –d 0
+```
 
-  > Hello world! I have 228 logical cores.
+> Hello world! I have 228 logical cores.
 
   
-  ```
-  [phi01]$ micnativeloadex ./hello.mic –d 1
-  ```
+```
+[phi01]$ micnativeloadex ./hello.mic –d 1
+```
 
-  > Hello world! I have 228 logical cores.
+> Hello world! I have 228 logical cores.
  
 
-  ```
-  [phi01]$ micnativeloadex ./hello.mic –d 2
-  ```
+```
+[phi01]$ micnativeloadex ./hello.mic –d 2
+```
 
-  > Hello world! I have 228 logical cores.
+> Hello world! I have 228 logical cores.
   
 
 The `micnativeloadex` utility can also be used to check the library
