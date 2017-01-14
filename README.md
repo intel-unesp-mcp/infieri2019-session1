@@ -188,6 +188,7 @@ $ ssh –X phi01.ncc.unesp.br –l traineeN
 
 Please refer to the teaching assistant(s) for more details.
 
+______
 
 # Practical Exercises - Part 1 #
 
