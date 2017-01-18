@@ -67,6 +67,18 @@ A. Vladimirov, V. Karpusenko, “*Test-driving Intel® Xeon Phi™ coprocessors 
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
 
 We will refer again to this white paper later on in this training.
+______
+
+## Navigation ##
+
+This course is divided into four parts:
+
+* Practical Exercises - Part 1: Introduction to the Intel® Xeon Phi™ coprocessor
+* Practical Exercices - Part 2: Compiling and running trivially simple applications
+* Practical Exercices - Part 3: High Performance Test-Drive
+* Practical Exercices - Part 4: Running a basic N-body simulation
+
+______
 
 ## What Intel® Xeon Phi™ coprocessors bring to the table
 
