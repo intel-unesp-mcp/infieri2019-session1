@@ -1,3 +1,5 @@
+<a name="top"></a>
+
 # 4rd International Summer School on INtelligent Signal Processing for FrontIEr Research and Industry
 
 ## Lab Workbook - Session 1 (CL6)
@@ -75,9 +77,9 @@ ______
 This course is divided into four parts:
 
 * [Practical Exercises - **Part 1**: Introduction to the Intel® Xeon Phi™ coprocessor](#part1)
-* Practical Exercices - Part 2: Compiling and running trivially simple applications
-* Practical Exercices - Part 3: High Performance Test-Drive
-* Practical Exercices - Part 4: Running a basic N-body simulation
+* [Practical Exercices - **Part 2**: Compiling and running trivially simple applications](#part2)
+* [Practical Exercices - **Part 3**: High Performance Test-Drive](#part3)
+* [Practical Exercices - **Part 4**: Running a basic N-body simulation](#part4)
 
 ______
 
@@ -625,6 +627,8 @@ coprocessor card to another one.
 
 ______
 
+<a name="part2"></a>
+
 # Practical Exercices - Part 2 #
 
 ## Compiling and running trivially simple applications ##
@@ -983,6 +987,8 @@ available threads (716):
 ```
 ______
 
+<a name="part3"></a>
+
 # Practical Exercises - Part 3 #
 
 ## High Performance Test-Drive ##
@@ -1224,6 +1230,8 @@ and, before launching it, modify the environment variable
 
 ______
 
+<a name="part4"></a>
+
 # Practical Exercises - Part 4 #
 
 ## Running a basic N-body simulation ##
@@ -1251,6 +1259,19 @@ Available at
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
 
 ______
+
+### Quick Navigation ###
+
+* [Top](#top)
+* [Practical Exercises - **Part 1**: Introduction to the Intel® Xeon Phi™ coprocessor](#part1)
+* [Practical Exercices - **Part 2**: Compiling and running trivially simple applications](#part2)
+* [Practical Exercices - **Part 3**: High Performance Test-Drive](#part3)
+* [Practical Exercices - **Part 4**: Running a basic N-body simulation](#part4)
+* [Bottom](#bottom)
+
+______
+
+<a name="bottom"></a>
 
 ## Other references ##
 
