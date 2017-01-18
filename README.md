@@ -74,7 +74,7 @@ ______
 
 This course is divided into four parts:
 
-* Practical Exercises - Part 1: Introduction to the Intel® Xeon Phi™ coprocessor
+* [Practical Exercises - **Part 1**: Introduction to the Intel® Xeon Phi™ coprocessor](#part1)
 * Practical Exercices - Part 2: Compiling and running trivially simple applications
 * Practical Exercices - Part 3: High Performance Test-Drive
 * Practical Exercices - Part 4: Running a basic N-body simulation
@@ -203,6 +203,7 @@ Please refer to the teaching assistant(s) for more details.
 
 ______
 
+<a name="part1"></a>
 # Practical Exercises - Part 1 #
 
 ## Introduction to the Intel® Xeon Phi™ coprocessor ##
