@@ -204,6 +204,7 @@ Please refer to the teaching assistant(s) for more details.
 ______
 
 <a name="part1"></a>
+
 # Practical Exercises - Part 1 #
 
 ## Introduction to the Intel® Xeon Phi™ coprocessor ##
