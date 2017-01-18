@@ -1273,7 +1273,7 @@ ______
 
 ### Quick Navigation ###
 
-[Top](#top) | [Part 1](#part1){Introduction to the Intel® Xeon Phi™ coprocessor} | [Part 2](#part2) | [Part 3](#part3) | [Part 4](#part4) | [Bottom](#bottom)
+[Top](#top) | [Part 1](#part1){"Introduction to the Intel® Xeon Phi™ coprocessor"} | [Part 2](#part2) | [Part 3](#part3) | [Part 4](#part4) | [Bottom](#bottom)
 
 ______
 
