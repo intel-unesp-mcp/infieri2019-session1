@@ -1280,7 +1280,8 @@ ______
 
 ### Quick Navigation ###
 
-[Top](#top "Top of the page") | [Part 1](#part1 "Introduction to the Intel® Xeon Phi™ coprocessor") | [Part 2](#part2 "Compiling and running trivially simple applications") | [Part 3](#part3 "High Performance Test-Drive") | [Part 4](#part4 "Running a basic N-body simulation") | [Bottom](#bottom "Bottom of the page") | [the huge and decisive test](https://intel-unesp-mcp.github.io/infieri-2017-advanced/#learning-goals)
+[Top](#top "Top of the page") | [Part 1](#part1 "Introduction to the Intel® Xeon Phi™ coprocessor") | [Part 2](#part2 "Compiling and running trivially simple applications") | [Part 3](#part3 "High Performance Test-Drive") | [Part 4](#part4 "Running a basic N-body simulation") | [Bottom](#bottom "Bottom of the page") | [the huge and decisive test](https://intel-unesp-mcp.github.io/infieri-2017-advanced/#learning-goals){:target="_blank"}
+
 
 ______
 
