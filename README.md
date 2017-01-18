@@ -627,6 +627,12 @@ coprocessor card to another one.
 
 ______
 
+### Quick Navigation ###
+
+[Top](#top "Top of the page") | [Part 1](#part1 "Introduction to the Intel® Xeon Phi™ coprocessor") | [Part 2](#part2 "Compiling and running trivially simple applications") | [Part 3](#part3 "High Performance Test-Drive") | [Part 4](#part4 "Running a basic N-body simulation") | [Bottom](#bottom "Bottom of the page")
+
+______
+
 <a name="part2"></a>
 
 # Practical Exercices - Part 2 #
@@ -987,6 +993,12 @@ available threads (716):
 ```
 ______
 
+### Quick Navigation ###
+
+[Top](#top "Top of the page") | [Part 1](#part1 "Introduction to the Intel® Xeon Phi™ coprocessor") | [Part 2](#part2 "Compiling and running trivially simple applications") | [Part 3](#part3 "High Performance Test-Drive") | [Part 4](#part4 "Running a basic N-body simulation") | [Bottom](#bottom "Bottom of the page")
+
+______
+
 <a name="part3"></a>
 
 # Practical Exercises - Part 3 #
@@ -1227,6 +1239,12 @@ If you want to run it on mic1, change lines 37, 38, 55, and 75 from
 `target (mic)` to `target (mic:1)`. Then recompile the source code
 and, before launching it, modify the environment variable
 `MIC_OMP_NUM_THREADS` to the appropriate number of threads (`228`).
+
+______
+
+### Quick Navigation ###
+
+[Top](#top "Top of the page") | [Part 1](#part1 "Introduction to the Intel® Xeon Phi™ coprocessor") | [Part 2](#part2 "Compiling and running trivially simple applications") | [Part 3](#part3 "High Performance Test-Drive") | [Part 4](#part4 "Running a basic N-body simulation") | [Bottom](#bottom "Bottom of the page")
 
 ______
 
