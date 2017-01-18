@@ -67,6 +67,7 @@ A. Vladimirov, V. Karpusenko, “*Test-driving Intel® Xeon Phi™ coprocessors 
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
 
 We will refer again to this white paper later on in this training.
+
 ______
 
 ## Navigation ##
