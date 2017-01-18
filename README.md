@@ -1258,7 +1258,7 @@ ______
 
 In this activity you are invited to run the N-body simulation described
 in the white paper mentioned in the very beginning of this lab workbook
-(page 4, “Before you start”). This article is a good reference to review
+\(["Before you start”](#before-you-start) \). This article is a good reference to review
 when evaluating how to write high-performance code for the Intel Xeon
 Phi™ coprocessor.
 
