@@ -1271,6 +1271,12 @@ ______
 
 ______
 
+### Quick Navigation ###
+
+[Top](#top) [Part 1](#part1) [Part 2](#part2) [Part 3](#part3) [Part 4](#part4) [Bottom](#bottom)
+
+______
+
 <a name="bottom"></a>
 
 ## Other references ##
