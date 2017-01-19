@@ -157,6 +157,12 @@ coprocessor programming:
 -   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_
     <http://www.apress.com/9781430259268>
 
+-   _Intel Xeon Phi Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)
+    <http://www.lotsofcores.com/>
+
+-   Intel Xeon Phi Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)
+    <http://www.lotsofcores.com/>
+
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_
     <http://www.colfax-intl.com/nd/xeonphi/book.aspx>
 
@@ -467,6 +473,28 @@ multiple processing cores, either between the multiple cores in a single
 Intel Xeon® processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
+
+### 1.3.1 Knights Landing the Second Generation of Xeon Phi Architecture ###
+
+Recently, a second generation of Intel Xeon Phi architecture was released with the code-name Knights Landing (KNL), offering additional support for vector processing, power efficient scaling and local memory bandwidth. The novelty of KNL are the following:
+•	Increasing in number of cores: KNL models range from 64 to72 cores;
+•	Improvement on VPU size: each core provides two units of 512 bits;
+•	Improvements on vector instruction set: KNL provides support to the new instruction set called AVX-512, that offers new functionalities for vectorization but is fully compatible with older versions;
+•	KNL is available as a processor or as a Coprocessor, maintaining compatibility with applications compiled for Intel Xeon;
+•	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random access memory (MCDRAM), that complements DDR4;
+In the KNL architecture each core has two 512-bit VPUs, L1 cache and is capable of executing four threads. The cores are organized in tiles, that consists of two cores that shares L2 cache. Tiles are interconnected by a cache-coherent two dimensional mesh network, mesh enforces that every message travels to the destination first vertically, until it hits the target row, then it makes the turn, and travels horizontally until it reaches the destination. Such interconnection is optimized for KNL traffic flows.
+KNL has two types of memory DDR4 and HBM. The maximum capacity in DDR4 is 384 GB and the size of HBM is 16 GB. HBM can be used as a Last-level cache (LLC) or as addressable memory in three modes:
+•	Flat: memory is treated as a standard memory in same address space of DDR4;
+•	Cache: memory is used as a LLC cache for DDR4;
+•	Hybrid: a portion of memory is cache and remaining is flat;
+The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) which means that the latency from core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA) which means that memory and cores are divided into two or four sections, in this case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:
+•	UMA
+o	All-to-all: memory addresses are uniform distributed across the chip;
+o	Quadrant: memory addresses divided in four sections;
+o	Hemisphere: memory addresses divided in two sections;
+•	NUMA
+o	SNC-2: tiles are divided in two NUMA nodes;
+o	SNC-4: tiles are divided in four NUMA nodes;
 
 ### 1.4 Hands-on Activities ###
 
