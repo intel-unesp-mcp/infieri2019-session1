@@ -717,6 +717,20 @@ will also learn how to offload parts of the code or specific function
 calls of an executable running on the host to the coprocessor, and will
 have the opportunity to play with simple MPI and OpenMP examples.
 
+### 2.1.1 Overview of Vectorization ###
+
+The VPUs present in the cores of Intel Xeon and Intel Xeon Phi architecture (described in Section 1.2), provides support for execution of vector instructions that 
+operates on a set of data called vector, whereas scalar instructions operate on single data items. This is a parallelism know as data-level parallelism. The best 
+candidates to explore data parallelism are the loops with independent iterations and with body composed of a few lines.
+The parallelization of an application using data parallelism is a process known as vectorization. Compilers support developers explore vectorization in the following ways:
+
+- Automatic vectorization: the compiler implements heuristics that changes scalar instruction to vector instructions automatically when there is no modification on final results.
+
+- Guided Vectorization: when the compiler is not able to automatically vectorize the code, developer can use pragmas to instruct the compiler about the vectorization.
+
+- Low level vectorization: the developer can use specific compiler libraries to develop vector code.
+
+
 ### 2.2 Hands-on Activities ##
 
 **2.2.1** A development system with Intel® Xeon Phi™ coprocessors must
