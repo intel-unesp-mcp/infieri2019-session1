@@ -946,6 +946,105 @@ output is produced. Set the `OFFLOAD_REPORT` environment variable to 1,
 and 2 and run `hello-offload1`, or `hello-offload2`, or `hello-offload3`
 again, and check the results.
 
+**2.2.5.1** The next example shows how to offload a function that sum two number 
+(variables A and B) and put the result in another variable (sum). In this case it 
+is necessary to transfer the content of this variables to coprocessor, and also 
+transfer the content of variable sum from coprocessor to host.The mechanism to
+ perform data transfer is using the directive in and out in pragma offload
+ (#pragma offload target(mic) in (A, B) out (sum)) In this case, it is used to
+ indicate the variable to be transferred from host to device before the beginning 
+of execution and out the transfer of content of variable from device to host after the execution of offload region.
+
+```
+[phi02]$ export OFFLOAD_REPORT=2
+[phi02]$ icc offloadFunction.c -o offloadFunction
+[phi02]$ ./offloadFunction
+```
+
+The offload report shows that 16 bytes were transferred from host to device and 8 bytes from device to host.
+
+In the next activity change the code  offloadFunction.c: add a function called MyFunction2 to be executed on 
+Intel Xeon Phi, that performs the sum of all elements of an array of double elements, and display the value of 
+sum on the host. (transfer variable C[] from host to device and variable sum from device to host)
+
+Use the following snippet to performs the sum of all elements of an array:
+
+```
+  int cont;
+  int n=100;
+  for (cont=0; cont<n; cont++)
+    sum += C[cont];
+
+```
+
+Do not forget to copy variable C using directive in
+
+
+**2.2.5.2** Automatic vectorization
+
+In order to enable the compiler vectorize the code automatically developer have to use compiler directive “-O” 
+that stands for optimization, followed by a number (1, 2 or 3) that indicates the level of optimization. The 
+option -qopt-report creates a report in a text file with the same name of source code with prefix “.optrpt”, 
+that shows for each loop the optimizations performed and the aspects that inhibited the optimizations.
+In this next example we will compile the code vect. using the compiler directive -O3 and -qopt-report.
+
+```
+[phi02]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
+```
+
+Open the vectorization report (vect.optrpt) and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report 
+ 
+```
+Loop on main
+LOOP BEGIN at vect.c(37,3)
+      remark #25045: Fused Loops: ( 37 41 )
+
+      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(38,10) ]
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(38,5) ]
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]
+      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(42,11) ]
+      remark #15305: vectorization support: vector length 4
+      remark #15309: vectorization support: normalized vectorization overhead 0.280
+      remark #15301: FUSED LOOP WAS VECTORIZED
+      remark #15448: unmasked aligned unit stride loads: 2
+      remark #15449: unmasked aligned unit stride stores: 3
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 25
+      remark #15477: vector cost: 6.250
+      remark #15478: estimated potential speedup: 3.990
+      remark #15487: type converts: 5
+      remark #15488: --- end vector cost summary ---
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+      remark #25015: Estimate of max trip count of loop=22500
+   LOOP END
+```
+
+Loop on hist
+
+```
+LOOP BEGIN at vect.c(11,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between hist[bin] (13:5) and hist[bin] (13:5)
+   remark #15346: vector dependence: assumed ANTI dependence between hist[bin] (13:5) and hist[bin] (13:5)
+   remark #25438: unrolled without remainder by 2
+LOOP END
+```
+
+
+The new vector instruction set AVX-512 provides support for indirection called confliction detection, 
+now perform the same compilation but using -xhost that set up the compiler to use the highest vector instruction 
+set available, in this case AVX 512
+
+```
+[phi04]$ icc vect.c -o vectAVX512 -O3 -qopt-report5 -xhost
+```
+
+Now the loop on function hist was vectorized using AVX512.
+
+Try to run this code on phi01 and note that it is not possible due to lack of 512 instruction set implemented on VPU.
+
+
 **2.2.6** One major difference between programming for a single system
 and for a cluster is that each cluster node has a separate memory space.
 Unlike multiple threads running in a shared memory space, communication
