@@ -195,7 +195,7 @@ should be able to run X11.
 Use the syntax below to log in to the host system.
 
 ```
-$ ssh –X phi01.ncc.unesp.br –l traineeN 
+$ ssh –X phi02.ncc.unesp.br –l traineeN 
 ```
 
 **(N is a number assigned to each participant)**
@@ -471,12 +471,12 @@ opportunity to exercise some of these computing models.
 ### 1.4 Hands-on Activities ###
 
 **1.4.1** On your desktop/workstation, open a terminal or command line
-console and use the command `ssh` to login to the host `phi01.ncc.unesp.br`
+console and use the command `ssh` to login to the host `phi02.ncc.unesp.br`
 as user traineeN (N = 1 … 16; please check with the teaching assistant
 which number has been assigned to you):
 
 ```
-$ ssh –X traineeN@phi01.ncc.unesp.br
+$ ssh –X traineeN@phi02.ncc.unesp.br
 ```
 
 **1.4.2** Intel’s tool for checking the status of Xeon Phi™ coprocessors
@@ -485,7 +485,7 @@ Intel® Xeon Phi™ coprocessor(s) installed in the system and the
 corresponding driver version:
 
 ```
-[phi01]$ micinfo
+[phi02]$ micinfo
 ```
 
 For each device listed, take note of the device model (SKU:
@@ -498,7 +498,7 @@ The `-listdevices` option provides a shorter output, with the list of the
 Intel® Xeon Phi™ coprocessors available in the system:
 
 ```
-[phi01]$ micinfo -listdevices
+[phi02]$ micinfo -listdevices
 ``` 
 
 (**Extra exercise:** compare the result with the output of `$ lspci | grep processor`).
@@ -509,8 +509,8 @@ To request detailed information about a specific device, the option
 GDDR, thermal. For example:
 
 ```
-[phi01]$ micinfo -deviceInfo 0 -group cores
-[phi01]$ micinfo -deviceInfo 1 -group thermal
+[phi02]$ micinfo -deviceInfo 0 -group cores
+[phi02]$ micinfo -deviceInfo 1 -group thermal
 ```
 
 **1.4.3** The Xeon Phi™ coprocessor is packaged in a PCIe card which
@@ -528,7 +528,7 @@ then issuing the micsmc command without any options will open a new
 window frame on your desktop, the *Coprocessor Platform Status Panel*:
 
 ```
-[phi01]$ micsmc &
+[phi02]$ micsmc &
 ```
 
 In the menu bar of this new window frame, select Cards, Show All and
@@ -550,7 +550,7 @@ message: `micsmc-gui: cannot connect to X server`. Alternatively, you
 can use the command below:
 
 ```
-[phi01]$ watch -n 1 micsmc -t
+[phi02]$ watch -n 1 micsmc -t
 ```
 
 The CLI mode is activated with command-line arguments and provides the
@@ -558,8 +558,8 @@ same information as the graphical user interface, but in text form. It
 is thus suitable for direct execution or for scripting. For example:
 
 ```
-[phi01]$ micsmc -c
-[phi01]$ micsmc -a
+[phi02]$ micsmc -c
+[phi02]$ micsmc -a
 ```
 
 For a detailed view of all `micsmc` arguments, use option `–h` (for help).
@@ -572,7 +572,7 @@ selected by using adequate arguments. Let us take a look on the outcomes
 of the command:
 
 ```
-[phi01]$ miccheck
+[phi02]$ miccheck
 ```
 
 For a detailed view of all `miccheck` arguments, use option `–h` (for help).
@@ -592,18 +592,18 @@ coprocessors´ Linux OS via a terminal shell. From the host shell issue
 an ssh to the first coprocessor (mic0):
 
 ```
-[phi01]$ ssh mic0
+[phi02]$ ssh mic0
 ```
 In the coprocessor command-line shell, issue the following commands and
 check the results:
 
 ```
-[phi01-mic]$ uname –a
-[phi01-mic]$ cat /proc/cpuinfo | grep processor | wc –l
-[phi01-mic]$ cat /proc/meminfo | grep MemTotal
-[phi01-mic]$ ifconfig
-[phi01-mic]$ cat /etc/hosts
-[phi01-mic]$ exit
+[phi02-mic]$ uname –a
+[phi02-mic]$ cat /proc/cpuinfo | grep processor | wc –l
+[phi02-mic]$ cat /proc/meminfo | grep MemTotal
+[phi02-mic]$ ifconfig
+[phi02-mic]$ cat /etc/hosts
+[phi02-mic]$ exit
 ```
 
 By default, the first Intel® Xeon Phi™ coprocessor in the system is
@@ -662,8 +662,8 @@ order to verify that the compilers are installed, run the following
 commands in the host system console:
 
 ```
-[phi01]$ icc -V
-[phi01]$ icpc -V
+[phi02]$ icc -V
+[phi02]$ icpc -V
 ```
 
 **2.2.2** Let us begin with an extremely trivial code just to check if
@@ -672,10 +672,10 @@ located at `/home/traineeN/source-files/session1`, then compile and
 execute it:
 
 ```
-[phi01]$ cd ~/source-files/session1
-[phi01]$ cat ./hello.c
-[phi01]$ icc hello.c -o hello
-[phi01]$ ./hello
+[phi02]$ cd ~/source-files/session1
+[phi02]$ cat ./hello.c
+[phi02]$ icc hello.c -o hello
+[phi02]$ ./hello
 ```
   > Hello world! I have 32 logical cores.
 
@@ -692,8 +692,8 @@ the Intel® Xeon Phi™ coprocessor (remember to change the name of the
 executable, e.g. `hello.mic` or `hello.phi`), and try to execute it:
 
 ```
-[phi01]$ icc -mmic hello.c -o hello.mic
-[phi01]$ ./hello.mic
+[phi02]$ icc -mmic hello.c -o hello.mic
+[phi02]$ ./hello.mic
 ```
 
  > -bash: ./hello.mic: cannot execute binary file
@@ -706,31 +706,31 @@ hello.mic to any of the coprocessors, for example mic0 and mic1 (and/or
 mic2):
 
 ```
-[phi01]$ scp hello.mic mic0:
-[phi01]$ scp hello.mic mic1:
-[phi01]$ scp hello.mic mic2:
+[phi02]$ scp hello.mic mic0:
+[phi02]$ scp hello.mic mic1:
+[phi02]$ scp hello.mic mic2:
 ```
 
 Connect to each coprocessor through ssh and execute the binary file
 locally:
 
 ```
-[phi01]$ ssh mic0
-[phi01-mic]$ ./hello.mic
+[phi02]$ ssh mic0
+[phi02-mic]$ ./hello.mic
 ```
 
   > Hello world! I have 228 logical cores.
 
 ```
-[phi01-mic]$ exit
-[phi01]$ ssh mic1
-[phi01-mic]$ ./hello.mic
+[phi02-mic]$ exit
+[phi02]$ ssh mic1
+[phi02-mic]$ ./hello.mic
 ```
 
   > Hello world! I have 228 logical cores.
 
 ```
-[phi01-mic]$ exit
+[phi02-mic]$ exit
 ```
 
 **2.2.3** Now we are going to run the native MIC executable in the
@@ -745,22 +745,22 @@ coprocessors is defined by the `SINK_LD_LIBRARY_PATH` environment
 variable, so we need to set it first:
 
 ```
-[phi01]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
-[phi01]$ micnativeloadex ./hello.mic –d 0
+[phi02]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
+[phi02]$ micnativeloadex ./hello.mic –d 0
 ```
 
 > Hello world! I have 228 logical cores.
 
   
 ```
-[phi01]$ micnativeloadex ./hello.mic –d 1
+[phi02]$ micnativeloadex ./hello.mic –d 1
 ```
 
 > Hello world! I have 228 logical cores.
  
 
 ```
-[phi01]$ micnativeloadex ./hello.mic –d 2
+[phi02]$ micnativeloadex ./hello.mic –d 2
 ```
 
 > Hello world! I have 228 logical cores.
@@ -770,7 +770,7 @@ The `micnativeloadex` utility can also be used to check the library
 dependencies of the binary code, by using the option `–l`:
 
 ```
-[phi01]$ micnativeloadex ./hello.mic –d 0 –l
+[phi02]$ micnativeloadex ./hello.mic –d 0 –l
 ```
 
 **Extra activity:** rebuild the code `hello.c` with the `–mmic` and `–mkl`
@@ -791,8 +791,8 @@ Xeon Phi™ coprocessor. Take a look at the content of the source file
 and run it:
 
 ```
-[phi01]$ icc hello-offload1.c –o hello-offload1
-[phi01]$ ./hello-offload1
+[phi02]$ icc hello-offload1.c –o hello-offload1
+[phi02]$ ./hello-offload1
 ```
 
 The second example shows how to declare functions within the scope of
@@ -804,8 +804,8 @@ offload occurs. Take a careful look at the content of the source file
 `hello-offload2.c`, then compile and run it:
 
 ```
-[phi01]$ icc hello-offload2.c –o hello-offload2
-[phi01]$ ./hello-offload2
+[phi02]$ icc hello-offload2.c –o hello-offload2
+[phi02]$ ./hello-offload2
 ```
 
 By default, environment variables defined on the host system are
@@ -819,16 +819,16 @@ third example below shows how this process works. Take a look at the
 content of the source file `hello-offload3.c`, then compile and run it:
 
 ```
-[phi01]$ icc hello-offload3.c –o hello-offload3
-[phi01]$ ./hello-offload3
+[phi02]$ icc hello-offload3.c –o hello-offload3
+[phi02]$ ./hello-offload3
 ```
   
 Set `ENV_VAR` to a certain value, run the binary again and compare the
 output with the previous run:
   
 ```
-[phi01]$ export ENV_VAR=any-value
-[phi01]$ ./hello-offload3
+[phi02]$ export ENV_VAR=any-value
+[phi02]$ ./hello-offload3
 ```
   
 
@@ -836,15 +836,15 @@ Define any value for `MIC_ENV_PREFIX` (e.g. MIC, PHI, etc), and run
 again, comparing the output with the previous runs:
 
 ``` 
-[phi01]$ export MIC_ENV_PREFIX=PHI
-[phi01]$ ./hello-offload3
+[phi02]$ export MIC_ENV_PREFIX=PHI
+[phi02]$ ./hello-offload3
 ```
 
 Now define a different value for `PHI_ENV_VAR` and run once again:
 
 ```
-[phi01]$ export PHI_ENV_VAR=any-other-value
-[phi01]$ ./hello-offload3
+[phi02]$ export PHI_ENV_VAR=any-other-value
+[phi02]$ ./hello-offload3
 ```
   
 
@@ -890,9 +890,9 @@ to simplify the process of building MPI programs, and utilities (e.g.
 and utilities are all set, run the following commands:
 
 ``` 
-[phi01]$ mpiicc -v
-[phi01]$ mpiicpc -v
-[phi01]$ mpirun -info
+[phi02]$ mpiicc -v
+[phi02]$ mpiicpc -v
+[phi02]$ mpirun -info
 ```
   
 
@@ -900,8 +900,8 @@ Let us start by using the mpiicc wrapper to compile the hello-mpi.c
 source code and the mpirun utility to run the binary in the host system:
 
 ```
-[phi01]$ mpiicc hello-mpi.c -o hello-mpi
-[phi01]$ mpirun -n 32 ./hello-mpi
+[phi02]$ mpiicc hello-mpi.c -o hello-mpi
+[phi02]$ mpirun -n 32 ./hello-mpi
 ```
 
 Notice that the output is not ordered by rank; this occurs because each
@@ -910,10 +910,10 @@ binary and run the same code natively on the Intel Xeon® coprocessor mic0
 (and do the same for mic1 and mic2):
   
 ```
-[phi01]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
-[phi01]$ scp hello-mpi.mic mic0:
-[phi01]$ ssh mic0
-[phi01-mic]$ mpirun -n XXX ./hello-mpi.mic 
+[phi02]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
+[phi02]$ scp hello-mpi.mic mic0:
+[phi02]$ ssh mic0
+[phi02-mic]$ mpirun -n XXX ./hello-mpi.mic 
 ```
 **(XXX = 228 in our case)**  
 
@@ -930,10 +930,10 @@ using the variable `MIC_ENV_PREFIX`. Take a look at code
 launch the binary. Check the result.
 
 ```
-[phi01]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
-[phi01]$ export MIC_ENV_PREFIX=PHI
-[phi01]$ export PHI_OMP_NUM_THREADS=4
-[phi01]$ mpirun -n 4 ./hello-mpi-omp-offload
+[phi02]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
+[phi02]$ export MIC_ENV_PREFIX=PHI
+[phi02]$ export PHI_OMP_NUM_THREADS=4
+[phi02]$ mpirun -n 4 ./hello-mpi-omp-offload
 ```
 
 **2.2.8** In this final activity for Part 2 we will work on a more
@@ -948,11 +948,11 @@ Phi™ coprocessors, and then transfer the corresponding binary to the
 coprocessors:
 
 ``` 
-[phi01]$ mpiicc montecarlo.c -o montecarlo
-[phi01]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
-[phi01]$ scp montecarlo.mic mic0:
-[phi01]$ scp montecarlo.mic mic1:
-[phi01]$ scp montecarlo.mic mic2:
+[phi02]$ mpiicc montecarlo.c -o montecarlo
+[phi02]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
+[phi02]$ scp montecarlo.mic mic0:
+[phi02]$ scp montecarlo.mic mic1:
+[phi02]$ scp montecarlo.mic mic2:
 ```
 
 We are going to learn how we can launch an MPI job on the coprocessors
@@ -961,7 +961,7 @@ variable on the host, `I_MPI_MIC`, to enable the MPI communication
 between host and coprocessors (valid values are: enable|yes|on|1):
 
 ```
-[phi01]$ export I_MPI_MIC=enable
+[phi02]$ export I_MPI_MIC=enable
 ```
 
 Now execute the application on the host and then on the coprocessors,
@@ -970,10 +970,10 @@ number of MPI processes, respectively (be patient, execution time is
 longer compared to the previous exercises):
 
 ```
-[phi01]$ mpirun -host localhost -n 32 ./montecarlo
-[phi01]$ mpirun -host mic0 -n 228 \~/montecarlo.mic
-[phi01]$ mpirun -host mic1 -n 228 \~/montecarlo.mic
-[phi01]$ mpirun -host mic2 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host localhost -n 32 ./montecarlo
+[phi02]$ mpirun -host mic0 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host mic1 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host mic2 -n 228 \~/montecarlo.mic
 ```
   
 
@@ -982,14 +982,14 @@ can specify the list of hosts and their respective parameters using the
 separator ‘:’, as shown below:
 
 ```
-[phi01]$ mpirun -host mic0 -n 228 \~/montecarlo.mic : -host mic1 –n 228 \~/montecarlo.mic : -host mic2 –n 228
+[phi02]$ mpirun -host mic0 -n 228 \~/montecarlo.mic : -host mic1 –n 228 \~/montecarlo.mic : -host mic2 –n 228
 ```
 
 Using this syntax, let us now execute the MPI application using all
 available threads (716):
 
 ```
-[phi01]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 228 \~/montecarlo.mic : -host mic1 -n 228 \~/montecarlo.mic : -host mic2 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 228 \~/montecarlo.mic : -host mic1 -n 228 \~/montecarlo.mic : -host mic2 -n 228 \~/montecarlo.mic
 ```
 ______
 
@@ -1070,10 +1070,10 @@ Let us now compile the hello-flops1.c code, upload it to one of the
 coprocessors, and run it:
 
 ```
-[phi01]$ icc -mmic -O3 hello-flops1.c -o hello-flops1
-[phi01]$ scp hello-flops1 mic0:
-[phi01]$ ssh mic0
-[phi01-mic]$ ./hello-flops1
+[phi02]$ icc -mmic -O3 hello-flops1.c -o hello-flops1
+[phi02]$ scp hello-flops1 mic0:
+[phi02]$ ssh mic0
+[phi02-mic]$ ./hello-flops1
 ```  
 
 > Initializing  
@@ -1108,10 +1108,10 @@ compile – upload – run sequence (do not forget to use the compiler
 directive `–openmp`):
 
 ``` 
-[phi01]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
-[phi01]$ scp hello-flops2 mic0:
-[phi01]$ ssh mic0
-[phi01-mic]$ ./hello-flops2
+[phi02]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
+[phi02]$ scp hello-flops2 mic0:
+[phi02]$ ssh mic0
+[phi02-mic]$ ./hello-flops2
 ```  
   
 > Initializing  
@@ -1156,23 +1156,23 @@ Let us compile `hello-flops3.c` and upload it to one of the coprocessors
 using the same command-line commands we have been using so far:
 
 ``` 
-[phi01]$ icc -openmp -mmic -O3 hello-flops3.c -o hello-flops3
-[phi01]$ scp hello-flops3 mic0:
+[phi02]$ icc -openmp -mmic -O3 hello-flops3.c -o hello-flops3
+[phi02]$ scp hello-flops3 mic0:
 ``` 
   
 Before running the compiled code, we need to define the following
 environment variables at each of the coprocessors' command prompts:
 
 ``` 
-[phi01]$ ssh mic0
-[phi01-mic]$ export OMP_NUM_THREADS=2
-[phi01-mic]$ export KMP_AFFINITY=compact
+[phi02]$ ssh mic0
+[phi02-mic]$ export OMP_NUM_THREADS=2
+[phi02-mic]$ export KMP_AFFINITY=compact
 ``` 
 
 Execute the binary on the coprocessor, and take note of the results:
 
 ```
-[phi01-mic]$ ./hello-flops3
+[phi02-mic]$ ./hello-flops3
 ``` 
 
 What did you get? The same results we have got using the previous code.
@@ -1182,9 +1182,9 @@ change in the environment variables (XXX must be two times the number of
 cores available: - 114 in our case):
 
 ``` 
-[phi01-mic]$ ssh mic0
-[phi01-mic]$ export OMP_NUM_THREADS=XXX (XXX = 114)
-[phi01-mic]$ export KMP_AFFINITY=scatter
+[phi02-mic]$ ssh mic0
+[phi02-mic]$ export OMP_NUM_THREADS=XXX (XXX = 114)
+[phi02-mic]$ export KMP_AFFINITY=scatter
 ``` 
   
 Run again and check the results. Change the environment variables to
@@ -1208,29 +1208,29 @@ on the host. Compile `hello-flops3-offload.c` using the command-line
 syntax shown below:
 
 ```
-[phi01]$ icc –openmp –O3 hello-flops3–offload.c –o hello-flops3-offload
+[phi02]$ icc –openmp –O3 hello-flops3–offload.c –o hello-flops3-offload
 ``` 
 
 Before executing it, we need to set up the environment variables the
 code requires. Enter the following lines on the host console:
 
 ``` 
-[phi01]$ export MIC_ENV_PREFIX=MIC
-[phi01]$ export MIC_OMP_NUM_THREADS=114
-[phi01]$ export MIC_KMP_AFFINITY=scatter
+[phi02]$ export MIC_ENV_PREFIX=MIC
+[phi02]$ export MIC_OMP_NUM_THREADS=114
+[phi02]$ export MIC_KMP_AFFINITY=scatter
 ``` 
   
 
 Check the syntax of the commands by issuing:
 
 ```
-[phi01]$ env | grep MIC
+[phi02]$ env | grep MIC
 ``` 
 
 If everything is ok, launch the code:
 
 ```
-[phi01]$ ./hello-flops3-offload
+[phi02]$ ./hello-flops3-offload
 ``` 
 
 Check the results and compare with the results obtained in the previous
