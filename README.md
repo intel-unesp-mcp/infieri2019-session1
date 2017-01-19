@@ -663,6 +663,36 @@ host system, and then transfer it to one of the coprocessor cards using
 Verify also if you are able to transfer the same file directly from one
 coprocessor card to another one.
 
+
+**1.4.7** On your desktop/workstation, open a terminal or command line 
+console and use the command ssh to login to the host phi04.ncc.unesp.br 
+(KNL Server) as user traineeN (N = 1 … 16; please check with the teaching 
+assistant which number has been assigned to you):
+
+```
+[phi02]$ ssh –X traineeN@phi04.ncc.unesp.br
+```
+
+**1.4.8** The utility lscpu shows information about the CPU architecture. 
+Use this utility to obtain the amount of cores and threads available on the Intel 
+KNL processor installed in the system:
+
+```
+[phi02]$ lscpu
+```
+
+**1.4.9** the utility numactl maps process to specific NUMA nodes. Use this utility 
+with parameter -H to obtain information about the NUMA nodes in the system.
+
+```
+[phi02]$ numactl -H
+```
+
+The cluster mode of KNL (server phi04) is in SNC-4 mode, so cores appear grouped into 
+four nodes with exactly a quarter of the on-platform memory in each node. 
+In addition, our system uses the on-package high bandwidth memory (HBM) in the ﬂat mode, 
+which adds four more NUMA nodes with a quarter of the HBM in each node.
+
 ______
 
 ### Quick Navigation ###
