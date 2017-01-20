@@ -508,9 +508,9 @@ The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) whi
 - **SNC-2:** tiles are divided in two NUMA nodes;  
 - **SNC-4:** tiles are divided in four NUMA nodes;    
 
-### 1.4 Hands-on Activities ###
+### 1.5 Hands-on Activities ###
 
-**1.4.1** On your desktop/workstation, open a terminal or command line
+**1.5.1** On your desktop/workstation, open a terminal or command line
 console and use the command `ssh` to login to the host `phi02.ncc.unesp.br`
 as user traineeN (N = 1 … 16; please check with the teaching assistant
 which number has been assigned to you):
@@ -519,7 +519,7 @@ which number has been assigned to you):
 $ ssh –X traineeN@phi02.ncc.unesp.br
 ```
 
-**1.4.2** Intel’s tool for checking the status of Xeon Phi™ coprocessors
+**1.5.2** Intel’s tool for checking the status of Xeon Phi™ coprocessors
 is micinfo. Use this utility to obtain detailed information about the
 Intel® Xeon Phi™ coprocessor(s) installed in the system and the
 corresponding driver version:
@@ -553,7 +553,7 @@ GDDR, thermal. For example:
 [phi02]$ micinfo -deviceInfo 1 -group thermal
 ```
 
-**1.4.3** The Xeon Phi™ coprocessor is packaged in a PCIe card which
+**1.5.3** The Xeon Phi™ coprocessor is packaged in a PCIe card which
 includes thermal and power sensors and a system management controller
 (SMC) that monitors the sensors and manages the coprocessor. The utility
 micsmc can be used to extract information from the coprocessor SMC,
@@ -604,7 +604,7 @@ is thus suitable for direct execution or for scripting. For example:
 
 For a detailed view of all `micsmc` arguments, use option `–h` (for help).
 
-**1.4.4** The miccheck utility runs a set of diagnostic tests in order
+**1.5.4** The miccheck utility runs a set of diagnostic tests in order
 to verify the configuration of all the Intel® Xeon Phi™ coprocessors
 installed in the system. By default, all available tests are run on all
 Intel® Xeon Phi™ coprocessors, but a subset of tests and devices can be
@@ -622,7 +622,7 @@ used by system administration purposes (e.g. updating the firmware in
 the Xeon Phi™ coprocessor´s flash memory) and usually require
 administrative privileges to run.
 
-**1.4.5** The Intel® Xeon Phi™ coprocessor is an IP-addressable PCIe
+**1.5.5** The Intel® Xeon Phi™ coprocessor is an IP-addressable PCIe
 device - managed by an independent environment provided by the MIC
 Platform Software Stack (MPSS) - that runs the Linux operating system.
 The Linux OS on the Intel® Xeon Phi™ coprocessor supports SSH access for
@@ -659,14 +659,14 @@ previous command sequence on the second and third coprocessors (mic1 and
 mic2). Check the number of cores, the available memory, and the IP
 address of the second coprocessor.
 
-**1.4.6** Bonus: using the command `cat`, create a simple text file in the
+**1.5.6** Bonus: using the command `cat`, create a simple text file in the
 host system, and then transfer it to one of the coprocessor cards using
 `scp`. Then issue an `ssh` to the corresponding card and check the file.
 Verify also if you are able to transfer the same file directly from one
 coprocessor card to another one.
 
 
-**1.4.7** On your desktop/workstation, open a terminal or command line 
+**1.5.7** On your desktop/workstation, open a terminal or command line 
 console and use the command ssh to login to the host phi04.ncc.unesp.br 
 (KNL Server) as user traineeN (N = 1 … 16; please check with the teaching 
 assistant which number has been assigned to you):
@@ -675,7 +675,7 @@ assistant which number has been assigned to you):
 [phi02]$ ssh –X traineeN@phi04.ncc.unesp.br
 ```
 
-**1.4.8** The utility lscpu shows information about the CPU architecture. 
+**1.5.8** The utility lscpu shows information about the CPU architecture. 
 Use this utility to obtain the amount of cores and threads available on the Intel 
 KNL processor installed in the system:
 
@@ -683,7 +683,7 @@ KNL processor installed in the system:
 [phi02]$ lscpu
 ```
 
-**1.4.9** the utility numactl maps process to specific NUMA nodes. Use this utility 
+**1.5.9** the utility numactl maps process to specific NUMA nodes. Use this utility 
 with parameter -H to obtain information about the NUMA nodes in the system.
 
 ```
