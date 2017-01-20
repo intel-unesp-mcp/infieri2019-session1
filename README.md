@@ -1045,8 +1045,43 @@ Now the loop on function hist was vectorized using AVX512.
 
 Try to run this code on **phi02** and note that it is not possible due to lack of 512 instruction set implemented on VPU.
 
+**2.2.8**  When MCDRam is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
 
-**2.2.8** One major difference between programming for a single system
+In order to explore the MCDRAM the developer can use a library called Memkind, that provides an interface to allocate memory on the MCDRAM, or can enforce the execution of application to the NUMA node attached to the MCDRAM.
+
+In this example, we are going to compare the execution of an application that performs matrix multiplication using DDR4 against MCDRAM in flat mode.
+
+First, lets compile the application
+
+```
+cd matrix/linux
+make clean
+make icc
+```
+
+execute the command numactl to identify the nodes attached to DDR4 and the nodes attached to MCDRAM.
+
+```
+numactl -H
+```
+
+In our server the cluster mode is setup as SNC-4, so the first four nodes (0, 1, 2 and 3) are attahed to DDR4 and the other four nodes (4, 5, 6 and 7) are attached to MCDRAM.
+
+To Execute the code on DDR. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 0 to 3.
+
+```
+time numactl -m 0,1,2,3 ./matrix.icc
+```
+
+To Execute the code on MCDRAM. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 4 to 7.
+
+```
+time numactl -m 4,5,6,7 ./matrix.icc
+```
+
+What execution presents better performance? 
+
+**2.2.9** One major difference between programming for a single system
 and for a cluster is that each cluster node has a separate memory space.
 Unlike multiple threads running in a shared memory space, communication
 between disjoint memory spaces usually requires the programmer to make
@@ -1099,7 +1134,7 @@ binary and run the same code natively on the Intel Xeon® coprocessor mic0
 ```
 **(XXX = 228 in our case)**  
 
-**2.2.9** In this activity we work with a slightly more complex Hello
+**2.2.10** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
 code to two coprocessors in such a way that each thread also says
 “hello”. This is accomplished by means of OpenMP. The number of threads
@@ -1118,7 +1153,7 @@ launch the binary. Check the result.
 [phi02]$ mpirun -n 4 ./hello-mpi-omp-offload
 ```
 
-**2.2.10** In this final activity for Part 2 we will work on a more
+**2.2.11** In this final activity for Part 2 we will work on a more
 realistic MPI application. Take a look at the source file montecarlo.c,
 a sample program that estimates de value of π (pi) using the Monte Carlo
 method. For more details please check the link below (Chapter 3):
