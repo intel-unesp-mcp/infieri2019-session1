@@ -680,14 +680,14 @@ Use this utility to obtain the amount of cores and threads available on the Inte
 KNL processor installed in the system:
 
 ```
-[phi02]$ lscpu
+[phi04]$ lscpu
 ```
 
 **1.5.9** the utility numactl maps process to specific NUMA nodes. Use this utility 
 with parameter -H to obtain information about the NUMA nodes in the system.
 
 ```
-[phi02]$ numactl -H
+[phi04]$ numactl -H
 ```
 
 The cluster mode of KNL (server phi04) is in SNC-4 mode, so cores appear grouped into 
@@ -1045,7 +1045,7 @@ Now the loop on function hist was vectorized using AVX512.
 
 Try to run this code on **phi02** and note that it is not possible due to lack of 512 instruction set implemented on VPU.
 
-**2.2.8**  When MCDRAR is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
+**2.2.8**  When MCDRAM is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
 
 In order to explore the MCDRAM the developer can use a library called Memkind, that provides an interface to allocate memory on the MCDRAM, or can enforce the execution of application to the NUMA node attached to the MCDRAM.
 
