@@ -1043,7 +1043,7 @@ set available, in this case AVX 512
 
 Now the loop on function hist was vectorized using AVX512.
 
-Try to run this code on phi01 and note that it is not possible due to lack of 512 instruction set implemented on VPU.
+Try to run this code on **phi02** and note that it is not possible due to lack of 512 instruction set implemented on VPU.
 
 
 **2.2.8** One major difference between programming for a single system
