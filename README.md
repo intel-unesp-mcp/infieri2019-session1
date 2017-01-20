@@ -474,7 +474,7 @@ Intel Xeon® processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
 
-### 1.3.1 Knights Landing the Second Generation of Xeon Phi Architecture ###
+###1.4 Knights Landing the Second Generation of Xeon Phi Architecture ###
 
 Recently, a second generation of Intel Xeon Phi architecture was released with the 
 code-name Knights Landing (KNL), offering additional support for vector processing, 
@@ -493,18 +493,18 @@ message travels to the destination first vertically, until it hits the target ro
 and travels horizontally until it reaches the destination. Such interconnection is optimized for KNL traffic flows.
 KNL has two types of memory DDR4 and HBM. The maximum capacity in DDR4 is 384 GB and the size of HBM is 16 GB. HBM can be used as a Last-level cache (LLC) or as addressable memory in three modes:
 
--	Flat: memory is treated as a standard memory in same address space of DDR4;
--	Cache: memory is used as a LLC cache for DDR4;
--	Hybrid: a portion of memory is cache and remaining is flat;
+* **Flat:** memory is treated as a standard memory in same address space of DDR4;
+* **Cache:** memory is used as a LLC cache for DDR4;
+* **Hybrid:** a portion of memory is cache and remaining is flat;
 
-The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) which means that the latency from core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA) which means that memory and cores are divided into two or four sections, in this case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:
--	UMA
-		- All-to-all: memory addresses are uniform distributed across the chip;
-		- Quadrant: memory addresses divided in four sections;
-		- Hemisphere: memory addresses divided in two sections;
--	NUMA
-		-	SNC-2: tiles are divided in two NUMA nodes;
-		-	SNC-4: tiles are divided in four NUMA nodes;
+The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) which means that the latency from core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA) which means that memory and cores are divided into two or four sections, in this case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:  
+* **UMA**  
+ * **All-to-all:** memory addresses are uniform distributed across the chip;  
+ * **Quadrant:** memory addresses divided in four sections;  
+ * **Hemisphere:** memory addresses divided in two sections;    
+* **NUMA**  
+ * **SNC-2:** tiles are divided in two NUMA nodes;  
+ * **SNC-4:** tiles are divided in four NUMA nodes;    
 
 ### 1.4 Hands-on Activities ###
 
