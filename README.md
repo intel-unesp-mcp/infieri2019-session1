@@ -499,12 +499,12 @@ KNL has two types of memory DDR4 and HBM. The maximum capacity in DDR4 is 384 GB
 
 The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) which means that the latency from core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA) which means that memory and cores are divided into two or four sections, in this case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:  
 
-#### UMA
+#### • UMA
 - **All-to-all:** memory addresses are uniform distributed across the chip;  
 - **Quadrant:** memory addresses divided in four sections;  
 - **Hemisphere:** memory addresses divided in two sections;    
 
-#### ◙ NUMA
+#### • NUMA
 - **SNC-2:** tiles are divided in two NUMA nodes;  
 - **SNC-4:** tiles are divided in four NUMA nodes;    
 
