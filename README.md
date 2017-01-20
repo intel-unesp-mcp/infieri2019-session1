@@ -995,7 +995,7 @@ In this next example we will compile the code `vect.c` using the compiler direct
 
 Open the vectorization report `vect.optrpt` and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report:
  
-#### Loop on main
+#### Loop on main:
   
 ```
 LOOP BEGIN at vect.c(37,3)  
@@ -1021,7 +1021,7 @@ LOOP BEGIN at vect.c(37,3)
 LOOP END  
 ```
 
-#### Loop on hist
+#### Loop on hist:
 
 ```
 LOOP BEGIN at vect.c(11,3)  
