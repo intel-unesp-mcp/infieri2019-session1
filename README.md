@@ -986,52 +986,51 @@ Do not forget to copy variable C using directive in
 
 In order to enable the compiler vectorize the code automatically developer have to use compiler directive “-O” 
 that stands for optimization, followed by a number (1, 2 or 3) that indicates the level of optimization. The 
-option -qopt-report creates a report in a text file with the same name of source code with prefix “.optrpt”, 
+option `-qopt-report` creates a report in a text file with the same name of source code with prefix `.optrpt`, 
 that shows for each loop the optimizations performed and the aspects that inhibited the optimizations.
-In this next example we will compile the code vect. using the compiler directive -O3 and -qopt-report.
+In this next example we will compile the code `vect.c` using the compiler directive `-O3` and `-qopt-report`.
 
 ```
 [phi02]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
 ```
 
-Open the vectorization report (vect.optrpt) and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report 
+Open the vectorization report `vect.optrpt` and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report 
  
-```
-Loop on main
-LOOP BEGIN at vect.c(37,3)
-      remark #25045: Fused Loops: ( 37 41 )
+#### Loop on main
+  
+> LOOP BEGIN at vect.c(37,3)  
+      remark #25045: Fused Loops: ( 37 41 )  
+      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(38,10) ]  
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(38,5) ]  
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
+      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
+      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(42,11) ]  
+      remark #15305: vectorization support: vector length 4  
+      remark #15309: vectorization support: normalized vectorization overhead 0.280  
+      remark #15301: FUSED LOOP WAS VECTORIZED  
+      remark #15448: unmasked aligned unit stride loads: 2  
+      remark #15449: unmasked aligned unit stride stores: 3  
+      remark #15475: --- begin vector cost summary ---  
+      remark #15476: scalar cost: 25  
+      remark #15477: vector cost: 6.250  
+      remark #15478: estimated potential speedup: 3.990  
+      remark #15487: type converts: 5  
+      remark #15488: --- end vector cost summary ---  
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 2  
+      remark #25015: Estimate of max trip count of loop=22500  
+   LOOP END  
 
-      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(38,10) ]
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(38,5) ]
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]
-      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(42,11) ]
-      remark #15305: vectorization support: vector length 4
-      remark #15309: vectorization support: normalized vectorization overhead 0.280
-      remark #15301: FUSED LOOP WAS VECTORIZED
-      remark #15448: unmasked aligned unit stride loads: 2
-      remark #15449: unmasked aligned unit stride stores: 3
-      remark #15475: --- begin vector cost summary ---
-      remark #15476: scalar cost: 25
-      remark #15477: vector cost: 6.250
-      remark #15478: estimated potential speedup: 3.990
-      remark #15487: type converts: 5
-      remark #15488: --- end vector cost summary ---
-      remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
-      remark #25015: Estimate of max trip count of loop=22500
-   LOOP END
-```
 
-Loop on hist
+#### Loop on hist
 
-```
-LOOP BEGIN at vect.c(11,3)
-   remark #15344: loop was not vectorized: vector dependence prevents vectorization
-   remark #15346: vector dependence: assumed FLOW dependence between hist[bin] (13:5) and hist[bin] (13:5)
-   remark #15346: vector dependence: assumed ANTI dependence between hist[bin] (13:5) and hist[bin] (13:5)
-   remark #25438: unrolled without remainder by 2
-LOOP END
-```
+
+> LOOP BEGIN at vect.c(11,3)  
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization  
+   remark #15346: vector dependence: assumed FLOW dependence between hist[bin] (13:5) and hist[bin] (13:5)  
+   remark #15346: vector dependence: assumed ANTI dependence between hist[bin] (13:5) and hist[bin] (13:5)  
+   remark #25438: unrolled without remainder by 2  
+LOOP END  
+
 
 
 The new vector instruction set AVX-512 provides support for indirection called confliction detection, 
