@@ -948,7 +948,7 @@ output is produced. Set the `OFFLOAD_REPORT` environment variable to 1,
 and 2 and run `hello-offload1`, or `hello-offload2`, or `hello-offload3`
 again, and check the results.
 
-**2.2.5.1** The next example shows how to offload a function that sum two number 
+**2.2.6** The next example shows how to offload a function that sum two number 
 (variables A and B) and put the result in another variable (sum). In this case it 
 is necessary to transfer the content of this variables to coprocessor, and also 
 transfer the content of variable sum from coprocessor to host.The mechanism to
@@ -982,7 +982,7 @@ Use the following snippet to performs the sum of all elements of an array:
 Do not forget to copy variable C using directive in
 
 
-**2.2.5.2** Automatic vectorization
+**2.2.7** Automatic vectorization
 
 In order to enable the compiler vectorize the code automatically developer have to use compiler directive “-O” 
 that stands for optimization, followed by a number (1, 2 or 3) that indicates the level of optimization. The 
@@ -1047,7 +1047,7 @@ Now the loop on function hist was vectorized using AVX512.
 Try to run this code on phi01 and note that it is not possible due to lack of 512 instruction set implemented on VPU.
 
 
-**2.2.6** One major difference between programming for a single system
+**2.2.8** One major difference between programming for a single system
 and for a cluster is that each cluster node has a separate memory space.
 Unlike multiple threads running in a shared memory space, communication
 between disjoint memory spaces usually requires the programmer to make
@@ -1100,7 +1100,7 @@ binary and run the same code natively on the Intel Xeon® coprocessor mic0
 ```
 **(XXX = 228 in our case)**  
 
-**2.2.7** In this activity we work with a slightly more complex Hello
+**2.2.9** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
 code to two coprocessors in such a way that each thread also says
 “hello”. This is accomplished by means of OpenMP. The number of threads
@@ -1119,7 +1119,7 @@ launch the binary. Check the result.
 [phi02]$ mpirun -n 4 ./hello-mpi-omp-offload
 ```
 
-**2.2.8** In this final activity for Part 2 we will work on a more
+**2.2.10** In this final activity for Part 2 we will work on a more
 realistic MPI application. Take a look at the source file montecarlo.c,
 a sample program that estimates de value of π (pi) using the Monte Carlo
 method. For more details please check the link below (Chapter 3):
