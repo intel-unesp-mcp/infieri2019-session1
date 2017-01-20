@@ -993,7 +993,7 @@ In this next example we will compile the code `vect.c` using the compiler direct
 [phi02]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
 ```
 
-Open the vectorization report `vect.optrpt` and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report 
+Open the vectorization report `vect.optrpt` and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report:
  
 #### Loop on main
   
