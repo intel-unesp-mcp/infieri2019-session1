@@ -474,7 +474,7 @@ Intel Xeon® processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
 
-###1.4 Knights Landing the Second Generation of Xeon Phi Architecture ###
+### 1.4 Knights Landing the Second Generation of Xeon Phi Architecture
 
 Recently, a second generation of Intel Xeon Phi architecture was released with the 
 code-name Knights Landing (KNL), offering additional support for vector processing, 
