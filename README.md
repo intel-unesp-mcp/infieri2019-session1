@@ -157,10 +157,10 @@ coprocessor programming:
 -   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_
     <http://www.apress.com/9781430259268>
 
--   _Intel Xeon Phi Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)
+-   _Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)
     <http://www.lotsofcores.com/>
 
--   Intel Xeon Phi Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)
+-   Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)
     <http://www.lotsofcores.com/>
 
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_
@@ -474,9 +474,9 @@ Intel Xeon® processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
 
-### 1.4 Knights Landing the Second Generation of Xeon Phi Architecture
+### 1.4 Knights Landing the Second Generation of Xeon Phi™ Architecture
 
-Recently, a second generation of Intel Xeon Phi architecture was released with the 
+Recently, a second generation of Intel® Xeon Phi™ architecture was released with the 
 code-name Knights Landing (KNL), offering additional support for vector processing, 
 power efficient scaling and local memory bandwidth. The novelty of KNL are the following:
 
@@ -721,7 +721,7 @@ have the opportunity to play with simple MPI and OpenMP examples.
 
 ### 2.1.1 Overview of Vectorization ###
 
-The VPUs present in the cores of Intel Xeon and Intel Xeon Phi architecture (described in Section 1.2), provides support for execution of vector instructions that 
+The VPUs present in the cores of Intel Xeon and Intel® Xeon Phi™ architecture (described in Section 1.2), provides support for execution of vector instructions that 
 operates on a set of data called vector, whereas scalar instructions operate on single data items. This is a parallelism know as data-level parallelism. The best 
 candidates to explore data parallelism are the loops with independent iterations and with body composed of a few lines.
 The parallelization of an application using data parallelism is a process known as vectorization. Compilers support developers explore vectorization in the following ways:
@@ -966,7 +966,7 @@ of execution and out the transfer of content of variable from device to host aft
 The offload report shows that 16 bytes were transferred from host to device and 8 bytes from device to host.
 
 In the next activity change the code  offloadFunction.c: add a function called MyFunction2 to be executed on 
-Intel Xeon Phi, that performs the sum of all elements of an array of double elements, and display the value of 
+Intel® Xeon Phi™, that performs the sum of all elements of an array of double elements, and display the value of 
 sum on the host. (transfer variable C[] from host to device and variable sum from device to host)
 
 Use the following snippet to performs the sum of all elements of an array:
