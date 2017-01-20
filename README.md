@@ -976,10 +976,9 @@ Use the following snippet to performs the sum of all elements of an array:
   int n=100;
   for (cont=0; cont<n; cont++)
     sum += C[cont];
-
 ```
 
-Do not forget to copy variable C using directive in
+**Do not forget to copy variable C using directive `in`.
 
 
 **2.2.7** Automatic vectorization
@@ -998,39 +997,40 @@ Open the vectorization report `vect.optrpt` and search for loop on on function m
  
 #### Loop on main
   
-> LOOP BEGIN at vect.c(37,3)  
-      remark #25045: Fused Loops: ( 37 41 )  
-      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(38,10) ]  
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(38,5) ]  
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
-      remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
-      remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(42,11) ]  
-      remark #15305: vectorization support: vector length 4  
-      remark #15309: vectorization support: normalized vectorization overhead 0.280  
-      remark #15301: FUSED LOOP WAS VECTORIZED  
-      remark #15448: unmasked aligned unit stride loads: 2  
-      remark #15449: unmasked aligned unit stride stores: 3  
-      remark #15475: --- begin vector cost summary ---  
-      remark #15476: scalar cost: 25  
-      remark #15477: vector cost: 6.250  
-      remark #15478: estimated potential speedup: 3.990  
-      remark #15487: type converts: 5  
-      remark #15488: --- end vector cost summary ---  
-      remark #25456: Number of Array Refs Scalar Replaced In Loop: 2  
-      remark #25015: Estimate of max trip count of loop=22500  
-   LOOP END  
-
+```
+LOOP BEGIN at vect.c(37,3)  
+    remark #25045: Fused Loops: ( 37 41 )  
+    remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(38,10) ]  
+    remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(38,5) ]  
+    remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
+    remark #15388: vectorization support: reference A[i] has aligned access   [ vect.c(42,5) ]  
+    remark #15388: vectorization support: reference B[i] has aligned access   [ vect.c(42,11) ]  
+    remark #15305: vectorization support: vector length 4  
+    remark #15309: vectorization support: normalized vectorization overhead 0.280  
+    remark #15301: FUSED LOOP WAS VECTORIZED  
+    remark #15448: unmasked aligned unit stride loads: 2  
+    remark #15449: unmasked aligned unit stride stores: 3  
+    remark #15475: --- begin vector cost summary ---  
+    remark #15476: scalar cost: 25  
+    remark #15477: vector cost: 6.250  
+    remark #15478: estimated potential speedup: 3.990  
+    remark #15487: type converts: 5  
+    remark #15488: --- end vector cost summary ---  
+    remark #25456: Number of Array Refs Scalar Replaced In Loop: 2  
+    remark #25015: Estimate of max trip count of loop=22500  
+LOOP END  
+```
 
 #### Loop on hist
 
-
-> LOOP BEGIN at vect.c(11,3)  
+```
+LOOP BEGIN at vect.c(11,3)  
    remark #15344: loop was not vectorized: vector dependence prevents vectorization  
    remark #15346: vector dependence: assumed FLOW dependence between hist[bin] (13:5) and hist[bin] (13:5)  
    remark #15346: vector dependence: assumed ANTI dependence between hist[bin] (13:5) and hist[bin] (13:5)  
    remark #25438: unrolled without remainder by 2  
 LOOP END  
-
+```
 
 
 The new vector instruction set AVX-512 provides support for indirection called confliction detection, 
