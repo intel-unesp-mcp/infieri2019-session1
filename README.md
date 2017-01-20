@@ -672,7 +672,7 @@ console and use the command ssh to login to the host phi04.ncc.unesp.br
 assistant which number has been assigned to you):
 
 ```
-[phi02]$ ssh –X traineeN@phi04.ncc.unesp.br
+ssh –X traineeN@phi04.ncc.unesp.br
 ```
 
 **1.5.8** The utility lscpu shows information about the CPU architecture. 
@@ -1045,24 +1045,32 @@ Now the loop on function hist was vectorized using AVX512.
 
 Try to run this code on **phi02** and note that it is not possible due to lack of 512 instruction set implemented on VPU.
 
-**2.2.8**  When MCDRam is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
+**2.2.8**  When MCDRAR is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
 
 In order to explore the MCDRAM the developer can use a library called Memkind, that provides an interface to allocate memory on the MCDRAM, or can enforce the execution of application to the NUMA node attached to the MCDRAM.
 
 In this example, we are going to compare the execution of an application that performs matrix multiplication using DDR4 against MCDRAM in flat mode.
 
-First, lets compile the application
+First, letsconnect to KNL server
+
 
 ```
-cd matrix/linux
-make clean
-make icc
+ssh –X traineeN@phi04.ncc.unesp.br
+```
+
+Compile the application
+
+
+```
+[phi04]$ cd matrix/linux
+[phi04]$ make clean
+[phi04]$ make icc
 ```
 
 execute the command numactl to identify the nodes attached to DDR4 and the nodes attached to MCDRAM.
 
 ```
-numactl -H
+[phi04]$ numactl -H
 ```
 
 In our server the cluster mode is setup as SNC-4, so the first four nodes (0, 1, 2 and 3) are attahed to DDR4 and the other four nodes (4, 5, 6 and 7) are attached to MCDRAM.
@@ -1070,13 +1078,13 @@ In our server the cluster mode is setup as SNC-4, so the first four nodes (0, 1,
 To Execute the code on DDR. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 0 to 3.
 
 ```
-time numactl -m 0,1,2,3 ./matrix.icc
+[phi04]$ time numactl -m 0,1,2,3 ./matrix.icc
 ```
 
 To Execute the code on MCDRAM. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 4 to 7.
 
 ```
-time numactl -m 4,5,6,7 ./matrix.icc
+[phi04]$ time numactl -m 4,5,6,7 ./matrix.icc
 ```
 
 What execution presents better performance? 
