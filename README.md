@@ -9,7 +9,7 @@
 UNESP Center for Scientific Computing (an Intel Modern Code Partner)  
 São Paulo State University (Universidade Estadual Paulista - UNESP)
 
-São Paulo, Brazil 
+São Paulo, Brazil - BR
 
 **Organized by: Rogério Iope, Silvio Stanzani, Raphael Cóbe, Jefferson Fialho**
 
