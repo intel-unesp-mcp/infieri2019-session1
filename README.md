@@ -978,7 +978,7 @@ Use the following snippet to performs the sum of all elements of an array:
     sum += C[cont];
 ```
 
-**Do not forget to copy variable C using directive `in`.
+**Do not forget to copy variable C using directive `in`.**
 
 
 **2.2.7** Automatic vectorization
