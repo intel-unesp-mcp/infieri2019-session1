@@ -201,13 +201,56 @@ should be able to run X11.
 Use the syntax below to log in to the host system.
 
 ```
-$ ssh –X phi02.ncc.unesp.br –l traineeN 
+$ ssh –X SERVER –l traineeN 
 ```
 
 **(N is a number assigned to each participant)**
 
 
+```
+$ ssh –X KNL-SERVER –l traineeN 
+```
+**(N is a number assigned to each participant)**
+
+
 Please refer to the teaching assistant(s) for more details.
+
+
+### GIT repository and source code directory
+
+**Git** is a free and open source distributed version control system (VCS) designed to tracking changes in projects files and coordinating work on those files among multiple people with speed and efficiency.
+
+**GitHub** is a Git repository hosting service.
+
+To copy (clone) the remote source code repository to your user directory, run the following command in the host system console:
+
+```
+git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
+```
+
+To access the source files directory run the following command:
+
+```
+cd infieri-2017-basic/src
+```
+
+This is your **SOURCE-DIR**.
+
+Please refer to the teaching assistant(s) for more details.
+
+### Intel's environment variables
+
+After you connect to a remote server, set the environment variables used by the intel tools running the following script:
+
+```
+[SERVER] source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+```
+
+Or
+
+```
+[KNL-SERVER] source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+```
 
 ______
 
