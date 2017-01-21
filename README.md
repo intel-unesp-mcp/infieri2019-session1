@@ -216,13 +216,13 @@ $ ssh –X KNL-SERVER –l traineeN
 Please refer to the teaching assistant(s) for more details.
 
 
-### GIT repository and source code directory
+### GIT repository and source files directory
 
 **Git** is a free and open source distributed version control system (VCS) designed to tracking changes in projects files and coordinating work on those files among multiple people with speed and efficiency.
 
 **GitHub** is a Git repository hosting service.
 
-To copy (clone) the remote source code repository to your user directory, run the following command in the host system console:
+To copy (clone) the remote source files repository to your user directory, run the following command in the host system console:
 
 ```
 $ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
