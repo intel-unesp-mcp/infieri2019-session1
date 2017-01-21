@@ -225,13 +225,13 @@ Please refer to the teaching assistant(s) for more details.
 To copy (clone) the remote source code repository to your user directory, run the following command in the host system console:
 
 ```
-git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
+$ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
 ```
 
 To access the source files directory run the following command:
 
 ```
-cd infieri-2017-basic/src
+$ cd infieri-2017-basic/src
 ```
 
 This is your **SOURCE-DIR**.
@@ -243,13 +243,13 @@ Please refer to the teaching assistant(s) for more details.
 After you connect to a remote server, set the environment variables used by the intel tools running the following script:
 
 ```
-[SERVER] source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+[SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
 ```
 
 Or
 
 ```
-[KNL-SERVER] source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+[KNL-SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
 ```
 
 ______
