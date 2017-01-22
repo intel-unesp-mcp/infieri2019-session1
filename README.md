@@ -17,34 +17,54 @@ ______
 
 ## Overview
 
-The Intel® Xeon Phi™ Coprocessor, the first product of Intel’s Many
-Integrated Core (MIC) Architecture, is a new accelerator technology
-developed by Intel to enable performance gains for highly parallel
-computing workloads. It possesses several interesting and appealing
-features, including the ability to use familiar programming models such
-as OpenMP and MPI. This hands-on training session is a comprehensive,
-practical introduction to the Xeon Phi™ architecture and programming
-models, aiming to demonstrate the processing power of the Intel® Xeon Phi™
-product family.
+Intel® Xeon Phi™ is a brand name for all Intel Many Integrated Core (MIC)
+architecture of processors and coprocessors developed by Intel to enable
+performance gains for highly parallel computing workloads. Intel MIC architecture
+combines many Intel processor cores onto a single chip and provides interesting
+and appealing features, including the ability to use familiar programming models
+such as OpenMP and MPI in much the same manner that they are used on
+multi-core / multi-socket systems based on widely used Intel Xeon processors.
 
-Participants will have access to a heterogeneous computing system
-equipped with Intel Xeon® processors and Intel® Xeon Phi™ coprocessors, as
-well as Intel software development tools. The computing system, a
-state-of-the-art server with two Intel Xeon processors (16 cores, 2
-threads/core) and three Intel® Xeon Phi™ coprocessors (171 cores, 4
-threads/core), is hosted at the Center for Scientific Computing of the
-São Paulo State University (UNESP), in Brazil. The step-by-step hands-on
-activities have been planned to provide easy to follow instructions in
-order to allow the participants to have a real - though very
-introductory - experience on using a powerful manycore system.
+This hands-on training has been designed to be a comprehensive, practical
+introduction to parallel programming based on the Xeon Phi architecture
+and programming models, aiming to demonstrate the processing power of
+the Intel Xeon Phi product family. Attendants of these training activities
+will start issuing simple command-line tools to get basic information about
+the Intel Xeon Phi coprocessors, then learn how to monitor what resources
+are being used and access their operating systems by establishing ssh
+sessions with them. They will thus verify that the Intel Xeon Phi
+coprocessor is an IP-addressable PCIe device - managed by an independent
+environment provided by the MIC Platform Software Stack (MPSS) - that
+runs a Linux-based operating system.
+
+Following the introductory part, participants will learn how to compile
+and run simple C/C++ applications directly into the coprocessors, and then
+compile and run example codes based on shared-memory parallelism with OpenMP
+and Cilk Plus and distributed-memory parallelism with MPI. They will also
+work on MPI application examples that should be executed simultaneously
+on the Xeon processors and the Xeon Phi coprocessors, explore the use of Intel
+libraries TBB and MKL, and develop insights on tuning parallel applications.
+
+Participants will have access to a heterogeneous computing system equipped
+with Intel Xeon processors and Intel Xeon Phi coprocessors, as well as the
+latest Intel software development tools. The computing system is hosted at
+the Center for Scientific Computing of the São Paulo State University (UNESP),
+in Brazil, an official member of the Intel Modern Code training program.
+The step-by-step hands-on activities have been planned to provide easy to
+follow instructions in order to allow the participants to have a real
+experience on using a powerful manycore computing system.
 
 ## Learning Goals
 
-Attendants of these hands-on labs will start issuing simple command-line
-tools to get basic information about the Intel® Xeon Phi™ coprocessors,
+Attendants of these hands-on labs will work on predefined sets of exercises
+that progressively help them get familiar with the Intel Xeon Phi coprocessor
+hardware, programming models and development tools. Exercises have been
+developed in such a way that the learners proceed from one topic to the next
+at their own speed. Participants will start issuing simple command-line
+tools to get basic information about the Intel Xeon Phi coprocessors,
 then will learn how to monitor what resources are being used and access
 their operating systems by establishing ssh sessions with them. Trainees
-will thus verify that the Intel® Xeon Phi™ coprocessor is an
+will thus verify that the Intel Xeon Phi coprocessor is an
 IP-addressable PCIe device - managed by an independent environment
 provided by the MIC Platform Software Stack (MPSS) - that runs the Linux
 operating system.
@@ -54,7 +74,7 @@ and run simple C/C++ applications directly into the coprocessors, and
 then compile and run example codes based on shared-memory parallelism
 with OpenMP and Cilk Plus and distributed-memory parallelism with MPI.
 They will also work on MPI application examples that should be executed
-simultaneously on the Xeon® processors and the Xeon Phi™ coprocessors,
+simultaneously on the Xeon® processors and the Xeon Phi coprocessors,
 explore the use of Intel Math Kernel Library (MKL), and develop insights
 on tuning parallel applications.
 
@@ -62,9 +82,10 @@ on tuning parallel applications.
 
 Please read through the following excerpt, extracted from the white
 paper referenced below, which will give you a short overview of the
-Intel® Xeon Phi™ coprocessor.
+Intel Xeon Phi coprocessor.
 
-A. Vladimirov, V. Karpusenko, “*Test-driving Intel® Xeon Phi™ coprocessors with a basic N-body simulation*”, Colfax International, January 2013, available at
+A. Vladimirov, V. Karpusenko, “*Test-driving Intel® Xeon Phi™ coprocessors with
+a basic N-body simulation*”, Colfax International, January 2013, available at
 
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
 
@@ -183,14 +204,14 @@ coprocessor programming:
 
 ## Remote access to the testing platform
 
-This document assumes that the testing platform has been setup and is
+This document assumes that the testing platforms have been setup and are
 ready to use. We will be using a state-of-the-art server - loaned by
-Intel - with two Intel Xeon® processors (16 cores, 2 threads/core) and
-three Intel® Xeon Phi™ coprocessors (171 cores, 4 threads/core), as well
+Intel - with two high-end Intel Xeon processors (each with 18 cores, 2 threads/core)
+and five Intel Xeon Phi coprocessors (each with 60 cores, 4 threads/core), as well
 as several Intel software development tools. To simplify nomenclature,
 we will refer to the testing platform as “the host” (or “the host
 system”), and the Xeon Phi™ coprocessors installed in the host system as
-“mic0”, “mic1”, and “mic2”.
+“mic0”, “mic1”, ..., “mic4”.
 
 Participants should work alone or in pairs on a workstation - preferably
 running Linux or Mac - with Internet access. All the exercises are
@@ -218,9 +239,9 @@ Please refer to the teaching assistant(s) for more details.
 
 ## GIT repository and source files directory
 
-**Git** is a free and open source distributed version control system (VCS) designed to tracking changes in projects files and coordinating work on those files among multiple people with speed and efficiency.
+**Git** is a free and open source distributed version control system (DVCS) designed to track changes in source files  or other content and coordinate work on them among multiple people with flexibility, security, and efficiency.
 
-**GitHub** is a Git repository hosting service.
+**GitHub** is a web-based Git repository hosting service.
 
 To copy (clone) the remote source files repository to your user directory, run the following command in the host system console:
 
@@ -234,13 +255,13 @@ To access the source files directory run the following command:
 $ cd infieri-2017-basic/src
 ```
 
-This is your **SOURCE-DIR**.
+This will be referred as your **SOURCE-DIR**.
 
 Please refer to the teaching assistant(s) for more details.
 
 ## Intel's environment variables
 
-After you connect to a remote server, set the environment variables used by the intel tools running the following script:
+After you connect to the remote server, set the environment variables necessary for the Intel development tools by running the following command:
 
 ```
 [SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
@@ -262,10 +283,10 @@ ______
 
 ### 1.1 Goals ###
 
-Activities start with a brief overview of the Xeon Phi™ coprocessor
+Activities start with a brief overview of the Xeon Phi coprocessor
 hardware and software architecture, followed by a series of practical
 exercises. The exercises will show you some of the tools available for
-getting information about the Intel® Xeon Phi™ coprocessors and monitor
+getting information about the Intel Xeon Phi coprocessors and monitor
 how their internal resources are being used. You will have an
 introductory contact with the essential tools and configuration options
 for managing the coprocessor operating environment.
@@ -278,21 +299,21 @@ MIC (Many Integrated Core) architecture, which enables fast and
 energy-efficient execution of High Performance Computing (HPC)
 applications utilizing massive thread parallelism, vector arithmetic and
 streamlined memory access. The term “Many Integrated Core” is used to
-distinguish the Intel® Xeon Phi™ product family from the “Multi-Core”
-family of Intel Xeon® processors.
+distinguish the Intel Xeon Phi product family from the “Multi-Core”
+family of Intel Xeon processors.
 
-The Xeon Phi™ card can be thought of as a computer board containing the
-coprocessor silicon chip with up to 61 cores, their associated caches,
+The Xeon Phi card can be thought of as a computer board containing the
+coprocessor silicon chip with up to 61 cores and their associated caches
 and memory controllers, which is in turn surrounded by GDDR5 memory
 chips, a flash memory, a system management controller, sensors, and
 miscellaneous electronics and connectors to attach it into a host
 computer system. The whole coprocessor card is what is commonly just
-called the Xeon Phi™ coprocessor. A schematic view of the key components
+called the Xeon Phi coprocessor. A schematic view of the key components
 of the coprocessor card is shown in Figure 1. The flash memory is used
 to store the coprocessor bootstrap code, similar to the BIOS in an Intel
 Xeon® processor platform. The System Management Controller (SMC) handles
 information coming from sensors that measure temperature, voltage, and
-current. The different Xeon Phi™ coprocessor models vary on such factors
+current. The different Xeon Phi coprocessor models vary on such factors
 as number of cores, memory size and speed, thermal solutions and form
 factor.
 
@@ -335,7 +356,7 @@ As can be seen in Figure 2, each core includes:
 **Figure 2: Basic building blocks of the Intel® Xeon Phi™ coprocessor
 chip**
 
-In addition to the IA (Intel Architecture) cores, the Xeon Phi™
+In addition to the IA (Intel Architecture) cores, the Xeon Phi
 coprocessor chip also includes:
 
 -   Memory controllers (GBOX), which access external memory devices
@@ -356,19 +377,19 @@ coprocessor chip also includes:
 Each memory controller is based on the GDDR5 specification, and supports
 two channels per memory controller. At up to 5.5 GT/s transfer speed,
 this provides a theoretical aggregate bandwidth of 352 GB/s (gigabytes
-per second) directly connected to the Intel® Xeon Phi™ coprocessor.
+per second) directly connected to the Intel® Xeon Phi coprocessor.
 
 For more detailed information please refer to ”Intel® Xeon Phi™
 Coprocessor: System Software Developers Guide".
 
 ### 1.3 Overview of the Xeon Phi™ system software and programming models ###
 
-The Intel® Xeon Phi™ coprocessor needs support from system software
+The Intel Xeon Phi coprocessor needs support from system software
 components to operate properly and interoperate with other hardware
-components in a system. The system software component of the Xeon Phi™
+components in a system. The system software component of the Xeon Phi
 coprocessor, known as the Intel Many Integrated Core (MIC) Platform
 Software Stack (MPSS), provides this functionality. When installing
-coprocessors for use in an Intel Xeon® processor platform for the first
+coprocessors for use in an Intel Xeon processor platform for the first
 time, an early step that needs to be done is to download, install, and
 launch the latest version of Intel MPSS.
 
@@ -398,7 +419,7 @@ Xeon Phi™ coprocessor:
     local Linux operating system.
 
 Unlike other device drivers implemented to support PCI Express based
-hardware, such as graphics cards, Intel® Xeon Phi™ was designed to support
+hardware, such as graphics cards, Intel Xeon Phi was designed to support
 the execution of computing applications in the familiar HPC environment
 through the OpenMP and MPI specifications, as well as other offload
 programming usage models. Because the coprocessor core is based on the
@@ -412,8 +433,8 @@ operating system resides on the coprocessor and implements complementary
 functionalities provided by the driver layer on the host side to achieve
 its system management goals.
 
-The software stack of the Xeon Phi™ is then highly layered, split up into
-a host side and a coprocessor side. Host system and Xeon Phi™ coprocessor
+The software stack of the Xeon Phi is then highly layered, split up into
+a host side and a coprocessor side. Host system and Xeon Phi coprocessor
 are both (typically) running Linux operating systems and they are
 connected through the PCI Express bus. On both sides, various layers of
 kernel and user level drivers, libraries, and runtimes can be found. For
@@ -425,7 +446,7 @@ coprocessor software architecture. As can be seen, the diagram shows
 well-defined left and right sides, and a solid line divides each of them
 in top and bottom halves. The left side corresponds to components on the
 host processor platform and the right side depicts software components
-on the Xeon Phi™ coprocessor. The top and bottom halves represent the
+on the Xeon Phi coprocessor. The top and bottom halves represent the
 standard operating system notion of hierarchical protection domains[^4]:
 application code and system interface executes at the user-level, and
 more trusted, system level operating system and driver code runs at the
@@ -445,7 +466,7 @@ is carried over the PCIe bus instead of network interconnects.
 **Figure 3: Simplified view of the Intel® Xeon Phi™ software stack**
 
 The careful examination of the software stack represented in Figure 3
-reveals two principal ways of accessing the Xeon Phi™ coprocessor:
+reveals two principal ways of accessing the Xeon Phi coprocessor:
 
 -   Offload (green line): applications are started and run on the
     host processor. Selected compute-intensive and highly parallel parts
@@ -459,11 +480,11 @@ reveals two principal ways of accessing the Xeon Phi™ coprocessor:
     of directives.
 
 -   Native (red line): applications can be run natively on the Xeon
-    Phi™ coprocessors. To the applications, the coprocessor looks like a
+    Phi coprocessors. To the applications, the coprocessor looks like a
     standalone multicore computer. Users can log in directly onto the
     Xeon Phi™ via ssh and execute applications, just as they are used to
     from the host system. Applications are compiled on the host for
-    native execution on the Xeon Phi™ and copied over (or made available
+    native execution on the Xeon Phi and copied over (or made available
     on a distributed filesystem exported from the host, e.g. via NFS -
     the Linux Network File System). After the computation is finished,
     the results can be retrieved from the coprocessor with the help of
@@ -474,12 +495,12 @@ Both models can be mixed, resulting in multiple execution scenarios:
 -   Applications running on the host only;
 
 -   Applications running mainly on the host, with critical parts of the
-    code being offloaded to the Xeon Phi™;
+    code being offloaded to the Xeon Phi;
 
--   Applications running on both the host and the Xeon Phi™, interacting
+-   Applications running on both the host and the Xeon Phi, interacting
     trough standardized communication frameworks;
 
--   Highly parallel applications running on the Xeon Phi™ only.
+-   Highly parallel applications running on the Xeon Phi only.
 
 Figure 4 illustrates the compute spectrum enabled when coupling
 processors and coprocessors. Depending on the application’s compute
@@ -513,58 +534,57 @@ The Intel MPI library supports all these programming execution models.
 MPI is the de facto library-based communication environment used to
 enable parallel applications to run, communicate, and scale across
 multiple processing cores, either between the multiple cores in a single
-Intel Xeon® processor platform or across a connected network of nodes in
+Intel Xeon processor platform or across a connected network of nodes in
 a cluster. During the hands-on activities of Part 2 you will have the
 opportunity to exercise some of these computing models.
 
 ### 1.4 Knights Landing: the Second Generation of Xeon Phi™ Architecture
 
-Recently, a second generation of Intel® Xeon Phi™ architecture was released with the 
+Recently, a second generation of Intel Xeon Phi architecture has been released with the 
 code-name Knights Landing (KNL), offering additional support for vector processing, 
-power efficient scaling and local memory bandwidth. The novelty of KNL are the following:
+power efficient scaling and local memory bandwidth. The novelties of Intel KNL are the following:
 
--	Increasing in number of cores: KNL models range from 64 to72 cores;
--	Improvement on VPU size: each core provides two units of 512 bits;
--	Improvements on vector instruction set: KNL provides support to the new instruction set called AVX-512, that offers new functionalities for vectorization but is fully compatible with older versions;
--	KNL is available as a processor or as a Coprocessor, maintaining compatibility with applications compiled for Intel Xeon;
--	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random access memory (MCDRAM), that complements DDR4;
+-	Increase in the number of cores: distinct KNL models have 64, 68 or 72 cores;
+-	Improvement on the size of the Vector Processing Units (VPU): each core provides two units of 512 bits;
+-	Improvements on the vector instruction set: KNL provides support to a new instruction set known as AVX-512, that offers new functionalities for vectorization but is fully compatible with previous versions;
+-	KNL is available both as a processor or as a coprocessor, maintaining compatibility with applications compiled for the Intel Xeon;
+-	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random access memory (MCDRAM), that complements DDR4.
 
-In the KNL architecture each core has two 512-bit VPUs, L1 cache and is capable of executing 
-four threads. The cores are organized in tiles, that consists of two cores that shares L2 cache. 
-Tiles are interconnected by a cache-coherent two dimensional mesh network, mesh enforces that every 
-message travels to the destination first vertically, until it hits the target row, then it makes the turn, 
-and travels horizontally until it reaches the destination. Such interconnection is optimized for KNL traffic flows.
-KNL has two types of memory DDR4 and HBM. The maximum capacity in DDR4 is 384 GB and the size of HBM is 16 GB. HBM can be used as a Last-level cache (LLC) or as addressable memory in three modes:
+Each core of the KNL architecture has two 512-bit VPUs, L1 cache and is capable of executing 
+four threads. Cores are organized in tiles, each one consisting of two cores that share a single L2 cache. 
+Tiles are interconnected by a cache-coherent two-dimensional mesh network; the mesh interconnection enforces that every 
+message travels to the destination first vertically, until it hits the target row, then travels horizontally until it reaches the destination. Such interconnection is specifically optimized for KNL traffic flows.
+KNL has two types of memory, known as DDR4 SDRAM (double data rate fourth-generation synchronous dynamic random-access memory) and HBM (High-Bandwidth Memory). The maximum capacity for DDR4 is 384 GB and the size of HBM is 16 GB. The high-bandwidth memory can be used as a Last-level cache (LLC) or as a regular addressable memory. KNL allows three modes of configuration:
 
 * **Flat:** memory is treated as a standard memory in same address space of DDR4;
 * **Cache:** memory is used as a LLC cache for DDR4;
 * **Hybrid:** a portion of memory is cache and remaining is flat;
 
-The memory in KNL can be organized in two forms: Uniform Memory Access (UMA) which means that the latency from core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA) which means that memory and cores are divided into two or four sections, in this case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:  
+The memory in KNL can be organized in two forms: Uniform Memory Access (UMA), in which the latency from one core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA), in which memory and cores are divided into two or four sections; in this second case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:  
 
 #### • UMA
 - **All-to-all:** memory addresses are uniform distributed across the chip;  
-- **Quadrant:** memory addresses divided in four sections;  
-- **Hemisphere:** memory addresses divided in two sections;    
+- **Quadrant:** memory addresses are divided in four sections;  
+- **Hemisphere:** memory addresses are divided in two sections.   
 
 #### • NUMA
 - **SNC-2:** tiles are divided in two NUMA nodes;  
-- **SNC-4:** tiles are divided in four NUMA nodes;    
+- **SNC-4:** tiles are divided in four NUMA nodes.
 
 ### 1.5 Hands-on Activities ###
 
 **1.5.1** On your desktop/workstation, open a terminal or command line
 console and use the command `ssh` to login to the host `phi02.ncc.unesp.br`
-as user traineeN (N = 1 … 16; please check with the teaching assistant
+as user traineeN (N = 01 … 20; please check with the teaching assistant
 which number has been assigned to you):
 
 ```
 $ ssh –X traineeN@phi02.ncc.unesp.br
 ```
 
-**1.5.2** Intel’s tool for checking the status of Xeon Phi™ coprocessors
+**1.5.2** Intel’s tool for checking the status of Xeon Phi coprocessors
 is micinfo. Use this utility to obtain detailed information about the
-Intel® Xeon Phi™ coprocessor(s) installed in the system and the
+Intel Xeon Phi coprocessor(s) installed in the system and the
 corresponding driver version:
 
 ```
@@ -575,10 +595,10 @@ For each device listed, take note of the device model (SKU:
 *stock-keeping unit*), number of cores, memory size (GDDR5 –
 <http://en.wikipedia.org/wiki/GDDR5>) and thermal information (die
 temperature, actively- or passively-cooled). Check also the memory size
-of the system host.
+of the host system.
 
 The `-listdevices` option provides a shorter output, with the list of the
-Intel® Xeon Phi™ coprocessors available in the system:
+Intel® Xeon Phi coprocessors available in the system:
 
 ```
 [phi02]$ micinfo -listdevices
@@ -596,7 +616,7 @@ GDDR, thermal. For example:
 [phi02]$ micinfo -deviceInfo 1 -group thermal
 ```
 
-**1.5.3** The Xeon Phi™ coprocessor is packaged in a PCIe card which
+**1.5.3** The Xeon Phi coprocessor is packaged in a PCIe card which
 includes thermal and power sensors and a system management controller
 (SMC) that monitors the sensors and manages the coprocessor. The utility
 micsmc can be used to extract information from the coprocessor SMC,
@@ -621,7 +641,7 @@ which enable you to switch from the current view to one of the two other
 available views: the *Core Histogram View* and the *Historical
 Utilization View*. In particular, the Core Histogram View displays the
 computational activity of all logical cores (*threads*), measured in
-percentage utilization, of the corresponding Xeon Phi™ coprocessor.
+percentage utilization, of the corresponding Xeon Phi coprocessor.
 
 To close the GUI application, type `fg` in the console and then hit ^C.
 For more information, please check the documentation available at
@@ -661,16 +681,16 @@ of the command:
 For a detailed view of all `miccheck` arguments, use option `–h` (for help).
 
 There are other administrative tools and utilities, but they are mostly
-used by system administration purposes (e.g. updating the firmware in
-the Xeon Phi™ coprocessor´s flash memory) and usually require
+used for system administration purposes (e.g. updating the firmware in
+the Xeon Phi coprocessor´s flash memory) and usually require
 administrative privileges to run.
 
-**1.5.5** The Intel® Xeon Phi™ coprocessor is an IP-addressable PCIe
+**1.5.5** The Intel® Xeon Phi coprocessor is an IP-addressable PCIe
 device - managed by an independent environment provided by the MIC
 Platform Software Stack (MPSS) - that runs the Linux operating system.
-The Linux OS on the Intel® Xeon Phi™ coprocessor supports SSH access for
+The Linux OS on the Intel Xeon Phi coprocessor supports SSH access for
 all users defined, including root, using public key authentication keys.
-In this activity we are going to interact with the Intel® Xeon Phi™
+In this activity we are going to interact with the Intel Xeon Phi
 coprocessors´ Linux OS via a terminal shell. From the host shell issue
 an ssh to the first coprocessor (mic0):
 
@@ -689,7 +709,7 @@ check the results:
 [phi02-mic]$ exit
 ```
 
-By default, the first Intel® Xeon Phi™ coprocessor in the system is
+By default, the first Intel Xeon Phi coprocessor in the system is
 resolved to the hostname mic0, as specified in the file `/etc/hosts`.
 Notice that the SSH server that runs on the coprocessor allows us to
 transfer files from the host to the coprocessor using the secure copy
@@ -708,17 +728,16 @@ host system, and then transfer it to one of the coprocessor cards using
 Verify also if you are able to transfer the same file directly from one
 coprocessor card to another one.
 
-
 **1.5.7** On your desktop/workstation, open a terminal or command line 
 console and use the command ssh to login to the host phi04.ncc.unesp.br 
-(KNL Server) as user traineeN (N = 1 … 16; please check with the teaching 
+(KNL Server) as user traineeN (N = 01 … 20; please check with the teaching 
 assistant which number has been assigned to you):
 
 ```
 ssh –X traineeN@phi04.ncc.unesp.br
 ```
 
-**1.5.8** The utility lscpu shows information about the CPU architecture. 
+**1.5.8** The utility `lscpu` shows information about the CPU architecture. 
 Use this utility to obtain the amount of cores and threads available on the Intel 
 KNL processor installed in the system:
 
@@ -726,17 +745,17 @@ KNL processor installed in the system:
 [phi04]$ lscpu
 ```
 
-**1.5.9** the utility numactl maps process to specific NUMA nodes. Use this utility 
-with parameter -H to obtain information about the NUMA nodes in the system.
+**1.5.9** the utility `numactl` maps processes to specific NUMA nodes. Use this utility 
+with the parameter -H to obtain information about the NUMA nodes in the system.
 
 ```
 [phi04]$ numactl -H
 ```
 
-The cluster mode of KNL (server phi04) is in SNC-4 mode, so cores appear grouped into 
+The cluster mode of the KNL server we are using has been configured as SNC-4, so cores appear grouped into 
 four nodes with exactly a quarter of the on-platform memory in each node. 
-In addition, our system uses the on-package high bandwidth memory (HBM) in the ﬂat mode, 
-which adds four more NUMA nodes with a quarter of the HBM in each node.
+In addition, our system uses the on-package high bandwidt memory (HBM) configured as ﬂat mode, 
+which adds four more NUMA nodes with a quarter of the HBM assigned for each node.
 
 ______
 
@@ -757,28 +776,25 @@ ______
 Traditionally, “Hello World” programs are used to illustrate basic
 syntax; most of the examples of this session will follow this tradition.
 The following set of activities will show you how to compile trivially
-simple source codes for native Intel® Xeon Phi™ coprocessor execution. You
+simple source codes for native Intel Xeon Phi coprocessor execution. You
 will also learn how to offload parts of the code or specific function
 calls of an executable running on the host to the coprocessor, and will
 have the opportunity to play with simple MPI and OpenMP examples.
 
 ### 2.1.1 Overview of Vectorization ###
 
-The VPUs present in the cores of Intel Xeon and Intel® Xeon Phi™ architecture (described in Section 1.2), provides support for execution of vector instructions that 
-operates on a set of data called vector, whereas scalar instructions operate on single data items. This is a parallelism know as data-level parallelism. The best 
-candidates to explore data parallelism are the loops with independent iterations and with body composed of a few lines.
-The parallelization of an application using data parallelism is a process known as vectorization. Compilers support developers explore vectorization in the following ways:
+The Vector Processing Units present in the cores of Intel Xeon and Intel Xeon Phi architecture (described in Section 1.2), provide support for the execution of vector instructions which operates simultaneously on a set of data items known as a vector. On the contrary, scalar instructions operate on single data items. This kind of parallelism is known as data-level parallelism. Considering the source code of an application, the best candidates to explore data parallelism are the loops with independent iterations and with a body composed by a few lines. The parallelization process of an application using data parallelism is known as **vectorization**. Compilers offer support for developers to explore vectorization in the following ways:
 
-- Automatic vectorization: the compiler implements heuristics that changes scalar instruction to vector instructions automatically when there is no modification on final results.
+- Automatic vectorization: the compiler implements heuristics that change scalar instructions to vector instructions automatically, but only in cases where there is no modification on the final results.
 
-- Guided Vectorization: when the compiler is not able to automatically vectorize the code, developer can use pragmas to instruct the compiler about the vectorization.
+- Guided Vectorization: when the compiler is not able to automatically vectorize the source code, the developer can use pragmas to instruct the compiler about the vectorization.
 
 - Low level vectorization: the developer can use specific compiler libraries to develop vector code.
 
 
 ### 2.2 Hands-on Activities ##
 
-**2.2.1** A development system with Intel® Xeon Phi™ coprocessors must
+**2.2.1** A development system with Intel Xeon Phi coprocessors must
 have the Intel software development tools installed, such as compilers,
 parallelization libraries and performance tuning utilities to support
 high performance code compilation. That said, before compiling and
@@ -815,7 +831,7 @@ activities are located in your home directory:
 ```
 
 Now recompile it using the `–mmic` flag to make it natively executable for
-the Intel® Xeon Phi™ coprocessor (remember to change the name of the
+the Intel Xeon Phi coprocessor (remember to change the name of the
 executable, e.g. `hello.mic` or `hello.phi`), and try to execute it:
 
 ```
@@ -825,8 +841,8 @@ executable, e.g. `hello.mic` or `hello.phi`), and try to execute it:
 
  > -bash: ./hello.mic: cannot execute binary file
 
-The resultant binary can only be executed on the Intel® Xeon Phi™
-coprocessor (why?). As we have seen before, the Intel® Xeon Phi™
+The resultant binary can only be executed on the Intel Xeon Phi
+coprocessor (why?). As we have seen before, the Intel Xeon Phi
 coprocessor is an IP-addressable device which runs an independent Linux
 OS with an SSH server daemon. Let us use scp to copy the executable
 hello.mic to any of the coprocessors, for example mic0 and mic1 (and/or
@@ -846,7 +862,7 @@ locally:
 [phi02-mic]$ ./hello.mic
 ```
 
-  > Hello world! I have 228 logical cores.
+  > Hello world! I have 240 logical cores.
 
 ```
 [phi02-mic]$ exit
@@ -854,7 +870,7 @@ locally:
 [phi02-mic]$ ./hello.mic
 ```
 
-  > Hello world! I have 228 logical cores.
+  > Hello world! I have 240 logical cores.
 
 ```
 [phi02-mic]$ exit
@@ -876,21 +892,21 @@ variable, so we need to set it first:
 [phi02]$ micnativeloadex ./hello.mic –d 0
 ```
 
-> Hello world! I have 228 logical cores.
+> Hello world! I have 240 logical cores.
 
   
 ```
 [phi02]$ micnativeloadex ./hello.mic –d 1
 ```
 
-> Hello world! I have 228 logical cores.
+> Hello world! I have 240 logical cores.
  
 
 ```
 [phi02]$ micnativeloadex ./hello.mic –d 2
 ```
 
-> Hello world! I have 228 logical cores.
+> Hello world! I have 240 logical cores.
   
 
 The `micnativeloadex` utility can also be used to check the library
@@ -982,7 +998,7 @@ Now define a different value for `PHI_ENV_VAR` and run once again:
 ```
 
 **2.2.5** We can generate diagnostic output for offload applications
-that utilize Intel® Xeon Phi™ coprocessors by using the environment
+that utilize Intel Xeon Phi coprocessors by using the environment
 variable `OFFLOAD_REPORT`, which controls the verbosity of the diagnostic
 output: `OFFLOAD_REPORT = 1` produces output including the offload
 locations and times; `OFFLOAD_REPORT = 2` adds information regarding data
@@ -991,13 +1007,13 @@ output is produced. Set the `OFFLOAD_REPORT` environment variable to 1,
 and 2 and run `hello-offload1`, or `hello-offload2`, or `hello-offload3`
 again, and check the results.
 
-**2.2.6** The next example shows how to offload a function that sum two number 
+**2.2.6** The next example shows how to offload a function that sum two numbers 
 (variables A and B) and put the result in another variable (sum). In this case it 
-is necessary to transfer the content of this variables to coprocessor, and also 
-transfer the content of variable sum from coprocessor to host.The mechanism to
- perform data transfer is using the directive in and out in pragma offload
- (#pragma offload target(mic) in (A, B) out (sum)) In this case, it is used to
- indicate the variable to be transferred from host to device before the beginning 
+is necessary to transfer the content of these variables to the coprocessor, and also 
+transfer the content of the variable sum from the coprocessor to the host. The mechanism to
+perform data transfer is using the directive in and out in pragma offload
+(#pragma offload target(mic) in (A, B) out (sum)) In this case, it is used to
+indicate the variable to be transferred from host to device before the beginning 
 of execution and out the transfer of content of variable from device to host after the execution of offload region.
 
 ```
@@ -1008,11 +1024,11 @@ of execution and out the transfer of content of variable from device to host aft
 
 The offload report shows that 16 bytes were transferred from host to device and 8 bytes from device to host.
 
-In the next activity change the code  offloadFunction.c: add a function called MyFunction2 to be executed on 
-Intel® Xeon Phi™, that performs the sum of all elements of an array of double elements, and display the value of 
+Now make a change in `offloadFunction.c` by adding a function called MyFunction2 to be executed on the 
+Intel Xeon Phi, that performs the sum of all elements of an array of double elements, and display the value of the
 sum on the host. (transfer variable C[] from host to device and variable sum from device to host)
 
-Use the following snippet to performs the sum of all elements of an array:
+Use the following snippet to perform the sum of all elements of an array:
 
 ```
   int cont;
@@ -1026,17 +1042,17 @@ Use the following snippet to performs the sum of all elements of an array:
 
 **2.2.7** Automatic vectorization
 
-In order to enable the compiler vectorize the code automatically developer have to use compiler directive “-O” 
-that stands for optimization, followed by a number (1, 2 or 3) that indicates the level of optimization. The 
-option `-qopt-report` creates a report in a text file with the same name of source code with prefix `.optrpt`, 
-that shows for each loop the optimizations performed and the aspects that inhibited the optimizations.
+In order to enable the compiler to vectorize the code automatically, the developer needs to use the compiler directive “-O” 
+(which stands for optimization), followed by a number - 1, 2 or 3 - that indicates the level of optimization. The 
+option `-qopt-report` creates a report in a text file with the same name of the source code added by the prefix `.optrpt`, 
+that shows the optimizations performed for each loop and information in case any extra optimizations were inhibited.
 In this next example we will compile the code `vect.c` using the compiler directive `-O3` and `-qopt-report`.
 
 ```
 [phi02]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
 ```
 
-Open the vectorization report `vect.optrpt` and search for loop on on function main. This loop was automatic vectorized but loop on function hist was not automatically vectorized due to data dependencies. The indirection in the index of variable samples inside function hist inhibited vectorization. Note the following message on vectorization report:
+Open the vectorization report `vect.optrpt` and search for `loop` on main function. This loop was automaticaly vectorized, but the loop on `hist` function was not, due to data dependencies. The indirection in the index of variable samples inside function `hist` inhibited vectorization. Note the following message on the vectorization report:
  
 #### Loop on main:
   
@@ -1075,34 +1091,29 @@ LOOP BEGIN at vect.c(11,3)
 LOOP END  
 ```
 
-
-The new vector instruction set AVX-512 provides support for indirection called confliction detection, 
-now perform the same compilation but using -xhost that set up the compiler to use the highest vector instruction 
-set available, in this case AVX 512
+The new vector instruction set AVX-512, available on the new Xeon Phi KNL, provides support for indirection called Confliction Detection. Now perform the same compilation but using -xhost which sets up the compiler to use the highest vector instruction set available, in this case AVX-512: 
 
 ```
 [phi04]$ icc vect.c -o vectAVX512 -O3 -qopt-report5 -xhost
 ```
 
-Now the loop on function hist was vectorized using AVX512.
+Now the loop on function hist was vectorized using AVX-512.
 
-Try to run this code on **phi02** and note that it is not possible due to lack of 512 instruction set implemented on VPU.
+Try to run this code on **phi02** and note that it is not possible due to the lack of the AVX-512 instruction set on the VPU of Xeon Phi first generation.
 
-**2.2.8**  When MCDRAM is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
+**2.2.8**  When the MCDRAM is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
 
-In order to explore the MCDRAM the developer can use a library called Memkind, that provides an interface to allocate memory on the MCDRAM, or can enforce the execution of application to the NUMA node attached to the MCDRAM.
+In order to explore the MCDRAM available in the Xeon Phi KNL, the developer can use a library known as `Memkind`, which provides an interface to allocate memory on the MCDRAM, and can enforce the execution of an application to the NUMA node attached to the MCDRAM.
 
 In this example, we are going to compare the execution of an application that performs matrix multiplication using DDR4 against MCDRAM in flat mode.
 
-First, letsconnect to KNL server
-
+Let us first connect to the KNL server:
 
 ```
 ssh –X traineeN@phi04.ncc.unesp.br
 ```
 
-Compile the application
-
+then compile the application:
 
 ```
 [phi04]$ cd matrix/linux
@@ -1110,27 +1121,26 @@ Compile the application
 [phi04]$ make icc
 ```
 
-execute the command numactl to identify the nodes attached to DDR4 and the nodes attached to MCDRAM.
-
+and execute the command `numactl` to identify the nodes attached to DDR4 and the nodes attached to MCDRAM:
 ```
 [phi04]$ numactl -H
 ```
 
-In our server the cluster mode is setup as SNC-4, so the first four nodes (0, 1, 2 and 3) are attahed to DDR4 and the other four nodes (4, 5, 6 and 7) are attached to MCDRAM.
+In our server the cluster mode has been setup as SNC-4, so the first four nodes (0, 1, 2 and 3) are attached to DDR4 and the other four nodes (4, 5, 6 and 7) are attached to MCDRAM.
 
-To Execute the code on DDR. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 0 to 3.
+To execute the code on DDR4 we will use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 0 to 3:
 
 ```
 [phi04]$ time numactl -m 0,1,2,3 ./matrix.icc
 ```
 
-To Execute the code on MCDRAM. we will use numactl with parameter "m" that enforce the numa nodes to execute the application. In this case nodes 4 to 7.
+To Execute the code on MCDRAM, we will again use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 4 to 7:
 
 ```
 [phi04]$ time numactl -m 4,5,6,7 ./matrix.icc
 ```
 
-What execution presents better performance? 
+Now compare both results. Which one showed better performance? 
 
 **2.2.9** One major difference between programming for a single system
 and for a cluster is that each cluster node has a separate memory space.
@@ -1162,7 +1172,6 @@ and utilities are all set, run the following commands:
 [phi02]$ mpiicpc -v
 [phi02]$ mpirun -info
 ```
-  
 
 Let us start by using the mpiicc wrapper to compile the hello-mpi.c
 source code and the mpirun utility to run the binary in the host system:
@@ -1174,8 +1183,8 @@ source code and the mpirun utility to run the binary in the host system:
 
 Notice that the output is not ordered by rank; this occurs because each
 logical thread executes independently. Let us now compile, upload the
-binary and run the same code natively on the Intel Xeon® coprocessor mic0
-(and do the same for mic1 and mic2):
+binary and run the same code natively on the Intel Xeon coprocessor mic0
+(and do the same for mic1, mic2, and so on):
   
 ```
 [phi02]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
@@ -1183,7 +1192,7 @@ binary and run the same code natively on the Intel Xeon® coprocessor mic0
 [phi02]$ ssh mic0
 [phi02-mic]$ mpirun -n XXX ./hello-mpi.mic 
 ```
-**(XXX = 228 in our case)**  
+**(XXX = 240 in our case)**  
 
 **2.2.10** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
@@ -1205,14 +1214,14 @@ launch the binary. Check the result.
 ```
 
 **2.2.11** In this final activity for Part 2 we will work on a more
-realistic MPI application. Take a look at the source file montecarlo.c,
+realistic MPI application. Take a look at the source file `montecarlo.c`,
 a sample program that estimates de value of π (pi) using the Monte Carlo
-method. For more details please check the link below (Chapter 3):
+method. For more details please check the link below:
 
 <http://software.intel.com/en-us/articles/using-the-intel-mpi-library-on-intel-xeon-phi-coprocessor-systems>
 
-Let us start by generating binaries for the Xeon® processors and the Xeon
-Phi™ coprocessors, and then transfer the corresponding binary to the
+Let us start by generating binaries for the Xeon processors and the Xeon
+Phi coprocessors, and then transfer the corresponding binary to the
 coprocessors:
 
 ``` 
@@ -1239,25 +1248,25 @@ longer compared to the previous exercises):
 
 ```
 [phi02]$ mpirun -host localhost -n 32 ./montecarlo
-[phi02]$ mpirun -host mic0 -n 228 \~/montecarlo.mic
-[phi02]$ mpirun -host mic1 -n 228 \~/montecarlo.mic
-[phi02]$ mpirun -host mic2 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host mic0 -n 240 \~/montecarlo.mic
+[phi02]$ mpirun -host mic1 -n 240 \~/montecarlo.mic
+[phi02]$ mpirun -host mic2 -n 240 \~/montecarlo.mic
+[phi02]$ mpirun -host mic3 -n 240 \~/montecarlo.mic
+[phi02]$ mpirun -host mic4 -n 240 \~/montecarlo.mic
 ```
   
-
 In order to start the application on two coprocessors simultaneously, we
 can specify the list of hosts and their respective parameters using the
-separator ‘:’, as shown below:
+separator `:`, as shown below:
 
 ```
-[phi02]$ mpirun -host mic0 -n 228 \~/montecarlo.mic : -host mic1 –n 228 \~/montecarlo.mic : -host mic2 –n 228
+[phi02]$ mpirun -host mic0 -n 240 \~/montecarlo.mic : -host mic1 –n 240 \~/montecarlo.mic : -host mic2 –n 240
 ```
 
-Using this syntax, let us now execute the MPI application using all
-available threads (716):
+Using this syntax, let us now execute the MPI application using all available threads:
 
 ```
-[phi02]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 228 \~/montecarlo.mic : -host mic1 -n 228 \~/montecarlo.mic : -host mic2 -n 228 \~/montecarlo.mic
+[phi02]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 \~/montecarlo.mic : -host mic1 -n 240 \~/montecarlo.mic : -host mic2 -n 240 \~/montecarlo.mic
 ```
 ______
 
@@ -1276,7 +1285,7 @@ ______
 ### 3.1 Goals ###
 
 In this new set of activities we will use simple code examples to
-leverage the Intel® Xeon Phi™ coprocessor towards peak performance, thus
+leverage the Intel Xeon Phi coprocessor towards peak performance, thus
 demonstrating some specific performance elements of the architecture.
 
 **Note:** The main ideas discussed and the set of source codes used in
@@ -1315,7 +1324,7 @@ Double precision floating point numbers are 64-bits wide, so eight
 simultaneously in the Xeon Phi™ coprocessors.
 
 In this sense, one possible approach to determine the peak single
-precision floating point capability of an Intel® Xeon Phi™ coprocessor is
+precision floating point capability of an Intel Xeon Phi coprocessor is
 by calculating the following expression:
 
 * clock frequency x number of cores x 16 x 2 (FMA) FLOPS per cycle
@@ -1348,7 +1357,7 @@ coprocessors, and run it:
 Starting Compute  
 GFlops = 25.600, Secs = 1.470, GFlops per sec = 17.415  
   
-  
+
 
 The result is about a half of one core's theoretical peak performance.
 The problem here is that the code runs only one thread in a single core.
@@ -1506,7 +1515,7 @@ activity for the mic0 coprocessor. The code as it is will run on mic0.
 If you want to run it on mic1, change lines 37, 38, 55, and 75 from
 `target (mic)` to `target (mic:1)`. Then recompile the source code
 and, before launching it, modify the environment variable
-`MIC_OMP_NUM_THREADS` to the appropriate number of threads (`228`).
+`MIC_OMP_NUM_THREADS` to the appropriate number of threads (`240`).
 
 ______
 
