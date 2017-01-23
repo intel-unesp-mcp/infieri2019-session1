@@ -822,7 +822,7 @@ located at `/home/traineeN/source-files/session1`, then compile and
 execute it:
 
 ```
-[SERVER]$ cd ~/source-files/session1
+[SERVER]$ cd SOURCE-DIR
 [SERVER]$ cat ./hello.c
 [SERVER]$ icc hello.c -o hello
 [SERVER]$ ./hello
@@ -1123,7 +1123,7 @@ ssh –X traineeN@KNL-SERVER
 then compile the application:
 
 ```
-[KNL-SERVER]$ cd matrix/linux
+[KNL-SERVER]$ cd SOURCE-DIR/matrix/linux
 [KNL-SERVER]$ make clean
 [KNL-SERVER]$ make icc
 ```
