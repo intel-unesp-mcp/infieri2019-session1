@@ -431,20 +431,19 @@ Xeon Phi™ coprocessor:
     control, coprocessor management utilities, and the coprocessor’s
     local Linux operating system.
 
-Unlike other device drivers implemented to support PCI Express based
-hardware, such as graphics cards, Intel Xeon Phi was designed to support
-the execution of computing applications in the familiar HPC environment
-through the OpenMP and MPI specifications, as well as other offload
-programming usage models. Because the coprocessor core is based on the
-traditional Intel P5 processor core, it can execute a complete operating
-system like any other computer. The disk drive is simulated by a RAM
-drive and supports an Internet protocol (IP)-based virtual socket to
-provide networking communication with the host. This design choice
-allows the coprocessor to appear as a node to the rest of the system and
-allows a usage model common in the HPC programming environment. The
-operating system resides on the coprocessor and implements complementary
-functionalities provided by the driver layer on the host side to achieve
-its system management goals.
+Unlike other device drivers implemented to support PCI Express based hardware,
+such as graphics cards, Intel Xeon Phi was designed to support the execution of
+computing applications in the familiar HPC environment through the OpenMP and
+MPI specifications, as well as other offload programming usage models. Because
+the coprocessor core is based on the traditional Intel P5 processor core, it
+can execute a complete operating system like any other computer. The hard drive
+is simulated by allocating a slice of the RAM memory. The board also provides
+an Internet protocol (IP)-based virtual socket which can be used for networking
+communication with the host. This design choice allows the coprocessor to
+appear as a network node to the rest of the system and allows an usage model
+common in the HPC programming environment. The operating system resides on the
+coprocessor and implements complementary functionalities provided by the driver
+layer on the host side to achieve its system management goals.
 
 The software stack of the Xeon Phi is then highly layered, split up into
 a host side and a coprocessor side. Host system and Xeon Phi coprocessor
@@ -456,12 +455,12 @@ PCI Express connection.
 
 Figure 3 shows a block diagram of the key components that comprise the
 coprocessor software architecture. As can be seen, the diagram shows
-well-defined left and right sides, and a solid line divides each of them
+well-defined left and right sides, and a solid line divides them
 in top and bottom halves. The left side corresponds to components on the
 host processor platform and the right side depicts software components
 on the Xeon Phi coprocessor. The top and bottom halves represent the
 standard operating system notion of hierarchical protection domains[^4]:
-application code and system interface executes at the user-level, and
+application code and system interface execute at the user-level, and
 more trusted, system level operating system and driver code runs at the
 kernel level. The application layer uses runtime libraries to provide
 the communication and control necessary to send the code and data to the
@@ -543,7 +542,7 @@ those models are:
 -   Coprocessor-only model: the application is launched and executed
     only on the coprocessors.
 
-The Intel MPI library supports all these programming execution models.
+The Intel MPI library supports all of these programming execution models.
 MPI is the de facto library-based communication environment used to
 enable parallel applications to run, communicate, and scale across
 multiple processing cores, either between the multiple cores in a single
@@ -553,9 +552,10 @@ opportunity to exercise some of these computing models.
 
 ### 1.4 Knights Landing: the Second Generation of Xeon Phi™ Architecture
 
-Recently, a second generation of Intel Xeon Phi architecture has been released with the 
-code-name Knights Landing (KNL), offering additional support for vector processing, 
-power efficient scaling and local memory bandwidth. The novelties of Intel KNL are the following:
+Knights Landing (KNL) is the code-name of the second generation of Intel Xeon
+Phi architecture, which has been released in early 2016. The new model offers
+additional support for vector processing, power efficient scaling and local
+memory bandwidth. The novelties of Intel KNL are the following:
 
 -	Increase in the number of cores: distinct KNL models have 64, 68 or 72 cores;
 -	Improvement on the size of the Vector Processing Units (VPU): each core provides two units of 512 bits;
@@ -563,17 +563,29 @@ power efficient scaling and local memory bandwidth. The novelties of Intel KNL a
 -	KNL is available both as a processor or as a coprocessor, maintaining compatibility with applications compiled for the Intel Xeon;
 -	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random access memory (MCDRAM), that complements DDR4.
 
-Each core of the KNL architecture has two 512-bit VPUs, L1 cache and is capable of executing 
-four threads. Cores are organized in tiles, each one consisting of two cores that share a single L2 cache. 
-Tiles are interconnected by a cache-coherent two-dimensional mesh network; the mesh interconnection enforces that every 
-message travels to the destination first vertically, until it hits the target row, then travels horizontally until it reaches the destination. Such interconnection is specifically optimized for KNL traffic flows.
-KNL has two types of memory, known as DDR4 SDRAM (double data rate fourth-generation synchronous dynamic random-access memory) and HBM (High-Bandwidth Memory). The maximum capacity for DDR4 is 384 GB and the size of HBM is 16 GB. The high-bandwidth memory can be used as a Last-level cache (LLC) or as a regular addressable memory. KNL allows three modes of configuration:
+Each core of the KNL architecture has two 512-bit VPUs, L1 cache and is capable
+of executing four threads. Cores are organized in tiles, each one consisting of
+two cores that share a single L2 cache. Tiles are interconnected by a
+cache-coherent two-dimensional mesh network. Its interconnection enforces that
+every message travels to the destination first vertically, until it hits the
+target row, then travels horizontally until it reaches the destination.  Such
+interconnection is specifically optimized for KNL traffic flows.  KNL has two
+types of memory, known as DDR4 SDRAM (double data rate fourth-generation
+synchronous dynamic random-access memory) and HBM (High-Bandwidth Memory). The
+maximum capacity for DDR4 is 384 GB and the size of HBM is 16 GB. The
+high-bandwidth memory can be used as a Last-level cache (LLC) or as a regular
+addressable memory. KNL allows three modes of configuration:
 
 * **Flat:** memory is treated as a standard memory in same address space of DDR4;
 * **Cache:** memory is used as a LLC cache for DDR4;
 * **Hybrid:** a portion of memory is cache and remaining is flat;
 
-The memory in KNL can be organized in two forms: Uniform Memory Access (UMA), in which the latency from one core to any memory location will vary little across the mesh, or Non-Uniform Memory Access (NUMA), in which memory and cores are divided into two or four sections; in this second case the latency from core to memory in the same region is lower that the latency from core to memory in other regions. KNL provides five cluster modes:  
+The memory in KNL can be organized in two forms: Uniform Memory Access (UMA),
+in which the latency from one core to any memory location will vary little
+across the mesh, or Non-Uniform Memory Access (NUMA), in which memory and cores
+are divided into two or four sections; in this second case the latency from
+core to memory in the same region is lower than the latency from core to memory
+in other regions. KNL provides five cluster modes:  
 
 #### • UMA
 - **All-to-all:** memory addresses are uniform distributed across the chip;  
@@ -604,11 +616,10 @@ corresponding driver version:
 [SERVER]$ micinfo
 ```
 
-For each device listed, take note of the device model (SKU:
-*stock-keeping unit*), number of cores, memory size (GDDR5 –
-<http://en.wikipedia.org/wiki/GDDR5>) and thermal information (die
-temperature, actively- or passively-cooled). Check also the memory size
-of the host system.
+For each device listed, take note of the device model (SKU: *stock-keeping
+unit*), number of cores, memory size (GDDR5 –
+<http://en.wikipedia.org/wiki/GDDR5>) and thermal information (die temperature,
+actively- or passively-cooled). Check also the memory size of the host system.
 
 The `-listdevices` option provides a shorter output, with the list of the
 Intel® Xeon Phi coprocessors available in the system:
@@ -617,12 +628,14 @@ Intel® Xeon Phi coprocessors available in the system:
 [SERVER]$ micinfo -listdevices
 ``` 
 
-(**Extra exercise:** compare the result with the output of `$ lspci | grep processor`).
+(**Extra exercise:** compare the result with the output of `$ lspci | grep
+processor`).
 
 To request detailed information about a specific device, the option
-`-deviceinfo <N>` can be used. The information displayed by the
-`micinfo` command can also be narrowed down by including the option `-group <group name>`, where group name can be: version, board, cores,
-GDDR, thermal. For example:
+`-deviceinfo <N>` can be used. The information displayed by the `micinfo`
+command can also be narrowed down by including the option `-group <group
+name>`, where group name can be: version, board, cores, GDDR, thermal. For
+example:
 
 ```
 [SERVER]$ micinfo -deviceInfo 0 -group cores
