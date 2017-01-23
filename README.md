@@ -2,7 +2,7 @@
 
 # 4rd International Summer School on INtelligent Signal Processing for FrontIEr Research and Industry
 
-## Lab Workbook - Session 1 (CL6)
+## Lab Workbook - Session 1
 
 **January 2017**
 
