@@ -204,13 +204,15 @@ coprocessor programming:
 ## Remote access to the testing platform
 
 This document assumes that the testing platforms have been setup and are
-ready to use. We will be using a state-of-the-art server - loaned by
+ready to use. We will be tow server.
+The first one is a state-of-the-art server - loaned by
 Intel - with two high-end Intel Xeon processors (each with 18 cores, 2 threads/core)
 and five Intel Xeon Phi coprocessors (each with 60 cores, 4 threads/core), as well
 as several Intel software development tools. To simplify nomenclature,
-we will refer to the testing platform as “the host” (or “the host
+we will refer to this server as “the host” (or “the host
 system”), and the Xeon Phi™ coprocessors installed in the host system as
 “mic0”, “mic1”, ..., “mic4”.
+The second one is a KNL server - with one KNL processors (68 cores, 4 threads/core). we will refer to this server as “the KNL host”. 
 
 Participants should work alone or in pairs on a workstation - preferably
 running Linux or Mac - with Internet access. All the exercises are
@@ -227,6 +229,8 @@ $ ssh –X SERVER –l traineeN
 **(N is a number assigned to each participant)**
 
 **The -X toggle allows to run GUI programs remotly**
+
+Use the following command to log in to the KNL host system.
 
 ```
 $ ssh –X KNL-SERVER –l traineeN 
