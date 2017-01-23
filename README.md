@@ -1054,7 +1054,7 @@ sum on the host. (transfer variable C[] from host to device and variable sum fro
 
 Use the following snippet to perform the sum of all elements of an array:
 
-```
+```c
   int cont;
   int n=100;
   for (cont=0; cont<n; cont++)
