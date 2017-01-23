@@ -19,31 +19,31 @@ ______
 
 Intel® Xeon Phi™ is a brand name for all Intel Many Integrated Core (MIC)
 architecture of processors and coprocessors developed by Intel to enable
-performance gains for highly parallel computing workloads. Intel MIC architecture
-combines many Intel processor cores onto a single chip and provides interesting
-and appealing features, including the ability to use familiar programming models
-such as OpenMP and MPI in much the same manner that they are used on
-multi-core / multi-socket systems based on widely used Intel Xeon processors.
+performance gains for highly parallel computing workloads. Intel MIC
+architecture combines many Intel processor cores onto a single chip and
+provides interesting and appealing features, including the ability to use
+familiar programming models such as OpenMP and MPI in much the same manner that
+they are used on multi-core / multi-socket systems, like the widely used Intel
+Xeon processors.
 
 This hands-on training has been designed to be a comprehensive, practical
-introduction to parallel programming based on the Xeon Phi architecture
-and programming models, aiming to demonstrate the processing power of
-the Intel Xeon Phi product family. Attendants of these training activities
-will start issuing simple command-line tools to get basic information about
-the Intel Xeon Phi coprocessors, then learn how to monitor what resources
-are being used and access their operating systems by establishing ssh
-sessions with them. They will thus verify that the Intel Xeon Phi
-coprocessor is an IP-addressable PCIe device - managed by an independent
-environment provided by the MIC Platform Software Stack (MPSS) - that
-runs a Linux-based operating system.
+introduction to parallel programming based on the Xeon Phi architecture and
+programming models, aiming to demonstrate the processing power of the Intel
+Xeon Phi product family. Attendants of these training activities will start
+issuing simple command-line tools to get basic information about the Intel Xeon
+Phi coprocessors, then learn how to monitor what resources are being used and
+access their operating systems by connecting to them using ssh protocol. They
+will be able to verify that the Intel Xeon Phi coprocessor is an IP-addressable
+PCIe device - managed by an independent environment provided by the MIC
+Platform Software Stack (MPSS) - that runs a Linux-based operating system.
 
-Following the introductory part, participants will learn how to compile
-and run simple C/C++ applications directly into the coprocessors, and then
-compile and run example codes based on shared-memory parallelism with OpenMP
-and Cilk Plus and distributed-memory parallelism with MPI. They will also
-work on MPI application examples that should be executed simultaneously
-on the Xeon processors and the Xeon Phi coprocessors, explore the use of Intel
-libraries TBB and MKL, and develop insights on tuning parallel applications.
+During this introductory part, participants will learn how to compile and
+run simple C/C++ applications directly on the coprocessors, and then compile
+and run example codes based on shared-memory parallelism with OpenMP and Cilk
+Plus and distributed-memory parallelism with MPI. They will also work on MPI
+application examples that should be executed simultaneously on the Xeon
+processors and the Xeon Phi coprocessors, explore the use of Intel libraries
+TBB and MKL, and develop insights on tuning parallel applications.
 
 Participants will have access to a heterogeneous computing system equipped
 with Intel Xeon processors and Intel Xeon Phi coprocessors, as well as the
@@ -58,16 +58,15 @@ experience on using a powerful manycore computing system.
 
 Attendants of these hands-on labs will work on predefined sets of exercises
 that progressively help them get familiar with the Intel Xeon Phi coprocessor
-hardware, programming models and development tools. Exercises have been
-developed in such a way that the learners proceed from one topic to the next
-at their own speed. Participants will start issuing simple command-line
-tools to get basic information about the Intel Xeon Phi coprocessors,
-then will learn how to monitor what resources are being used and access
-their operating systems by establishing ssh sessions with them. Trainees
-will thus verify that the Intel Xeon Phi coprocessor is an
-IP-addressable PCIe device - managed by an independent environment
-provided by the MIC Platform Software Stack (MPSS) - that runs the Linux
-operating system.
+hardware, programming models, and development tools. Exercises have been
+developed in such a way that the learners proceed from one topic to the next at
+their own speed. Participants will start issuing simple commands to get basic
+information about the Intel Xeon Phi coprocessors, then will learn how to
+monitor what resources are being used and access their operating systems by
+establishing ssh sessions with them. Trainees will thus verify that the Intel
+Xeon Phi coprocessor is an IP-addressable PCIe device - managed by an
+independent environment provided by the MIC Platform Software Stack (MPSS) -
+that runs the Linux operating system.
 
 Following the introductory part, participants will learn how to compile
 and run simple C/C++ applications directly into the coprocessors, and
@@ -133,9 +132,9 @@ performance of an Intel® Xeon Phi™ coprocessor is 1 TFLOP/s in double
 precision. This performance is achieved at the same power consumption as
 in two Intel Xeon® processors, which yield up to 300 GFLOP/s.
 
-In order to completely utilize the full power of Intel® Xeon Phi™
-coprocessors (as well as Intel Xeon-based systems), applications must
-utilize several levels of parallelism:
+In order to take advantage of the full power of Intel® Xeon Phi™ coprocessors
+(as well as Intel Xeon-based systems), applications must use several levels
+of parallelism:
 
 1.  task parallelism in distributed memory to scale an application
     across multiple coprocessors or multiple compute nodes,
@@ -216,17 +215,18 @@ system”), and the Xeon Phi™ coprocessors installed in the host system as
 Participants should work alone or in pairs on a workstation - preferably
 running Linux or Mac - with Internet access. All the exercises are
 command-line based and should be executed on the host system by means of
-a secure shell (SSH) connection. Ideally the participant workstation
-should be able to run X11.
+a secure shell (SSH) connection. Ideally, the participant workstation
+should be able to open X11 connections with the server.
 
-Use the syntax below to log in to the host system.
+Use the following command to log in to the host system.
 
-```
+```bash
 $ ssh –X SERVER –l traineeN 
 ```
 
 **(N is a number assigned to each participant)**
 
+**The -X toggle allows to run GUI programs remotly**
 
 ```
 $ ssh –X KNL-SERVER –l traineeN 
@@ -237,31 +237,33 @@ $ ssh –X KNL-SERVER –l traineeN
 Please refer to the teaching assistant(s) for more details.
 
 
-## GIT repository and source files directory
+## GIT repository - getting the source files
 
-**Git** is a free and open source distributed version control system (DVCS) designed to track changes in source files  or other content and coordinate work on them among multiple people with flexibility, security, and efficiency.
+**Git** is a free and open source distributed version control system (DVCS)
+designed to track changes in source files or other content and coordinate work
+on them among multiple people with flexibility, security, and efficiency.
 
 **GitHub** is a web-based Git repository hosting service.
 
-To copy (clone) the remote source files repository to your user directory, run the following command in the host system console:
+The files used during these activities are stored at GitHub and in order to
+obtain them, you have to perform a copy (clone) of the remote repository to
+your user directory, in order to do so, you should run the following command in
+the host system console:
 
-```
+```bash
 $ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
 ```
 
-To access the source files directory run the following command:
+The source files will be available at the `infieri-2017-basic/src` directory.
 
-```
-$ cd infieri-2017-basic/src
-```
-
-This will be referred as your **SOURCE-DIR**.
+From now on, the full path for these files will be referred as **SOURCE-DIR**.
 
 Please refer to the teaching assistant(s) for more details.
 
 ## Intel's environment variables
 
-After you connect to the remote server, set the environment variables necessary for the Intel development tools by running the following command:
+After you connect to the remote server, set the environment variables necessary
+for the Intel development tools by running the following command:
 
 ```
 [SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
@@ -380,13 +382,13 @@ coprocessor chip also includes:
 -   the Ring Interconnect that connects all of the aforementioned
     components together on the chip.
 
-Each memory controller is based on the GDDR5 specification, and supports
-two channels per memory controller. At up to 5.5 GT/s transfer speed,
-this provides a theoretical aggregate bandwidth of 352 GB/s (gigabytes
-per second) directly connected to the Intel® Xeon Phi coprocessor.
+Each memory controller is based on the GDDR5 specification, and supports two
+channels per memory controller, which results in up to 5.5 GT/s transfer speed.
+This provides a theoretical aggregate bandwidth of 352 GB/s (gigabytes per
+second) directly connected to the Intel® Xeon Phi coprocessor.
 
-For more detailed information please refer to ”Intel® Xeon Phi™
-Coprocessor: System Software Developers Guide".
+For more detailed information please refer to ”Intel® Xeon Phi™ Coprocessor:
+System Software Developers Guide".
 
 ### 1.3 Overview of the Xeon Phi™ system software and programming models ###
 
