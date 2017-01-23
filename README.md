@@ -1137,7 +1137,18 @@ Let us first connect to the KNL server:
 ssh –X traineeN@KNL-SERVER
 ```
 
-then compile the application:
+Clone the source files repository:
+
+```
+$ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
+```
+
+**Note:** All the source codes we will be using in this section are located in **SOURCE-DIR**.
+
+For more informations, check [**"getting the source files"**](#get_repo) section.
+
+
+Then compile the application:
 
 ```bash
 [KNL-SERVER]$ cd SOURCE-DIR/matrix/linux
