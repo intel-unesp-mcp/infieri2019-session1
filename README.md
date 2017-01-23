@@ -232,7 +232,7 @@ $ ssh –X SERVER –l traineeN
 
 Use the following command to log in to the KNL host system.
 
-```
+```bash
 $ ssh –X KNL-SERVER –l traineeN 
 ```
 **(N is a number assigned to each participant)**
@@ -270,13 +270,13 @@ Please refer to the teaching assistant(s) for more details.
 After you connect to the remote server, set the environment variables necessary
 for the Intel development tools by running the following command:
 
-```
+```bash
 [SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
 ```
 
 Or
 
-```
+```bash
 [KNL-SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
 ```
 
@@ -603,7 +603,7 @@ console and use the command `ssh` to login to the host `SERVER`
 as user traineeN (N = 01 … 20; please check with the teaching assistant
 which number has been assigned to you):
 
-```
+```bash
 $ ssh –X traineeN@SERVER
 ```
 
@@ -612,7 +612,7 @@ is micinfo. Use this utility to obtain detailed information about the
 Intel Xeon Phi coprocessor(s) installed in the system and the
 corresponding driver version:
 
-```
+```bash
 [SERVER]$ micinfo
 ```
 
@@ -624,7 +624,7 @@ actively- or passively-cooled). Check also the memory size of the host system.
 The `-listdevices` option provides a shorter output, with the list of the
 Intel® Xeon Phi coprocessors available in the system:
 
-```
+```bash
 [SERVER]$ micinfo -listdevices
 ``` 
 
@@ -637,7 +637,7 @@ command can also be narrowed down by including the option `-group <group
 name>`, where group name can be: version, board, cores, GDDR, thermal. For
 example:
 
-```
+```bash
 [SERVER]$ micinfo -deviceInfo 0 -group cores
 [SERVER]$ micinfo -deviceInfo 1 -group thermal
 ```
@@ -656,7 +656,7 @@ statistics. If your workstation has X11 capabilities (Linux or Mac),
 then issuing the micsmc command without any options will open a new
 window frame on your desktop, the *Coprocessor Platform Status Panel*:
 
-```
+```bash
 [SERVER]$ micsmc &
 ```
 
@@ -678,7 +678,7 @@ your local desktop).
 message: `micsmc-gui: cannot connect to X server`. Alternatively, you
 can use the command below:
 
-```
+```bash
 [SERVER]$ watch -n 1 micsmc -t
 ```
 
@@ -686,7 +686,7 @@ The CLI mode is activated with command-line arguments and provides the
 same information as the graphical user interface, but in text form. It
 is thus suitable for direct execution or for scripting. For example:
 
-```
+```bash
 [SERVER]$ micsmc -c
 [SERVER]$ micsmc -a
 ```
@@ -700,7 +700,7 @@ Intel® Xeon Phi™ coprocessors, but a subset of tests and devices can be
 selected by using adequate arguments. Let us take a look on the outcomes
 of the command:
 
-```
+```bash
 [SERVER]$ miccheck
 ```
 
@@ -720,13 +720,13 @@ In this activity we are going to interact with the Intel Xeon Phi
 coprocessors´ Linux OS via a terminal shell. From the host shell issue
 an ssh to the first coprocessor (mic0):
 
-```
+```bash
 [SERVER]$ ssh mic0
 ```
 In the coprocessor command-line shell, issue the following commands and
 check the results:
 
-```
+```bash
 [SERVER-MIC]$ uname –a
 [SERVER-MIC]$ cat /proc/cpuinfo | grep processor | wc –l
 [SERVER-MIC]$ cat /proc/meminfo | grep MemTotal
@@ -758,7 +758,7 @@ coprocessor card to another one.
 console and use the command ssh to login to the host **KNL-SERVER** as user traineeN (N = 01 … 20; please check with the teaching 
 assistant which number has been assigned to you):
 
-```
+```bash
 ssh –X traineeN@KNL-SERVER
 ```
 
@@ -766,14 +766,14 @@ ssh –X traineeN@KNL-SERVER
 Use this utility to obtain the amount of cores and threads available on the Intel 
 KNL processor installed in the system:
 
-```
+```bash
 [KNL-SERVER]$ lscpu
 ```
 
 **1.5.9** the utility `numactl` maps processes to specific NUMA nodes. Use this utility 
 with the parameter -H to obtain information about the NUMA nodes in the system.
 
-```
+```bash
 [KNL-SERVER]$ numactl -H
 ```
 
@@ -829,7 +829,7 @@ utilities we will use and 2) the environment is set up properly. In
 order to verify that the compilers are installed, run the following
 commands in the host system console:
 
-```
+```bash
 [SERVER]$ icc -V
 [SERVER]$ icpc -V
 ```
@@ -839,7 +839,7 @@ everything is running fine. Take a look at the source code `hello.c`
 located at **SOURCE-DIR**, then compile and
 execute it:
 
-```
+```bash
 [SERVER]$ cd SOURCE-DIR
 [SERVER]$ cat ./hello.c
 [SERVER]$ icc hello.c -o hello
@@ -858,7 +858,7 @@ Now recompile it using the `–mmic` flag to make it natively executable for
 the Intel Xeon Phi coprocessor (remember to change the name of the
 executable, e.g. `hello.mic` or `hello.phi`), and try to execute it:
 
-```
+```bash
 [SERVER]$ icc -mmic hello.c -o hello.mic
 [SERVER]$ ./hello.mic
 ```
@@ -872,7 +872,7 @@ OS with an SSH server daemon. Let us use scp to copy the executable
 hello.mic to any of the coprocessors, for example mic0 and mic1 (and/or
 mic2):
 
-```
+```bash
 [SERVER]$ scp hello.mic mic0:
 [SERVER]$ scp hello.mic mic1:
 [SERVER]$ scp hello.mic mic2:
@@ -881,14 +881,14 @@ mic2):
 Connect to each coprocessor through ssh and execute the binary file
 locally:
 
-```
+```bash
 [SERVER]$ ssh mic0
 [SERVER-MIC]$ ./hello.mic
 ```
 
   > Hello world! I have 240 logical cores.
 
-```
+```bash
 [SERVER-MIC]$ exit
 [SERVER]$ ssh mic1
 [SERVER-MIC]$ ./hello.mic
@@ -896,7 +896,7 @@ locally:
 
   > Hello world! I have 240 logical cores.
 
-```
+```bash
 [SERVER-MIC]$ exit
 ```
 
@@ -911,7 +911,7 @@ location of the Intel compiler runtime libraries for Intel® Xeon Phi™
 coprocessors is defined by the `SINK_LD_LIBRARY_PATH` environment
 variable, so we need to set it first:
 
-```
+```bash
 [SERVER]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
 [SERVER]$ micnativeloadex ./hello.mic –d 0
 ```
@@ -919,14 +919,14 @@ variable, so we need to set it first:
 > Hello world! I have 240 logical cores.
 
   
-```
+```bash
 [SERVER]$ micnativeloadex ./hello.mic –d 1
 ```
 
 > Hello world! I have 240 logical cores.
  
 
-```
+```bash
 [SERVER]$ micnativeloadex ./hello.mic –d 2
 ```
 
@@ -936,7 +936,7 @@ variable, so we need to set it first:
 The `micnativeloadex` utility can also be used to check the library
 dependencies of the binary code, by using the option `–l`:
 
-```
+```bash
 [SERVER]$ micnativeloadex ./hello.mic –d 0 –l
 ```
 
@@ -957,7 +957,7 @@ Xeon Phi™ coprocessor. Take a look at the content of the source file
 `hello-offload1.c` in **SOURCE-DIR**, then compile
 and run it:
 
-```
+```bash
 [SERVER]$ icc hello-offload1.c –o hello-offload1
 [SERVER]$ ./hello-offload1
 ```
@@ -970,7 +970,7 @@ code of the function is transferred to the coprocessor and launched when
 offload occurs. Take a careful look at the content of the source file
 `hello-offload2.c`, then compile and run it:
 
-```
+```bash
 [SERVER]$ icc hello-offload2.c –o hello-offload2
 [SERVER]$ ./hello-offload2
 ```
@@ -985,7 +985,7 @@ are forwarded. In the forwarding process, the prefix is dropped. The
 third example below shows how this process works. Take a look at the
 content of the source file `hello-offload3.c`, then compile and run it:
 
-```
+```bash
 [SERVER]$ icc hello-offload3.c –o hello-offload3
 [SERVER]$ ./hello-offload3
 ```
@@ -993,7 +993,7 @@ content of the source file `hello-offload3.c`, then compile and run it:
 Set `ENV_VAR` to a certain value, run the binary again and compare the
 output with the previous run:
   
-```
+```bash
 [SERVER]$ export ENV_VAR=any-value
 [SERVER]$ ./hello-offload3
 ```
@@ -1002,14 +1002,14 @@ output with the previous run:
 Define any value for `MIC_ENV_PREFIX` (e.g. MIC, PHI, etc), and run
 again, comparing the output with the previous runs:
 
-``` 
+```bash
 [SERVER]$ export MIC_ENV_PREFIX=PHI
 [SERVER]$ ./hello-offload3
 ```
 
 Now define a different value for `PHI_ENV_VAR` and run once again:
 
-```
+```bash
 [SERVER]$ export PHI_ENV_VAR=any-other-value
 [SERVER]$ ./hello-offload3
 ```
@@ -1017,7 +1017,7 @@ Now define a different value for `PHI_ENV_VAR` and run once again:
 
 **Note:** to undefine an environment variable use the command `unset`:
   
-```
+```bash
   unset MIC_ENV_PREFIX
 ```
 
@@ -1040,7 +1040,7 @@ perform data transfer is using the directive in and out in pragma offload
 indicate the variable to be transferred from host to device before the beginning 
 of execution and out the transfer of content of variable from device to host after the execution of offload region.
 
-```
+```bash
 [SERVER]$ export OFFLOAD_REPORT=2
 [SERVER]$ icc offloadFunction.c -o offloadFunction
 [SERVER]$ ./offloadFunction
@@ -1072,7 +1072,7 @@ option `-qopt-report` creates a report in a text file with the same name of the 
 that shows the optimizations performed for each loop and information in case any extra optimizations were inhibited.
 In this next example we will compile the code `vect.c` using the compiler directive `-O3` and `-qopt-report`.
 
-```
+```bash
 [SERVER]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
 ```
 
@@ -1117,7 +1117,7 @@ LOOP END
 
 The new vector instruction set AVX-512, available on the new Xeon Phi KNL, provides support for indirection called Confliction Detection. Now perform the same compilation but using -xhost which sets up the compiler to use the highest vector instruction set available, in this case AVX-512: 
 
-```
+```bash
 [KNL-SERVER]$ icc vect.c -o vectAVX512 -O3 -qopt-report5 -xhost
 ```
 
@@ -1133,20 +1133,21 @@ In this example, we are going to compare the execution of an application that pe
 
 Let us first connect to the KNL server:
 
-```
+```bash
 ssh –X traineeN@KNL-SERVER
 ```
 
 then compile the application:
 
-```
+```bash
 [KNL-SERVER]$ cd SOURCE-DIR/matrix/linux
 [KNL-SERVER]$ make clean
 [KNL-SERVER]$ make icc
 ```
 
 and execute the command `numactl` to identify the nodes attached to DDR4 and the nodes attached to MCDRAM:
-```
+
+```bash
 [KNL-SERVER]$ numactl -H
 ```
 
@@ -1154,13 +1155,13 @@ In our server the cluster mode has been setup as SNC-4, so the first four nodes 
 
 To execute the code on DDR4 we will use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 0 to 3:
 
-```
+```bash
 [KNL-SERVER]$ time numactl -m 0,1,2,3 ./matrix.icc
 ```
 
 To Execute the code on MCDRAM, we will again use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 4 to 7:
 
-```
+```bash
 [KNL-SERVER]$ time numactl -m 4,5,6,7 ./matrix.icc
 ```
 
@@ -1191,7 +1192,7 @@ to simplify the process of building MPI programs, and utilities (e.g.
 `mpirun`, `mpiexec`) to launch them. In order to verify that the wrappers
 and utilities are all set, run the following commands:
 
-``` 
+```bash 
 [SERVER]$ mpiicc -v
 [SERVER]$ mpiicpc -v
 [SERVER]$ mpirun -info
@@ -1200,7 +1201,7 @@ and utilities are all set, run the following commands:
 Let us start by using the mpiicc wrapper to compile the hello-mpi.c
 source code and the mpirun utility to run the binary in the host system:
 
-```
+```bash
 [SERVER]$ mpiicc hello-mpi.c -o hello-mpi
 [SERVER]$ mpirun -n 32 ./hello-mpi
 ```
@@ -1210,7 +1211,7 @@ logical thread executes independently. Let us now compile, upload the
 binary and run the same code natively on the Intel Xeon coprocessor mic0
 (and do the same for mic1, mic2, and so on):
   
-```
+```bash
 [SERVER]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
 [SERVER]$ scp hello-mpi.mic mic0:
 [SERVER]$ ssh mic0
@@ -1230,7 +1231,7 @@ using the variable `MIC_ENV_PREFIX`. Take a look at code
 `hello-mpi-omp-offload.c` and try to understand it; then compile it, and
 launch the binary. Check the result.
 
-```
+```bash
 [SERVER]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
 [SERVER]$ export MIC_ENV_PREFIX=PHI
 [SERVER]$ export PHI_OMP_NUM_THREADS=4
@@ -1248,7 +1249,7 @@ Let us start by generating binaries for the Xeon processors and the Xeon
 Phi coprocessors, and then transfer the corresponding binary to the
 coprocessors:
 
-``` 
+```bash 
 [SERVER]$ mpiicc montecarlo.c -o montecarlo
 [SERVER]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
 [SERVER]$ scp montecarlo.mic mic0:
@@ -1261,7 +1262,7 @@ from the host system. First we need to set an additional environment
 variable on the host, `I_MPI_MIC`, to enable the MPI communication
 between host and coprocessors (valid values are: enable|yes|on|1):
 
-```
+```bash
 [SERVER]$ export I_MPI_MIC=enable
 ```
 
@@ -1270,7 +1271,7 @@ using the the flags `–host` and `–n`, which specifies the host name and the
 number of MPI processes, respectively (be patient, execution time is
 longer compared to the previous exercises):
 
-```
+```bash
 [SERVER]$ mpirun -host localhost -n 32 ./montecarlo
 [SERVER]$ mpirun -host mic0 -n 240 \~/montecarlo.mic
 [SERVER]$ mpirun -host mic1 -n 240 \~/montecarlo.mic
@@ -1283,13 +1284,13 @@ In order to start the application on two coprocessors simultaneously, we
 can specify the list of hosts and their respective parameters using the
 separator `:`, as shown below:
 
-```
+```bash
 [SERVER]$ mpirun -host mic0 -n 240 \~/montecarlo.mic : -host mic1 –n 240 \~/montecarlo.mic : -host mic2 –n 240
 ```
 
 Using this syntax, let us now execute the MPI application using all available threads:
 
-```
+```bash
 [SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 \~/montecarlo.mic : -host mic1 -n 240 \~/montecarlo.mic : -host mic2 -n 240 \~/montecarlo.mic
 ```
 ______
@@ -1370,7 +1371,7 @@ something near 34 GigaFLOPS per core.
 Let us now compile the hello-flops1.c code, upload it to one of the
 coprocessors, and run it:
 
-```
+```bash
 [SERVER]$ icc -mmic -O3 hello-flops1.c -o hello-flops1
 [SERVER]$ scp hello-flops1 mic0:
 [SERVER]$ ssh mic0
@@ -1408,7 +1409,7 @@ Take a look at the code `less hello-flops2.c` and then repeat the
 compile – upload – run sequence (do not forget to use the compiler
 directive `–openmp`):
 
-``` 
+```bash 
 [SERVER]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
 [SERVER]$ scp hello-flops2 mic0:
 [SERVER]$ ssh mic0
@@ -1456,7 +1457,7 @@ scattered across the cores.
 Let us compile `hello-flops3.c` and upload it to one of the coprocessors
 using the same command-line commands we have been using so far:
 
-``` 
+```bash 
 [SERVER]$ icc -openmp -mmic -O3 hello-flops3.c -o hello-flops3
 [SERVER]$ scp hello-flops3 mic0:
 ``` 
@@ -1464,7 +1465,7 @@ using the same command-line commands we have been using so far:
 Before running the compiled code, we need to define the following
 environment variables at each of the coprocessors' command prompts:
 
-``` 
+```bash 
 [SERVER]$ ssh mic0
 [SERVER-MIC]$ export OMP_NUM_THREADS=2
 [SERVER-MIC]$ export KMP_AFFINITY=compact
@@ -1472,7 +1473,7 @@ environment variables at each of the coprocessors' command prompts:
 
 Execute the binary on the coprocessor, and take note of the results:
 
-```
+```bash
 [SERVER-MIC]$ ./hello-flops3
 ``` 
 
@@ -1482,7 +1483,7 @@ and assigned to one core `affinity value = compact`. Let us now make a
 change in the environment variables (XXX must be two times the number of
 cores available: - 114 in our case):
 
-``` 
+```bash 
 [SERVER-MIC]$ ssh mic0
 [SERVER-MIC]$ export OMP_NUM_THREADS=XXX (XXX = 114)
 [SERVER-MIC]$ export KMP_AFFINITY=scatter
@@ -1508,14 +1509,14 @@ then the block of code that could be offloaded to the coprocessor runs
 on the host. Compile `hello-flops3-offload.c` using the command-line
 syntax shown below:
 
-```
+```bash
 [SERVER]$ icc –openmp –O3 hello-flops3–offload.c –o hello-flops3-offload
 ``` 
 
 Before executing it, we need to set up the environment variables the
 code requires. Enter the following lines on the host console:
 
-``` 
+```bash 
 [SERVER]$ export MIC_ENV_PREFIX=MIC
 [SERVER]$ export MIC_OMP_NUM_THREADS=114
 [SERVER]$ export MIC_KMP_AFFINITY=scatter
@@ -1524,13 +1525,13 @@ code requires. Enter the following lines on the host console:
 
 Check the syntax of the commands by issuing:
 
-```
+```bash
 [SERVER]$ env | grep MIC
 ``` 
 
 If everything is ok, launch the code:
 
-```
+```bash
 [SERVER]$ ./hello-flops3-offload
 ``` 
 
