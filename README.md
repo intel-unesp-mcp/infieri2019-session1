@@ -832,7 +832,7 @@ execute it:
 
 
 **Note:** All the source codes we will be using in the following
-activities are located in your home directory.
+activities are located in **SOURCE-DIR**.
 
 For more informations, check [**"getting the source files"**](#get_repo) section.
 
