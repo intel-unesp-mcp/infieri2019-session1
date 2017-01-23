@@ -236,6 +236,7 @@ $ ssh –X KNL-SERVER –l traineeN
 
 Please refer to the teaching assistant(s) for more details.
 
+<a name="get_repo"></a>
 
 ## GIT repository - getting the source files
 
@@ -818,7 +819,7 @@ commands in the host system console:
 
 **2.2.2** Let us begin with an extremely trivial code just to check if
 everything is running fine. Take a look at the source code `hello.c`
-located at `/home/traineeN/source-files/session1`, then compile and
+located at **SOURCE-DIR**, then compile and
 execute it:
 
 ```
@@ -831,11 +832,10 @@ execute it:
 
 
 **Note:** All the source codes we will be using in the following
-activities are located in your home directory:
+activities are located in your home directory.
 
-```
-  /home/traineeN/source-files/session1.
-```
+For more informations, check [**"getting the source files"**](#get_repo) section.
+
 
 Now recompile it using the `–mmic` flag to make it natively executable for
 the Intel Xeon Phi coprocessor (remember to change the name of the
@@ -937,7 +937,7 @@ The first example uses the directive `#pragma offload target(mic)`,
 which informs the compiler that the segment of the code immediately
 below it (and delimited with brackets) should be executed on an Intel®
 Xeon Phi™ coprocessor. Take a look at the content of the source file
-`hello-offload1.c` in `/home/traineeN/source-files/session1`, then compile
+`hello-offload1.c` in **SOURCE-DIR**, then compile
 and run it:
 
 ```
@@ -1304,7 +1304,7 @@ James Reinders (Elsevier, 2013).
 
 **3.2.1** In this activity we will compile a code that uses only one
 core of the Intel Xeon® coprocessor. Take a look at the `helloflops1.c`
-code in `/home/traineeN/source-files/session1` (use `less`, as the file
+code in **SOURCE-DIR** (use `less`, as the file
 has over 90 lines). Line 72 of the code is related to an important
 compute capability of the Xeon Phi™: the availability of fused multiply
 and add (FMA), a floating-point operation that computes the product of
@@ -1551,7 +1551,7 @@ Phi™ coprocessor.
 Please read carefully and refer to the white paper below for compiler
 instructions (Listings 2, 3, 5, and 6). The source codes (listings 1 and
 4) can be found on the host system in the usual location
-`/home/traineeN/source-files/session1`. Please refer to the teaching
+**SOURCE-DIR**. Please refer to the teaching
 assistant(s) if you have any question.
 
 A. Vladimirov, V. Karpusenko, “_Test-driving Intel® Xeon Phi™ coprocessors
