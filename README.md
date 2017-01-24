@@ -220,6 +220,8 @@ command-line based and should be executed on the host system by means of
 a secure shell (SSH) connection. Ideally, the participant workstation
 should be able to open X11 connections with the server.
 
+<a name="remote_access"></a>
+
 Use the following command to log in to the host system.
 
 ```bash
@@ -825,8 +827,13 @@ parallelization libraries and performance tuning utilities to support
 high performance code compilation. That said, before compiling and
 linking any source code, we need to be sure that 1) the host system has
 the Intel C (icc) and C++ (icpc) compilers, the libraries and the
-utilities we will use and 2) the environment is set up properly. In
-order to verify that the compilers are installed, run the following
+utilities we will use and 2) the environment is set up properly. 
+
+**Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
+
+For more informations, check [**"Remote access"**](#remote_access) section.
+
+In order to verify that the compilers are installed, run the following
 commands in the host system console:
 
 ```bash
