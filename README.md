@@ -171,34 +171,34 @@ coprocessor programming:
 
 **Useful References**
 
--   _Intel® Xeon Phi™ Coprocessor High-Performance Programming, by Jim Jeffers and James Reinders (Elsevier, 2013)_    
+-   _Intel® Xeon Phi™ Coprocessor High-Performance Programming, by Jim Jeffers and James Reinders (Elsevier, 2013)_  
     <http://www.lotsofcores.com/>
 
--   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_
+-   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_  
     <http://www.apress.com/9781430259268>
 
--   _Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)
+-   _Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)  
     <http://www.lotsofcores.com/>
 
--   Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)
+-   Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)  
     <http://www.lotsofcores.com/>
 
--   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_
+-   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_  
     <http://www.colfax-intl.com/nd/xeonphi/book.aspx>
 
--   _An Overview of Programming for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors_
+-   _An Overview of Programming for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors_  
     <http://software.intel.com/sites/default/files/article/330164/an-overview-of-programming-for-intel-xeon-processors-and-intel-xeon-phi-coprocessors.pdf>
 
--   _Intel® Xeon Phi™ Coprocessor Developer´s Quick Start Guide_
+-   _Intel® Xeon Phi™ Coprocessor Developer´s Quick Start Guide_  
     <http://software.intel.com/sites/default/files/article/335818/intel-xeon-phi-coprocessor-quick-start-developers-guide.pdf>
 
--   _Intel C++ Compiler XE 13.1 User and Reference Guide (Linux OS)_
+-   _Intel C++ Compiler XE 13.1 User and Reference Guide (Linux OS)_  
     <http://software.intel.com/sites/products/documentation/doclib/stdxe/2013/composerxe/compiler/cpp-lin/>
 
--   _Intel® Xeon Phi™ Coprocessor: System Software Developers Guide_
+-   _Intel® Xeon Phi™ Coprocessor: System Software Developers Guide_  
     <http://www.intel.com/content/www/us/en/processors/xeon/xeon-phi-coprocessor-system-software-developers-guide.html>
 
--   _Intel® Xeon Phi™ Coprocessor 3120A (6GB, 1.100 GHz, 57 cores)_
+-   _Intel® Xeon Phi™ Coprocessor 3120A (6GB, 1.100 GHz, 57 cores)_  
     <http://ark.intel.com/products/75797/Intel-Xeon-Phi-Coprocessor-3120A-6GB-1_100-GHz-57-core>
 
 ## Remote access to the testing platform
