@@ -1183,6 +1183,8 @@ To Execute the code on MCDRAM, we will again use the command `numactl` with para
 
 Now compare both results. Which one showed better performance? 
 
+<a name="2-2-9"></a>
+
 **2.2.9** One major difference between programming for a single system
 and for a cluster is that each cluster node has a separate memory space.
 Unlike multiple threads running in a shared memory space, communication
@@ -1257,8 +1259,9 @@ launch the binary. Check the result.
 [SERVER]$ export PHI_OMP_NUM_THREADS=4
 [SERVER]$ mpirun -n 4 ./hello-mpi-omp-offload
 ```
+<a name="2-2-11"></a>
 
-**2.2.11** In this final activity for Part 2 we will work on a more
+**2.2.11** In this final activity, we will work on a more
 realistic MPI application. Take a look at the source file `montecarlo.c`,
 a sample program that estimates de value of π (pi) using the Monte Carlo
 method. For more details please check the link below:
