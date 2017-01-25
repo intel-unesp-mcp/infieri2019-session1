@@ -831,7 +831,7 @@ utilities we will use and 2) the environment is set up properly.
 
 **Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
 
-For more informations, check [**"Remote access"**](#remote_access) section.
+For more information, check the [**"Remote access"**](#remote_access) section.
 
 In order to verify that the compilers are installed, run the following
 commands in the host system console:
@@ -858,7 +858,7 @@ execute it:
 **Note:** All the source codes we will be using in the following
 activities are located in **SOURCE-DIR**.
 
-For more informations, check [**"getting the source files"**](#get_repo) section.
+For more information, check the [**"getting the source files"**](#get_repo) section.
 
 
 Now recompile it using the `–mmic` flag to make it natively executable for
@@ -1150,7 +1150,7 @@ Clone the source files repository:
 $ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
 ```
 
-**Note:** All the source codes we will be using in this section are located in **SOURCE-DIR**. For more informations, check [**"getting the source files"**](#get_repo) section.
+**Note:** All the source codes we will be using in this section are located in **SOURCE-DIR**. For more information, check the [**"getting the source files"**](#get_repo) section.
 
 
 Then compile the application:
@@ -1205,7 +1205,7 @@ ranks.
 
 **Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
 
-For more informations, check [**"Remote access"**](#remote_access) section.
+For more information, check the [**"Remote access"**](#remote_access) section.
 
 Let us start with a trivially simple “Hello World” application for MPI.
 Take a look at the hello-mpi.c source code. MPI implementations
