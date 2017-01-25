@@ -230,7 +230,7 @@ $ ssh –X SERVER –l traineeN
 
 **(N is a number assigned to each participant)**
 
-**The -X toggle allows to run GUI programs remotly**
+**Note:** ssh -X allows you to log into a remote computer and have its graphical user interface X displayed on your local machine.
 
 Use the following command to log in to the KNL host system.
 
