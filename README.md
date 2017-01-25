@@ -1201,6 +1201,10 @@ same program run concurrently, where each rank computes a different part
 of the larger problem and uses MPI calls to communicate data between
 ranks.
 
+**Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
+
+For more informations, check [**"Remote access"**](#remote_access) section.
+
 Let us start with a trivially simple “Hello World” application for MPI.
 Take a look at the hello-mpi.c source code. MPI implementations
 typically provide compiler wrappers (e.g. `mpicc`, `mpiicc`, `mpiicpc`, etc)
