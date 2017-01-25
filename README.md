@@ -1455,6 +1455,9 @@ single core. Check this by changing the number of threads in
 than `4`, recompile the code, upload it to the coprocessors and run again.
 You will see that the performance should remain more or less the same.
 
+<a name="3-2-3"></a>
+<!-- Reference to advanced session-->
+
 **3.2.3** The next code, `hello-flops3.c`, is an updated version of
 `hello-flops2.c`. It allows that each new thread is assigned to one core
 until the maximum number of cores available. Subsequent threads will
