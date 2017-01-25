@@ -919,7 +919,7 @@ coprocessors is defined by the `SINK_LD_LIBRARY_PATH` environment
 variable, so we need to set it first:
 
 ```bash
-[SERVER]$ export SINK_LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.1.117/compiler/lib/mic
+[SERVER]$ export SINK_LD_LIBRARY_PATH=/opt/intel/lib/mic
 [SERVER]$ micnativeloadex ./hello.mic –d 0
 ```
 
