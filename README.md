@@ -1436,6 +1436,7 @@ directive `–openmp`):
 [SERVER]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
 [SERVER]$ scp hello-flops2 mic0:
 [SERVER]$ ssh mic0
+[SERVER-MIC]$ export LD_LIBRARY_PATH=/opt/intel/lib/mic:$LD_LIBRARY_PATH
 [SERVER-MIC]$ ./hello-flops2
 ```  
   
