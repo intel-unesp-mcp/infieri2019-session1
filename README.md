@@ -1254,7 +1254,7 @@ using the variable `MIC_ENV_PREFIX`. Take a look at code
 launch the binary. Check the result.
 
 ```bash
-[SERVER]$ mpiicc -openmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
+[SERVER]$ mpiicc -qopenmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
 [SERVER]$ export MIC_ENV_PREFIX=PHI
 [SERVER]$ export PHI_OMP_NUM_THREADS=4
 [SERVER]$ mpirun -n 4 ./hello-mpi-omp-offload
@@ -1430,10 +1430,10 @@ single core to enable our code to run closer to the core's peak
 performance. The code `hello-flops2.c` does that using OpenMP directives.
 Take a look at the code `less hello-flops2.c` and then repeat the
 compile – upload – run sequence (do not forget to use the compiler
-directive `–openmp`):
+directive `–qopenmp`):
 
 ```bash 
-[SERVER]$ icc -openmp -mmic -O3 hello-flops2.c -o hello-flops2
+[SERVER]$ icc -qopenmp -mmic -O3 hello-flops2.c -o hello-flops2
 [SERVER]$ scp hello-flops2 mic0:
 [SERVER]$ ssh mic0
 [SERVER-MIC]$ export LD_LIBRARY_PATH=/opt/intel/lib/mic:$LD_LIBRARY_PATH
@@ -1485,7 +1485,7 @@ Let us compile `hello-flops3.c` and upload it to one of the coprocessors
 using the same command-line commands we have been using so far:
 
 ```bash 
-[SERVER]$ icc -openmp -mmic -O3 hello-flops3.c -o hello-flops3
+[SERVER]$ icc -qopenmp -mmic -O3 hello-flops3.c -o hello-flops3
 [SERVER]$ scp hello-flops3 mic0:
 ``` 
   
@@ -1537,7 +1537,7 @@ on the host. Compile `hello-flops3-offload.c` using the command-line
 syntax shown below:
 
 ```bash
-[SERVER]$ icc –openmp –O3 hello-flops3–offload.c –o hello-flops3-offload
+[SERVER]$ icc –qopenmp –O3 hello-flops3–offload.c –o hello-flops3-offload
 ``` 
 
 Before executing it, we need to set up the environment variables the
