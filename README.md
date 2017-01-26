@@ -1599,6 +1599,13 @@ instructions (Listings 2, 3, 5, and 6). The source codes (listings 1 and
 **SOURCE-DIR**. Please refer to the teaching
 assistant(s) if you have any question.
 
+**IMPORTANT:** After you connect to the MIC device (`ssh micN`), set the environment variables necessary
+for the Intel development tools by running the following command:
+
+```bash
+source /opt/intel/parallel_studio_xe_2017.1.043/compilers_and_libraries_2017/linux/mkl/bin/mklvars.sh mic
+```
+
 A. Vladimirov, V. Karpusenko, “_Test-driving Intel® Xeon Phi™ coprocessors
 with a basic N-body simulation_”, Colfax International, January 2013.
 Available at
