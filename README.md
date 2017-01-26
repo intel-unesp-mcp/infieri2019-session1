@@ -1605,6 +1605,8 @@ Available at
 
 <http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
 
+<https://goparallel.sourceforge.net/wp-content/uploads/2013/01/Colfax_Nbody_Xeon_Phi.pdf>
+
 ______
 
 ### Quick Navigation ###
