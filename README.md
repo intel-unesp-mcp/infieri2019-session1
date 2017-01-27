@@ -1296,11 +1296,11 @@ longer compared to the previous exercises):
 
 ```bash
 [SERVER]$ mpirun -host localhost -n 32 ./montecarlo
-[SERVER]$ mpirun -host mic0 -n 240 \~/montecarlo.mic
-[SERVER]$ mpirun -host mic1 -n 240 \~/montecarlo.mic
-[SERVER]$ mpirun -host mic2 -n 240 \~/montecarlo.mic
-[SERVER]$ mpirun -host mic3 -n 240 \~/montecarlo.mic
-[SERVER]$ mpirun -host mic4 -n 240 \~/montecarlo.mic
+[SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic
+[SERVER]$ mpirun -host mic1 -n 240 ./montecarlo.mic
+[SERVER]$ mpirun -host mic2 -n 240 ./montecarlo.mic
+[SERVER]$ mpirun -host mic3 -n 240 ./montecarlo.mic
+[SERVER]$ mpirun -host mic4 -n 240 ./montecarlo.mic
 ```
   
 In order to start the application on two coprocessors simultaneously, we
@@ -1308,13 +1308,13 @@ can specify the list of hosts and their respective parameters using the
 separator `:`, as shown below:
 
 ```bash
-[SERVER]$ mpirun -host mic0 -n 240 \~/montecarlo.mic : -host mic1 –n 240 \~/montecarlo.mic : -host mic2 –n 240
+[SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic : -host mic1 –n 240 ./montecarlo.mic : -host mic2 –n 240
 ```
 
 Using this syntax, let us now execute the MPI application using all available threads:
 
 ```bash
-[SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 \~/montecarlo.mic : -host mic1 -n 240 \~/montecarlo.mic : -host mic2 -n 240 \~/montecarlo.mic
+[SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 ./montecarlo.mic : -host mic1 -n 240 ./montecarlo.mic : -host mic2 -n 240 ./montecarlo.mic
 ```
 ______
 
