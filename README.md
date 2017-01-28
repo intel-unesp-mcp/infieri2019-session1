@@ -732,7 +732,7 @@ check the results:
 [SERVER-MIC]$ uname –a
 [SERVER-MIC]$ cat /proc/cpuinfo | grep processor | wc –l
 [SERVER-MIC]$ cat /proc/meminfo | grep MemTotal
-[SERVER-MIC]$ ifconfig
+[SERVER-MIC]$ ip a
 [SERVER-MIC]$ cat /etc/hosts
 [SERVER-MIC]$ exit
 ```
