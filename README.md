@@ -1229,17 +1229,7 @@ source code and the mpirun utility to run the binary in the host system:
 ```
 
 Notice that the output is not ordered by rank; this occurs because each
-logical thread executes independently. Let us now compile, upload the
-binary and run the same code natively on the Intel Xeon coprocessor mic0
-(and do the same for mic1, mic2, and so on):
-  
-```bash
-[SERVER]$ mpiicc -mmic hello-mpi.c -o hello-mpi.mic
-[SERVER]$ scp hello-mpi.mic mic0:
-[SERVER]$ ssh mic0
-[SERVER-MIC]$ mpirun -n XXX ./hello-mpi.mic 
-```
-**(XXX = 240 in our case)**  
+logical thread executes independently. 
 
 **2.2.10** In this activity we work with a slightly more complex Hello
 World MPI code, which runs in the host system but offloads parts of the
