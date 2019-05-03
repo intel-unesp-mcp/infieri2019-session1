@@ -1,10 +1,10 @@
 <a name="top"></a>
 
-# 4rd International Summer School on INtelligent signal processing for FrontIEr Research and Industry
+# 5th International Summer School on INtelligent signal processing for FrontIEr Research and Industry
 
 ## Lab Workbook - Session 1
 
-**January 2017**
+**April 2019**
 
 UNESP Center for Scientific Computing (an Intel Modern Code Partner)  
 São Paulo State University (Universidade Estadual Paulista - UNESP)
