@@ -67,17 +67,26 @@ on tuning parallel applications.
 
 ## Before you start
 
-Please read through the following excerpt, extracted from the white
-paper referenced below, which will give you a short overview of the
-Intel Xeon Phi coprocessor.
+Please read carefully the introduction and the first section, 'KNL Architecture Overview',
+of the paper referenced below, which will give you an overview of the Intel Xeon Phi processor.
 
-A. Vladimirov, V. Karpusenko, “*Test-driving Intel® Xeon Phi™ coprocessors with
-a basic N-body simulation*”, Colfax International, January 2013, available at
+Sodani, Avinash et. al., *Knights Landing: Second-Generation Intel Xeon Phi Product*.
+IEEE Micro. 36. 34-46. 10.1109/MM.2016.25.
 
-<http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
-
-We will refer again to this white paper later on in this training.
-
+Abstract: "This article describes the architecture of Knights Landing, the second-generation
+Intel Xeon Phi product family, which targets high-performance computing and other
+highly parallel workloads. It provides a significant increase in scalar and vector
+performance and a big boost in memory bandwidth compared to the prior generation,
+called Knights Corner. Knights Landing is a self-booting, standard CPU that is
+completely binary compatible with prior Intel Xeon processors and is capable of
+running all legacy workloads unmodified. Its innovations include a core optimized
+for power efficiency, a 512-bit vector instruction set, a memory architecture
+comprising two types of memory for high bandwidth and large capacity, a high-bandwidth
+on-die interconnect, and an integrated on-package network fabric. These features enable
+the Knights Landing processor to provide significant performance improvement for
+computationally intensive and bandwidth-bound workloads while still providing good
+performance on unoptimized legacy workloads, without requiring any special way of
+programming other than the standard CPU programming model."
 ______
 
 ## Navigation
@@ -91,73 +100,7 @@ This course is divided into four parts:
 
 ______
 
-## What Intel® Xeon Phi™ coprocessors bring to the table
-
-Intel® Xeon Phi™ coprocessor is a symmetric multiprocessor in the form
-factor of a PCI express device. Intel’s James Reinders has deﬁned the
-purpose of Intel® Xeon Phi™ coprocessors in the following way[^1]: “*Intel®
-Xeon Phi™ coprocessors are designed to extend the reach of applications
-that have demonstrated the ability to fully utilize the scaling
-capabilities of Intel Xeon® processor-based systems and fully exploit
-available processor vector capabilities or memory bandwidth.*” It cannot
-be used as a stand-alone processor. However, up to eight Intel® Xeon Phi™
-coprocessors can be used in a single chassis[^2]. Each coprocessor
-features more than 50 cores clocked at 1 GHz or more, supporting 64-bit
-x86 instructions. The exact number of cores depends on the model and the
-generation of the product. These in-order cores support four-way hyper-
-threading, resulting in more than 200 logical cores. Cores of Intel® Xeon
-Phi™ coprocessors are interconnected by a high-speed bidirectional ring,
-which unites L2 caches of the cores into a large coherent aggregate
-cache over 25 MB in size. The coprocessor also has over 6 GB of onboard
-GDDR5 memory. The speed and energy efficiency of Intel® Xeon Phi™
-coprocessors comes from its vector units. Each core contains a vector
-arithmetics unit with 512-bit SIMD vectors supporting a new instruction
-set called Intel Initial Many-Core Instructions (Intel IMCI). The Intel
-IMCI includes, among other instructions, the fused multiply-add,
-reciprocal, square root, power and exponent operations, commonly used in
-physical modeling and statistical analysis. The theoretical peak
-performance of an Intel® Xeon Phi™ coprocessor is 1 TFLOP/s in double
-precision. This performance is achieved at the same power consumption as
-in two Intel Xeon® processors, which yield up to 300 GFLOP/s.
-
-In order to take advantage of the full power of Intel® Xeon Phi™ coprocessors
-(as well as Intel Xeon-based systems), applications must use several levels
-of parallelism:
-
-1.  task parallelism in distributed memory to scale an application
-    across multiple coprocessors or multiple compute nodes,
-
-2.  task parallelism in shared memory to utilize more than 200 logical
-    cores,
-
-3.  and at last, but definitely not the least, - data parallelism to
-    employ the 512-bit vector units.
-
-The novelty of developer experience in Intel® Xeon Phi™ coprocessor is the
-continuity of the programming model between Xeon® processor and Xeon Phi™
-coprocessor programming:
-
-1.  The same C, C++ or Fortran code can be compiled into applications
-    for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors.
-    Cross-platform porting is possible with only code re-compilation.
-
-2.  The same parallel frameworks are supported by the Intel Xeon® and
-    Intel® Xeon Phi™ architectures. MPI can be used to scale in
-    distributed or shared memory with Intel® Xeon Phi™ coprocessors acting
-    as individual cluster nodes. OpenMP, Intel Cilk Plus, Intel
-    Threading Building Blocks, and other shared memory frameworks can be
-    used to split the work homogeneously between the processor or
-    coprocessor cores. The Intel Math Kernel Library provides highly
-    optimized standard functions for both platforms.
-
-3.  The same software development tools can be used for both platforms:
-    Intel compilers, Intel VTune Parallel Amplifier XE to profile and
-    optimize the applications, Intel Debugger and Intel Inspector to
-    diagnose critical and logical issues.
-
-4.  Similar optimization methods benefit applications on both platforms.
-
-**Useful References**
+## Useful References
 
 -   _Intel® Xeon Phi™ Coprocessor High-Performance Programming, by Jim Jeffers and James Reinders (Elsevier, 2013)_  
     <http://www.lotsofcores.com/>
@@ -192,17 +135,13 @@ coprocessor programming:
 ## Remote access to the testing platform
 
 This document assumes that the testing platforms have been setup and are
-ready to use. We will be tow server.
-The first one is a state-of-the-art server - loaned by
-Intel - with two high-end Intel Xeon processors (each with 18 cores, 2 threads/core)
-and five Intel Xeon Phi coprocessors (each with 60 cores, 4 threads/core), as well
+ready to use. We will use a total of six servers, each with one second-generation
+Intel Xeon Phi processor (68 cores, 4 threads/core), as well
 as several Intel software development tools. To simplify nomenclature,
-we will refer to this server as “the host” (or “the host
-system”), and the Xeon Phi™ coprocessors installed in the host system as
-“mic0”, “mic1”, ..., “mic4”.
-The second one is a KNL server - with one KNL processors (68 cores, 4 threads/core). we will refer to this server as “the KNL host”. 
+we will refer to each server as “the host” (or “the host
+system”).
 
-Participants should work alone or in pairs on a workstation - preferably
+Participants should work alone on a workstation (desktop PC or laptop) - preferably
 running Linux or Mac - with Internet access. All the exercises are
 command-line based and should be executed on the host system by means of
 a secure shell (SSH) connection. Ideally, the participant workstation
@@ -210,23 +149,15 @@ should be able to open X11 connections with the server.
 
 <a name="remote_access"></a>
 
-Use the following command to log in to the host system.
+Use the following command to log in to the host system:
 
 ```bash
-$ ssh –X SERVER –l traineeN 
+$ ssh –X KNL-SERVER –l traineeN 
 ```
 
 **(N is a number assigned to each participant)**
 
 **Note:** ssh -X allows you to log into a remote computer and have its graphical user interface X displayed on your local machine.
-
-Use the following command to log in to the KNL host system.
-
-```bash
-$ ssh –X KNL-SERVER –l traineeN 
-```
-**(N is a number assigned to each participant)**
-
 
 Please refer to the teaching assistant(s) for more details.
 
@@ -258,16 +189,15 @@ Please refer to the teaching assistant(s) for more details.
 ## Intel's environment variables
 
 After you connect to the remote server, set the environment variables necessary
-for the Intel development tools by running the following command:
+for the Intel development tools by running the following commands:
+
 
 ```bash
-[SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+[KNL-SERVER]$ source /opt/tools/intel/parallel_studio_xe_2018/psxevars.sh intel64
 ```
 
-Or
-
 ```bash
-[KNL-SERVER]$ source /opt/intel/parallel_studio_xe_2017.1.043/psxevars.sh intel64
+[KNL-SERVER]$ source /opt/tools/intel/parallel_studio_xe_2018/compilers_and_libraries_2018/linux/mpi/intel64/bin/mpivars.sh
 ```
 
 ______
