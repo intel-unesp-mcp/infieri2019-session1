@@ -30,20 +30,17 @@ This hands-on training has been designed to be a comprehensive, practical
 introduction to parallel programming based on the Xeon Phi architecture and
 programming models, aiming to demonstrate the processing power of the Intel
 Xeon Phi product family. Attendants of these training activities will start
-issuing simple command-line tools to get basic information about the Intel Xeon
-Phi coprocessors, then learn how to monitor what resources are being used and
-access their operating systems by connecting to them using ssh protocol. They
-will be able to verify that the Intel Xeon Phi coprocessor is an IP-addressable
-PCIe device - managed by an independent environment provided by the MIC
-Platform Software Stack (MPSS) - that runs a Linux-based operating system.
+issuing simple command-line tools to get basic information about the second-generation
+Intel Xeon Phi processors, by connecting to the servers using the ssh protocol.
+They will verify that the second-generation Intel Xeon Phi processor is a
+self-booting processor capable of running a usual Linux-based operating system.
 
 During this introductory part, participants will learn how to compile and
-run simple C/C++ applications directly on the coprocessors, and then compile
-and run example codes based on shared-memory parallelism with OpenMP and Cilk
-Plus and distributed-memory parallelism with MPI. They will also work on MPI
-application examples that should be executed simultaneously on the Xeon
-processors and the Xeon Phi coprocessors, explore the use of Intel libraries
-TBB and MKL, and develop insights on tuning parallel applications.
+run simple C/C++ applications, and then compile and run example codes based on
+shared-memory parallelism with OpenMP and Cilk Plus and distributed-memory
+parallelism with MPI. They will also work on MPI application examples that
+should be executed simultaneously on distinct servers with Xeon Phi processors,
+explore the use of Intel MKL library, and develop insights on tuning parallel applications.
 
 Participants will have access to a heterogeneous computing system equipped
 with Intel Xeon processors and Intel Xeon Phi coprocessors, as well as the
