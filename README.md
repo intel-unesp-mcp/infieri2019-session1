@@ -42,36 +42,27 @@ parallelism with MPI. They will also work on MPI application examples that
 should be executed simultaneously on distinct servers with Xeon Phi processors,
 explore the use of Intel MKL library, and develop insights on tuning parallel applications.
 
-Participants will have access to a heterogeneous computing system equipped
-with Intel Xeon processors and Intel Xeon Phi coprocessors, as well as the
-latest Intel software development tools. The computing system is hosted at
-the Center for Scientific Computing of the São Paulo State University (UNESP),
-in Brazil, an official member of the Intel Modern Code training program.
-The step-by-step hands-on activities have been planned to provide easy to
-follow instructions in order to allow the participants to have a real
-experience on using a powerful manycore computing system.
+Participants will have access to a set of dedicated servers equipped
+with Intel Xeon Phi processors running a usual Linux-based operating system, as well as the
+latest Intel software development tools. The servers are hosted at
+the Center for Scientific Computing of the São Paulo State University (UNESP), in
+São Paulo, Brazil. The step-by-step hands-on activities have been planned to provide easy to
+follow instructions in order to allow the participants to have a real experience on using
+a powerful manycore computing system.
 
 ## Learning Goals
 
 Attendants of these hands-on labs will work on predefined sets of exercises
-that progressively help them get familiar with the Intel Xeon Phi coprocessor
+that progressively help them get familiar with the Intel Xeon Phi processor
 hardware, programming models, and development tools. Exercises have been
 developed in such a way that the learners proceed from one topic to the next at
 their own speed. Participants will start issuing simple commands to get basic
-information about the Intel Xeon Phi coprocessors, then will learn how to
-monitor what resources are being used and access their operating systems by
-establishing ssh sessions with them. Trainees will thus verify that the Intel
-Xeon Phi coprocessor is an IP-addressable PCIe device - managed by an
-independent environment provided by the MIC Platform Software Stack (MPSS) -
-that runs the Linux operating system.
-
-Following the introductory part, participants will learn how to compile
-and run simple C/C++ applications directly into the coprocessors, and
-then compile and run example codes based on shared-memory parallelism
-with OpenMP and Cilk Plus and distributed-memory parallelism with MPI.
+information about the Intel Xeon Phi processors, then will learn how to compile
+and run simple C/C++ applications, including example codes based on shared-memory
+parallelism with OpenMP and distributed-memory parallelism with MPI.
 They will also work on MPI application examples that should be executed
-simultaneously on the Xeon® processors and the Xeon Phi coprocessors,
-explore the use of Intel Math Kernel Library (MKL), and develop insights
+simultaneously on distinct servers also based on Xeon Phi processors,
+explore the use of the Intel Math Kernel Library (MKL), and develop insights
 on tuning parallel applications.
 
 ## Before you start
