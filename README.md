@@ -102,13 +102,13 @@ ______
 
 ## Useful References
 
--   _Intel® Xeon Phi™ Processor High Performance Programming - Knights Landing Edition (2016)_  
+-   _Intel® Xeon Phi™ Processor High Performance Programming - Knights Landing Edition (Morgan Kaufmann, 2016)_  
     <https://www.elsevier.com/books/intel-xeon-phi-processor-high-performance-programming/jeffers/978-0-12-809194-4/>
 
--   _High Performance Parallelism Pearls - Multicore and Many-core Programming Approaches - Vol. I (2014)_ 
+-   _High Performance Parallelism Pearls - Vol. I (Morgan Kaufmann, 2014)_ 
     <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-one/reinders/978-0-12-802118-7/>
 
--   _High Performance Parallelism Pearls - Multicore and Many-core Programming Approaches - Vol. II (2015)_
+-   _High Performance Parallelism Pearls - Vol. II (Morgan Kaufmann, 2015)_
     <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-two/jeffers/978-0-12-803819-2/>
     
 -   _Books on Programming Multicore and Many-core by James Reinders and Jim Jeffers_  
@@ -123,11 +123,11 @@ ______
 -   _Intel® Xeon Phi™ Coprocessor Developer´s Quick Start Guide_  
     <http://software.intel.com/sites/default/files/article/335818/intel-xeon-phi-coprocessor-quick-start-developers-guide.pdf>
 
--   _Intel® C++ Compiler 19.0 Developer Guide and Reference_  
-    <https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference>
-
 -   _Intel® Xeon Phi™ Coprocessor: System Software Developers Guide_  
     <http://www.intel.com/content/www/us/en/processors/xeon/xeon-phi-coprocessor-system-software-developers-guide.html>
+
+-   _Intel® C++ Compiler 19.0 Developer Guide and Reference_  
+    <https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference>
 
 -   _Intel® Xeon Phi™ x200 Product Family_  
     <https://ark.intel.com/content/www/us/en/ark/products/series/92650/intel-xeon-phi-x200-product-family.html>
