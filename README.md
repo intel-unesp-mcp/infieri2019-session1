@@ -105,10 +105,10 @@ ______
 -   _Intel® Xeon Phi™ Processor High Performance Programming - Knights Landing Edition (Morgan Kaufmann, 2016)_  
     <https://www.elsevier.com/books/intel-xeon-phi-processor-high-performance-programming/jeffers/978-0-12-809194-4/>
 
--   _High Performance Parallelism Pearls - Vol. I (Morgan Kaufmann, 2014)_ 
+-   _High Performance Parallelism Pearls - Vol. I (Morgan Kaufmann, 2014)_  
     <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-one/reinders/978-0-12-802118-7/>
 
--   _High Performance Parallelism Pearls - Vol. II (Morgan Kaufmann, 2015)_
+-   _High Performance Parallelism Pearls - Vol. II (Morgan Kaufmann, 2015)_  
     <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-two/jeffers/978-0-12-803819-2/>
     
 -   _Books on Programming Multicore and Many-core by James Reinders and Jim Jeffers_  
