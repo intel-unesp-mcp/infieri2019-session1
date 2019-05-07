@@ -102,8 +102,8 @@ ______
 
 ## Useful References
 
--   _Intel® Xeon Phi™ Coprocessor High-Performance Programming, by Jim Jeffers and James Reinders (Elsevier, 2013)_  
-    <http://www.lotsofcores.com/>
+-   _Intel® Xeon Phi™ Processor High Performance Programming - Knights Landing Edition (Elsevier, 2016)_  
+    <https://www.elsevier.com/books/intel-xeon-phi-processor-high-performance-programming/jeffers/978-0-12-809194-4/>
 
 -   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_  
     <http://www.apress.com/9781430259268>
@@ -115,7 +115,7 @@ ______
     <http://www.lotsofcores.com/>
 
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_  
-    <http://www.colfax-intl.com/nd/xeonphi/book.aspx>
+    <https://colfaxresearch.com/second-edition-of-parallel-programming-and-optimization-with-intel-xeon-phi-coprocessors/>
 
 -   _An Overview of Programming for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors_  
     <http://software.intel.com/sites/default/files/article/330164/an-overview-of-programming-for-intel-xeon-processors-and-intel-xeon-phi-coprocessors.pdf>
@@ -123,14 +123,14 @@ ______
 -   _Intel® Xeon Phi™ Coprocessor Developer´s Quick Start Guide_  
     <http://software.intel.com/sites/default/files/article/335818/intel-xeon-phi-coprocessor-quick-start-developers-guide.pdf>
 
--   _Intel C++ Compiler XE 13.1 User and Reference Guide (Linux OS)_  
-    <http://software.intel.com/sites/products/documentation/doclib/stdxe/2013/composerxe/compiler/cpp-lin/>
+-   _Intel® C++ Compiler 19.0 Developer Guide and Reference_  
+    <https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference>
 
 -   _Intel® Xeon Phi™ Coprocessor: System Software Developers Guide_  
     <http://www.intel.com/content/www/us/en/processors/xeon/xeon-phi-coprocessor-system-software-developers-guide.html>
 
--   _Intel® Xeon Phi™ Coprocessor 3120A (6GB, 1.100 GHz, 57 cores)_  
-    <http://ark.intel.com/products/75797/Intel-Xeon-Phi-Coprocessor-3120A-6GB-1_100-GHz-57-core>
+-   _Intel® Xeon Phi™ x200 Product Family_  
+    <https://ark.intel.com/content/www/us/en/ark/products/series/92650/intel-xeon-phi-x200-product-family.html>
 
 ## Remote access to the testing platform
 
