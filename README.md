@@ -113,10 +113,13 @@ ______
     
 -   _Books on Programming Multicore and Many-core by James Reinders and Jim Jeffers_  
     <http://www.lotsofcores.com/>
-
+    
+-   _Knights Landing - An Overview for Developers (webinar)_  
+    <https://software.intel.com/en-us/videos/knights-landing-an-overview-for-developers/>
+    
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_  
     <https://colfaxresearch.com/second-edition-of-parallel-programming-and-optimization-with-intel-xeon-phi-coprocessors/>
-
+    
 -   _An Overview of Programming for Intel Xeon® processors and Intel® Xeon Phi™ coprocessors_  
     <http://software.intel.com/sites/default/files/article/330164/an-overview-of-programming-for-intel-xeon-processors-and-intel-xeon-phi-coprocessors.pdf>
 
