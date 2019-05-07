@@ -120,6 +120,9 @@ ______
 -   _Best Practice Guide - Knights Landing (2017)_  
     http://www.prace-ri.eu/IMG/pdf/Best-Practice-Guide-Knights-Landing.pdf/>    
     
+-   _Get Ready for Intel’s Knights Landing (KNL) – 3 papers: AVX-512, Clustering Modes, MCDRAM_  
+    https://colfaxresearch.com/get-ready-for-intel-knights-landing-3-papers/>        
+    
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_  
     <https://colfaxresearch.com/second-edition-of-parallel-programming-and-optimization-with-intel-xeon-phi-coprocessors/>
     
