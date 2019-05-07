@@ -212,265 +212,19 @@ ______
 
 # Practical Exercises - Part 1 #
 
-## Introduction to the Intel® Xeon Phi™ coprocessor ##
+## Introduction to the Intel® Xeon Phi™ KNL processor ##
 
 ### 1.1 Goals ###
 
-Activities start with a brief overview of the Xeon Phi coprocessor
+Activities start with a brief overview of the Xeon Phi processor
 hardware and software architecture, followed by a series of practical
 exercises. The exercises will show you some of the tools available for
-getting information about the Intel Xeon Phi coprocessors and monitor
+getting information about the Intel Xeon Phi processors and monitor
 how their internal resources are being used. You will have an
 introductory contact with the essential tools and configuration options
 for managing the coprocessor operating environment.
 
-### 1.2 Overview of the Xeon Phi™ hardware architecture ###
-
-Intel® Xeon Phi™ coprocessors have been designed as a supplement to the
-Intel Xeon® processor family. These computing accelerators feature the
-MIC (Many Integrated Core) architecture, which enables fast and
-energy-efficient execution of High Performance Computing (HPC)
-applications utilizing massive thread parallelism, vector arithmetic and
-streamlined memory access. The term “Many Integrated Core” is used to
-distinguish the Intel Xeon Phi product family from the “Multi-Core”
-family of Intel Xeon processors.
-
-The Xeon Phi card can be thought of as a computer board containing the
-coprocessor silicon chip with up to 61 cores and their associated caches
-and memory controllers, which is in turn surrounded by GDDR5 memory
-chips, a flash memory, a system management controller, sensors, and
-miscellaneous electronics and connectors to attach it into a host
-computer system. The whole coprocessor card is what is commonly just
-called the Xeon Phi coprocessor. A schematic view of the key components
-of the coprocessor card is shown in Figure 1. The flash memory is used
-to store the coprocessor bootstrap code, similar to the BIOS in an Intel
-Xeon® processor platform. The System Management Controller (SMC) handles
-information coming from sensors that measure temperature, voltage, and
-current. The different Xeon Phi coprocessor models vary on such factors
-as number of cores, memory size and speed, thermal solutions and form
-factor.
-
-![infieri01_pic01](img/infieri01_pic01.png)
-
-**Figure 1: Intel® Xeon Phi™ coprocessor card schematic**
-
-At a high level, the coprocessor silicon chip consists of up to 61
-processor cores based on the Intel Pentium architecture (P54C[^3]) with
-several improvements - including Intel64 instruction set architecture,
-4-way symmetric multithreading, new vector instructions, and increased
-cache sizes -, interconnected by a high performance on-die bidirectional
-interconnect. Each core is a fully functional, in-order processing unit
-supporting fetch-decode-execute instruction cycles from four hardware
-thread execution contexts.
-
-Figure 2 shows a simple diagram of the logical layout of some of the
-critical chip components of the Intel® Xeon Phi™ coprocessor architecture.
-As can be seen in Figure 2, each core includes:
-
--   a 512 bit wide vector processor unit (VPU), capable of performing
-    512-bit vector operations on 16 single-precision or 8
-    double-precision floating-point arithmetic operations as well as
-    integer operations;
-
--   the Core Ring Interface (CRI), which connects each core to
-    corresponding special controllers called Ring Stops that insert
-    requests and receive responses on/to the ring;
-
--   the L2 cache (including the tag, state, data and LRU arrays) and the
-    L2 pipeline and associated arbitration logic;
-
--   the Tag Directory (TD), which is a portion of the distributed tag
-    directory infrastructure for cross-snooping L2 caches in all cores;
-    the L2 caches are kept fully coherent with each other by the TDs,
-    which are referenced after an L2 cache miss.
-
-![infieri01_pic02.png](img/infieri01_pic02.png)
-
-**Figure 2: Basic building blocks of the Intel® Xeon Phi™ coprocessor
-chip**
-
-In addition to the IA (Intel Architecture) cores, the Xeon Phi
-coprocessor chip also includes:
-
--   Memory controllers (GBOX), which access external memory devices
-    (local physical memory on the coprocessor card) to read and write
-    data; each memory controller has 2 channel controllers, which
-    together can operate two 32-bit memory channels;
-
--   a Gen2 PCI Express client logic (SBOX), which is the system
-    interface to the host CPU or PCI Express switch, supporting x8 and
-    x16 configurations;
-
--   a debug display engine (DBOX) comprised by a set of registers that
-    can be accessed for debugging purposes;
-
--   the Ring Interconnect that connects all of the aforementioned
-    components together on the chip.
-
-Each memory controller is based on the GDDR5 specification, and supports two
-channels per memory controller, which results in up to 5.5 GT/s transfer speed.
-This provides a theoretical aggregate bandwidth of 352 GB/s (gigabytes per
-second) directly connected to the Intel® Xeon Phi coprocessor.
-
-For more detailed information please refer to ”Intel® Xeon Phi™ Coprocessor:
-System Software Developers Guide".
-
-### 1.3 Overview of the Xeon Phi™ system software and programming models ###
-
-The Intel Xeon Phi coprocessor needs support from system software
-components to operate properly and interoperate with other hardware
-components in a system. The system software component of the Xeon Phi
-coprocessor, known as the Intel Many Integrated Core (MIC) Platform
-Software Stack (MPSS), provides this functionality. When installing
-coprocessors for use in an Intel Xeon processor platform for the first
-time, an early step that needs to be done is to download, install, and
-launch the latest version of Intel MPSS.
-
-The MPSS provides tools and utilities that allow the platform user to
-query the coprocessors’ status. The utilities run on the host system at
-the user level and goes through the system drivers to communicate with
-the corresponding software piece on the coprocessor in order to retrieve
-system information such as core and memory utilization, core
-temperature, and power received from the system management component and
-controller (SMC) hardware on the coprocessor system.
-
-There are thus two major components that comprise the software structure
-used to build and run applications and system services that utilize the
-Xeon Phi™ coprocessor:
-
--   Development tools and runtime libraries: the development tools and
-    associated runtime services and libraries are provided by tool
-    packages such as the Intel Parallel Studio XE 2013 and the Intel
-    Cluster Studio 2013. The Intel C/C++ Intel Fortran compiler, and
-    Intel MPI library are some of the sub-components of these
-    development tools packages.
-
--   Intel Manycore Platform Software Stack (MPSS): the operational
-    software specific to the coprocessor including middleware interfaces
-    used by the development tools, device drivers for communication and
-    control, coprocessor management utilities, and the coprocessor’s
-    local Linux operating system.
-
-Unlike other device drivers implemented to support PCI Express based hardware,
-such as graphics cards, Intel Xeon Phi was designed to support the execution of
-computing applications in the familiar HPC environment through the OpenMP and
-MPI specifications, as well as other offload programming usage models. Because
-the coprocessor core is based on the traditional Intel P5 processor core, it
-can execute a complete operating system like any other computer. The hard drive
-is simulated by allocating a slice of the RAM memory. The board also provides
-an Internet protocol (IP)-based virtual socket which can be used for networking
-communication with the host. This design choice allows the coprocessor to
-appear as a network node to the rest of the system and allows an usage model
-common in the HPC programming environment. The operating system resides on the
-coprocessor and implements complementary functionalities provided by the driver
-layer on the host side to achieve its system management goals.
-
-The software stack of the Xeon Phi is then highly layered, split up into
-a host side and a coprocessor side. Host system and Xeon Phi coprocessor
-are both (typically) running Linux operating systems and they are
-connected through the PCI Express bus. On both sides, various layers of
-kernel and user level drivers, libraries, and runtimes can be found. For
-ease of use, a virtual network interface is implemented on top of the
-PCI Express connection.
-
-Figure 3 shows a block diagram of the key components that comprise the
-coprocessor software architecture. As can be seen, the diagram shows
-well-defined left and right sides, and a solid line divides them
-in top and bottom halves. The left side corresponds to components on the
-host processor platform and the right side depicts software components
-on the Xeon Phi coprocessor. The top and bottom halves represent the
-standard operating system notion of hierarchical protection domains[^4]:
-application code and system interface execute at the user-level, and
-more trusted, system level operating system and driver code runs at the
-kernel level. The application layer uses runtime libraries to provide
-the communication and control necessary to send the code and data to the
-coprocessor and get the results back. The application layer also
-contains utilities and libraries that can be used to query the system
-status and allow socket communications and other communication supports
-(such as InfiniBand protocols). The application layer is built on top of
-the system software running at the kernel level (the most protected mode
-of operation of the processor, where the OS kernel and drivers usually
-run) on both the host and the coprocessor card[^5]. The network traffic
-is carried over the PCIe bus instead of network interconnects.
-
-![infieri01_pic03](img/infieri01_pic03.png)
-
-**Figure 3: Simplified view of the Intel® Xeon Phi™ software stack**
-
-The careful examination of the software stack represented in Figure 3
-reveals two principal ways of accessing the Xeon Phi coprocessor:
-
--   Offload (green line): applications are started and run on the
-    host processor. Selected compute-intensive and highly parallel parts
-    of the application are offloaded to the coprocessor, by using a
-    comprehensive set of programming language extensions and
-    library routines. The process of transferring data to and execution
-    code on the coprocessor is transparent to the users. Results are
-    obtained on the host side, as if the application was run on the
-    host only. With Compiler Assisted Offloading (CAO), the users
-    explicitly control data transfer and execution with the help
-    of directives.
-
--   Native (red line): applications can be run natively on the Xeon
-    Phi coprocessors. To the applications, the coprocessor looks like a
-    standalone multicore computer. Users can log in directly onto the
-    Xeon Phi™ via ssh and execute applications, just as they are used to
-    from the host system. Applications are compiled on the host for
-    native execution on the Xeon Phi and copied over (or made available
-    on a distributed filesystem exported from the host, e.g. via NFS -
-    the Linux Network File System). After the computation is finished,
-    the results can be retrieved from the coprocessor with the help of
-    the same mechanisms.
-
-Both models can be mixed, resulting in multiple execution scenarios:
-
--   Applications running on the host only;
-
--   Applications running mainly on the host, with critical parts of the
-    code being offloaded to the Xeon Phi;
-
--   Applications running on both the host and the Xeon Phi, interacting
-    trough standardized communication frameworks;
-
--   Highly parallel applications running on the Xeon Phi only.
-
-Figure 4 illustrates the compute spectrum enabled when coupling
-processors and coprocessors. Depending on the application’s compute
-needs, execution can be initiated on either a host processor or on one
-or more coprocessors. Depending on the application needs and system
-environment, any mix of computation between the processor and
-coprocessor can be chosen for optimal performance.
-
-![infieri01_pic04](img/infieri01_pic04.png)
-
-**Figure 4: Programming models for an Intel Xeon® platform with Xeon Phi™ coprocessors**
-
-Included in Figure 4 is a conceptual view of how code might be launched
-and executed in the key enabled programming uses. From left to right
-those models are:
-
--   Processor-only model: the application is launched and executed only
-    on the host processors;
-
--   Offload model: the application is launched and primarily managed on
-    processors and selected portions of the code are offloaded to the
-    coprocessors;
-
--   Symmetric model: the application is launched on both processors and
-    coprocessors with cooperative communication (typically via MPI);
-
--   Coprocessor-only model: the application is launched and executed
-    only on the coprocessors.
-
-The Intel MPI library supports all of these programming execution models.
-MPI is the de facto library-based communication environment used to
-enable parallel applications to run, communicate, and scale across
-multiple processing cores, either between the multiple cores in a single
-Intel Xeon processor platform or across a connected network of nodes in
-a cluster. During the hands-on activities of Part 2 you will have the
-opportunity to exercise some of these computing models.
-
-### 1.4 Knights Landing: the Second Generation of Xeon Phi™ Architecture
+### 1.2 Knights Landing: the Second Generation of Xeon Phi™ Architecture
 
 Knights Landing (KNL) is the code-name of the second generation of Intel Xeon
 Phi architecture, which has been released in early 2016. The new model offers
@@ -516,18 +270,18 @@ in other regions. KNL provides five cluster modes:
 - **SNC-2:** tiles are divided in two NUMA nodes;  
 - **SNC-4:** tiles are divided in four NUMA nodes.
 
-### 1.5 Hands-on Activities ###
+### 1.3 Hands-on Activities ###
 
-**1.5.1** On your desktop/workstation, open a terminal or command line
-console and use the command `ssh` to login to the host `SERVER`
-as user traineeN (N = 01 … 20; please check with the teaching assistant
+**1.3.1** On your workstation (desktop/laptop), open a terminal or command line
+console and use the command `ssh` to login to the host `KNL-SERVER`
+as user traineeN (N = 01 … 30; please check with the teaching assistant
 which number has been assigned to you):
 
 ```bash
-$ ssh –X traineeN@SERVER
+$ ssh –X traineeN@KNL-SERVER
 ```
 
-**1.5.2** Intel’s tool for checking the status of Xeon Phi coprocessors
+**1.3.2** Intel’s tool for checking the status of Xeon Phi coprocessors
 is micinfo. Use this utility to obtain detailed information about the
 Intel Xeon Phi coprocessor(s) installed in the system and the
 corresponding driver version:
@@ -562,7 +316,7 @@ example:
 [SERVER]$ micinfo -deviceInfo 1 -group thermal
 ```
 
-**1.5.3** The Xeon Phi coprocessor is packaged in a PCIe card which
+**1.3.3** The Xeon Phi coprocessor is packaged in a PCIe card which
 includes thermal and power sensors and a system management controller
 (SMC) that monitors the sensors and manages the coprocessor. The utility
 micsmc can be used to extract information from the coprocessor SMC,
@@ -613,7 +367,7 @@ is thus suitable for direct execution or for scripting. For example:
 
 For a detailed view of all `micsmc` arguments, use option `–h` (for help).
 
-**1.5.4** The miccheck utility runs a set of diagnostic tests in order
+**1.3.4** The miccheck utility runs a set of diagnostic tests in order
 to verify the configuration of all the Intel® Xeon Phi™ coprocessors
 installed in the system. By default, all available tests are run on all
 Intel® Xeon Phi™ coprocessors, but a subset of tests and devices can be
@@ -631,7 +385,7 @@ used for system administration purposes (e.g. updating the firmware in
 the Xeon Phi coprocessor´s flash memory) and usually require
 administrative privileges to run.
 
-**1.5.5** The Intel® Xeon Phi coprocessor is an IP-addressable PCIe
+**1.3.5** The Intel® Xeon Phi coprocessor is an IP-addressable PCIe
 device - managed by an independent environment provided by the MIC
 Platform Software Stack (MPSS) - that runs the Linux operating system.
 The Linux OS on the Intel Xeon Phi coprocessor supports SSH access for
@@ -668,13 +422,13 @@ previous command sequence on the second and third coprocessors (mic1 and
 mic2). Check the number of cores, the available memory, and the IP
 address of the second coprocessor.
 
-**1.5.6** Bonus: using the command `cat`, create a simple text file in the
+**1.3.6** Bonus: using the command `cat`, create a simple text file in the
 host system, and then transfer it to one of the coprocessor cards using
 `scp`. Then issue an `ssh` to the corresponding card and check the file.
 Verify also if you are able to transfer the same file directly from one
 coprocessor card to another one.
 
-**1.5.7** On your desktop/workstation, open a terminal or command line 
+**1.3.7** On your desktop/workstation, open a terminal or command line 
 console and use the command ssh to login to the host **KNL-SERVER** as user traineeN (N = 01 … 20; please check with the teaching 
 assistant which number has been assigned to you):
 
@@ -682,7 +436,7 @@ assistant which number has been assigned to you):
 ssh –X traineeN@KNL-SERVER
 ```
 
-**1.5.8** The utility `lscpu` shows information about the CPU architecture. 
+**1.3.8** The utility `lscpu` shows information about the CPU architecture. 
 Use this utility to obtain the amount of cores and threads available on the Intel 
 KNL processor installed in the system:
 
@@ -690,7 +444,7 @@ KNL processor installed in the system:
 [KNL-SERVER]$ lscpu
 ```
 
-**1.5.9** the utility `numactl` maps processes to specific NUMA nodes. Use this utility 
+**1.3.9** the utility `numactl` maps processes to specific NUMA nodes. Use this utility 
 with the parameter -H to obtain information about the NUMA nodes in the system.
 
 ```bash
