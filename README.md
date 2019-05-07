@@ -105,13 +105,13 @@ ______
 -   _Intel® Xeon Phi™ Processor High Performance Programming - Knights Landing Edition (Elsevier, 2016)_  
     <https://www.elsevier.com/books/intel-xeon-phi-processor-high-performance-programming/jeffers/978-0-12-809194-4/>
 
--   _Intel® Xeon Phi™ Coprocessor Architecture and Tools, by Rezaur Rahman (Apress, 2013)_  
-    <http://www.apress.com/9781430259268>
+-   _High Performance Parallelism Pearls - Multicore and Many-core Programming Approaches - Vol. I (Morgan Kaufmann, 2014)_ 
+    <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-one/reinders/978-0-12-802118-7/>
 
--   _Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume two, by Jim Jeffers and James Reinders (Elsevier, 2015)  
-    <http://www.lotsofcores.com/>
-
--   Intel® Xeon Phi™ Coprocessor High-Performance Programming Volume three, by Jim Jeffers and James Reinders (Elsevier, 2016)  
+-   _High Performance Parallelism Pearls - Multicore and Many-core Programming Approaches - Vol. II (Morgan Kaufmann, 2014)_
+    <https://www.elsevier.com/books/high-performance-parallelism-pearls-volume-two/jeffers/978-0-12-803819-2/>
+    
+-   _Books on Programming Multicore and Many-core by James Reinders and Jim Jeffers_  
     <http://www.lotsofcores.com/>
 
 -   _Parallel Programming and Optimization with Intel® Xeon Phi™ Coprocessors, 2nd Edition (Colfax, 2015)_  
