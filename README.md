@@ -273,13 +273,41 @@ in other regions. KNL provides five cluster modes:
 ### 1.3 Hands-on Activities ###
 
 **1.3.1** On your workstation (desktop/laptop), open a terminal or command line
-console and use the command `ssh` to login to the host `KNL-SERVER`
+console and use the command `ssh` to login to the host `SERVER`
 as user traineeN (N = 01 … 30; please check with the teaching assistant
 which number has been assigned to you):
 
 ```bash
-$ ssh –X traineeN@KNL-SERVER
+$ ssh –X traineeN@SERVER
 ```
+
+**1.3.2** The utility `lscpu` shows information about the CPU architecture. 
+Use this utility to obtain the amount of cores and threads available on the Intel 
+KNL processor installed in the system:
+
+```bash
+[SERVER]$ lscpu
+```
+
+**1.3.3** The utility `numactl` maps processes to specific NUMA nodes. Use this utility 
+with the parameter -H to obtain information about the NUMA nodes in the system.
+
+```bash
+[SERVER]$ numactl -H
+```
+
+The cluster mode of the KNL server we are using has been configured as SNC-4, so cores appear grouped into 
+four nodes with exactly a quarter of the on-platform memory in each node. 
+In addition, our system uses the on-package high bandwidt memory (HBM) configured as ﬂat mode, 
+which adds four more NUMA nodes with a quarter of the HBM assigned for each node.
+
+**1.3.4** The utility `numastat` displays memory statistics (such as allocation hits and misses)
+for processes and the operating system on a per-NUMA-node basis. The option -m displays system-wide
+memory usage information on a per-node basis, similar to the information found in /proc/meminfo.
+
+```bash
+[SERVER]$ numastat -m
+
 
 **1.3.2** Intel’s tool for checking the status of Xeon Phi coprocessors
 is micinfo. Use this utility to obtain detailed information about the
