@@ -226,7 +226,7 @@ for managing the coprocessor operating environment.
 
 ### 1.2 Knights Landing: the Second Generation of Xeon Phi™ Architecture
 
-Knights Landing (KNL) is the code-name of the second generation of Intel Xeon
+Knights Landing (KNL) is the code name of the second generation of Intel Xeon
 Phi architecture, which has been released in early 2016. The new model offers
 additional support for vector processing, power efficient scaling and local
 memory bandwidth. The novelties of Intel KNL are the following:
@@ -251,8 +251,8 @@ high-bandwidth memory can be used as a Last-level cache (LLC) or as a regular
 addressable memory. KNL allows three modes of configuration:
 
 * **Flat:** memory is treated as a standard memory in same address space of DDR4;
-* **Cache:** memory is used as a LLC cache for DDR4;
-* **Hybrid:** a portion of memory is cache and remaining is flat;
+* **Cache:** memory is used as an LLC cache for DDR4;
+* **Hybrid:** a portion of memory is cache and the remaining is flat.
 
 The memory in KNL can be organized in two forms: Uniform Memory Access (UMA),
 in which the latency from one core to any memory location will vary little
@@ -262,13 +262,13 @@ core to memory in the same region is lower than the latency from core to memory
 in other regions. KNL provides five cluster modes:  
 
 #### • UMA
-- **All-to-all:** memory addresses are uniform distributed across the chip;  
+- **All-to-all:** memory addresses are uniformly distributed across the chip;  
 - **Quadrant:** memory addresses are divided in four sections;  
 - **Hemisphere:** memory addresses are divided in two sections.   
 
 #### • NUMA
-- **SNC-2:** tiles are divided in two NUMA nodes;  
-- **SNC-4:** tiles are divided in four NUMA nodes.
+- **SNC-2:** (sub-NUMA cluster 2) tiles are divided in two NUMA nodes;  
+- **SNC-4:** (sub-NUMA cluster 4) tiles are divided in four NUMA nodes.
 
 ### 1.3 Hands-on Activities ###
 
