@@ -245,14 +245,14 @@ every message travels to the destination first vertically, until it hits the
 target row, then travels horizontally until it reaches the destination.  Such
 interconnection is specifically optimized for KNL traffic flows.  KNL has two
 types of memory, known as DDR4 SDRAM (double data rate fourth-generation
-synchronous dynamic random-access memory) and HBM (High-Bandwidth Memory). The
-maximum capacity for DDR4 is 384 GB and the size of HBM is 16 GB. The
+synchronous dynamic random-access memory) and HBM (High-Bandwidth Memory) or MCDRAM.
+The maximum capacity for DDR4 is 384 GB and the size of MCDRAM is 16 GB. The
 high-bandwidth memory can be used as a Last-level cache (LLC) or as a regular
 addressable memory. KNL allows three modes of configuration:
 
-* **Flat:** memory is treated as a standard memory in same address space of DDR4;
-* **Cache:** memory is used as an LLC cache for DDR4;
-* **Hybrid:** a portion of memory is cache and the remaining is flat.
+* **Flat:** MCDRAM is treated as a standard memory in same address space of DDR4;
+* **Cache:** MCDRAM is used as an Last-level cache (L3) for DDR4;
+* **Hybrid:** a fraction of MCDRAM is set up as cache and the remaining as flat.
 
 The memory in KNL can be organized in two forms: Uniform Memory Access (UMA),
 in which the latency from one core to any memory location will vary little
