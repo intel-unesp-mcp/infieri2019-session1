@@ -267,8 +267,12 @@ in other regions. KNL provides five cluster modes:
 - **Hemisphere:** memory addresses are divided in two sections.   
 
 #### • NUMA
-- **SNC-2:** (sub-NUMA cluster 2) tiles are divided in two NUMA nodes;  
-- **SNC-4:** (sub-NUMA cluster 4) tiles are divided in four NUMA nodes.
+- **SNC-2:** (Sub-NUMA Cluster 2) tiles are divided in two NUMA nodes;  
+- **SNC-4:** (Sub-NUMA Cluster 4) tiles are divided in four NUMA nodes.
+
+Regardless of the cluster mode selected, all memory (MCDRAM and DDR4) is available
+to all cores, and all memory is fully cache-coherent. What differs between the modes
+is whether the view of MCDRAM or DDR4 is **UMA** or **NUMA**.
 
 ### 1.3 Hands-on Activities ###
 
