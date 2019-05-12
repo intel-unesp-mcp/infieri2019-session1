@@ -681,8 +681,8 @@ ______
 ### 4.1 Goals ###
 
 This is an optional, more challenging activity. You are invited to follow Part 1 of the N-body simulation
-example developed by Intel® Software Innovator 'Johnny Chan', which describes a code optimization journey
-to boost performance of a toy N-body simulation algorithm on a single KNL server.
+example developed by Intel® Software Innovator 'Johnny Chan', which describes a step by step code optimization
+journey to boost performance of a toy N-body simulation algorithm on a single KNL server.
 
 ### 4.2 Hands-on Activities ###
 
@@ -704,15 +704,3 @@ ______
 
 
 <a name="bottom"></a>
-
-## Other references ##
-
-[^1]: <https://software.intel.com/sites/default/files/blog/337861/reindersxeonandxeonphi-v20121112a.pdf>
-
-[^2]: <http://www.prweb.com/releases/2012/11/prweb10124930.htm>
-
-[^3]: <http://en.wikipedia.org/wiki/P54C>
-
-[^4]: <http://en.wikipedia.org/wiki/Protection\_ring>
-
-[^5]: <http://info.adtechglobal.com/blog/bid/329382/Harnessing-the-Compute-Power-of-the-Intel-Xeon-Phi-Part-2>
