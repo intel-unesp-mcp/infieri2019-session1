@@ -6,12 +6,12 @@
 
 **April 2019**
 
-UNESP Center for Scientific Computing (an Intel Modern Code Partner)  
-São Paulo State University (Universidade Estadual Paulista - UNESP)
+Unesp Center for Scientific Computing
+São Paulo State University (Universidade Estadual Paulista)
 
 São Paulo, Brazil
 
-**Organized by: Rogério Iope, Silvio Stanzani, Raphael Cóbe, Jefferson Fialho**
+**Organized by: Rogério Iope, Jefferson Fialho, Raphael Cóbe, Silvio Stanzani**
 
 ______
 
