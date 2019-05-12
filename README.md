@@ -680,34 +680,17 @@ ______
 
 ### 4.1 Goals ###
 
-In this activity you are invited to run the N-body simulation described
-in the white paper mentioned in the very beginning of this lab workbook
-\(["Before you start”](#before-you-start) \). This article is a good reference to review
-when evaluating how to write high-performance code for the Intel Xeon
-Phi™ coprocessor.
+This is an optional, more challenging activity. You are invited to follow Part 1 of the N-body simulation
+example developed by Intel® Software Innovator 'Johnny Chan', which describes a code optimization journey
+to boost performance of a toy N-body simulation algorithm on a single KNL server.
 
-### 4.2 Activities ###
+### 4.2 Hands-on Activities ###
 
-Please read carefully and refer to the white paper below for compiler
-instructions (Listings 2, 3, 5, and 6). The source codes (listings 1 and
-4) can be found on the host system in the usual location
-**SOURCE-DIR**. Please refer to the teaching
-assistant(s) if you have any question.
+Please access the link below ,read carefully and try to reproduce the optimization steps described by the author
+of the article. There are some specific topics that we need to adapt to our environment, so pleasse
+refer to the teaching assistant before you start.
 
-**IMPORTANT:** After you connect to the MIC device (`ssh micN`), set the environment variables necessary
-for the Intel development tools by running the following command:
-
-```bash
-source /opt/intel/parallel_studio_xe_2017.1.043/compilers_and_libraries_2017/linux/mkl/bin/mklvars.sh mic
-```
-
-A. Vladimirov, V. Karpusenko, “_Test-driving Intel® Xeon Phi™ coprocessors
-with a basic N-body simulation_”, Colfax International, January 2013.
-Available at
-
-<http://research.colfaxinternational.com/post/2013/01/07/Nbody-Xeon-Phi.aspx>
-
-<https://goparallel.sourceforge.net/wp-content/uploads/2013/01/Colfax_Nbody_Xeon_Phi.pdf>
+<https://mathalope.co.uk/2017/09/07/high-performance-computing-hpc-on-intel-xeon-phi-n-body-simulation-example/>
 
 ______
 
