@@ -95,7 +95,7 @@ This course is divided into four parts:
 
 * [Practical Exercises - **Part 1**: Introduction to the Intel® Xeon Phi™ coprocessor](#part1)
 * [Practical Exercices - **Part 2**: Compiling and running trivially simple applications](#part2)
-* [Practical Exercices - **Part 3**: High Performance Test-Drive](#part3)
+* [Practical Exercices - **Part 3**: Getting started on KNL - Cornell Virtual Workshop Training](#part3)
 * [Practical Exercices - **Part 4**: Running a basic N-body simulation](#part4)
 
 ______
@@ -645,7 +645,7 @@ ______
 
 # Practical Exercises - Part 3 #
 
-## Getting started on KNL (Cornell Virtual Workshop Training) ##
+## Getting started on KNL - Cornell Virtual Workshop Training ##
 
 ### 3.1 Goals ###
 
