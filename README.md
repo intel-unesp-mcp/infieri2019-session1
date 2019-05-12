@@ -293,19 +293,19 @@ core available on the Intel KNL processor installed in the system:
 [SERVER]$ lscpu
 ```
 
-**1.3.3** In highly parallel processors such as the KNL, parallelism is present at two levels: task
-parallelism and data parallelism. Task parallelism comes from the massive number of cores in the processor.
-Data parallelism comes from support for **vector instructions**, which make every core of the processor
-a single instruction multiple data (SIMD) processor. The 1st generation Intel Xeon Phi processors,
-released in 2012 and code-named Knights Corner (KNC), were first Intel architecture processors to
-support 512-bit vectors. The 2nd generation Intel Xeon Phi processors, released in 2016 and code-named
+**1.3.3** In highly parallel processors such as the KNL, parallelism can be explored at least in three levels: data
+parallelism with vector instructions, task parallelism in shared memory with threads, and process parallelism
+in distributed memory with message passing. Data parallelism comes from support for **vector instructions**,
+which make every core of the processor a single instruction multiple data (SIMD) processor. The 1st generation
+Intel Xeon Phi processors, released in 2013 and code-named Knights Corner (KNC), were first Intel architecture
+processors to support 512-bit vectors. The 2nd generation Intel Xeon Phi processors, released in 2016 and code-named
 Knights Landing (KNL), also support 512-bit vectors, but in a new instruction set called Intel Advanced
-Vector Extensions 512 (Intel AVX-512).Let us run again the utility `lscpu` to obtain the AVX512 instructions
-available for the KNL processor we are using. We are going to use the Linux `pipe`and `grep` commands.
-The pipe command allows us to use two or more commands such that output of one command serves as input
-to the next, like a pipeline. The symbol '|' denotes a pipe. The `grep` command works like a filter,
-searching a long string of characters for a particular pattern of characters, and displays or highlights all
-lines that contain that pattern.
+Vector Extensions 512 (Intel AVX-512).
+Let us run again the utility `lscpu` to obtain the AVX512 instructions available for the KNL processor we are using.
+We are going to use the Linux `pipe`and `grep` commands. The pipe command allows us to use two or more commands
+such that output of one command serves as input to the next, like a pipeline. The symbol '|' denotes a pipe.
+The `grep` command works like a filter, searching a long string of characters for a particular pattern of
+characters, and displays or highlights all lines that contain that pattern.
 
 ```bash
 [SERVER]$ lscpu | grep avx512
@@ -430,7 +430,6 @@ activities are located in **SOURCE-DIR**.
 
 For more information, check the [**"getting the source files"**](#get_repo) section.
 
-
 **2.2.3** Automatic vectorization
 
 In order to enable the compiler to vectorize the code automatically, the developer needs to use the compiler directive “-O” 
@@ -492,7 +491,57 @@ compiler to use the highest vector instruction set available, in this case AVX-5
 
 Now the loop on function hist was vectorized using AVX-512.
 
-**2.2.9** One major difference between programming for a single system and for a cluster is that
+**2.2.4** In this exercise we are going to explore task parallelism, by running a trivially simple application
+that will use all the threads of the Knights Landing (KNL) server to simultaneously print "Hello world”,
+using the OpenMP framework to write our first parallel (multi-threaded) application.
+
+Take a look at the `hello-omp.c` source code located at **SOURCE-DIR**. The 'omp.h' library provides
+the required utilities to write multi-thread codes; the 'omp_get_max_threads()' returns the maximum
+number of threads available on the system; the 'imp_get_thread_num()' returns the thread ID. The 'printf'
+function prints the thread ID so we can visualize the parallelism. Finally, the '#pragma omp parallel'
+directive is responsible for the execution of the sequence of instructions defined by the open and close
+curly brackets in parallel, using all the threads available on the system.
+
+Now compile source code and run the generated executable file:
+
+```bash
+[KNL-SERVER]$ icc -qopenmp -o hello-imp  hello-omp.c
+[KNL-SERVER]$ ./hello-omp
+```
+
+How many threads did you get? Is this the result you were expecting?
+
+Notice that the output is not ordered; this occurs because each logical thread executes independently.
+To obtain an ordered output, we can pipe the result to the Linux command `sort`, which will
+rearrange the lines in a text file so that they are sorted, numerically and alphabetically.
+The output can be ordered using the following command:
+
+```bash
+[KNL-SERVER]$ ./hello-omp | sort -nk5
+```
+
+We can set the maximum number
+of OpenMP threads using the environment variable OMP_NUM_THREADS. To do so, we need to set the value
+of this variable in the command shell in which the program is going to run, before invoking the program:
+
+```bash
+[KNL-SERVER]$ export OMP_NUM_THREADS=32
+[KNL-SERVER]$ ./hello-omp
+```
+Run again using different values of OMP_NUM_THREADS. To check the current value of OMP_NUM_THREADS, use the
+command `env` and search for the pattern OMP using `grep`:
+
+```bash
+[KNL-SERVER]$ env | grep OMP
+```
+
+To delete the OMP_NUM_THREADS environment variable, use the command `unset`:
+
+```bash
+[KNL-SERVER]$ unset OMP_NUM_THREADS
+```
+
+**2.2.5** One major difference between programming for a single system and for a cluster is that
 each cluster node has a separate memory space. Unlike multiple threads running in a shared memory
 space, communication between disjoint memory spaces usually requires the programmer to make
 explicit calls to communication routines. The explicit communications occur via messages and
@@ -525,16 +574,15 @@ source code and the mpirun utility to run the binary in the host system:
 [SERVER]$ mpirun -n 32 ./hello-mpi
 ```
 
-Notice that the output is not ordered by rank; this occurs because each
-logical thread executes independently. To obtain an ordered output, we can pipe the
-result to the Linux command know as 'sort', which will rearrange the lines in a text
-file so that they are sorted, numerically and alphabetically.
+Notice that the output is not ordered by rank; this occurs because each logical thread executes
+independently. As we have already seen, to obtain an ordered output, we can pipe the output to
+the Linux command `sort`:
 
 ```bash
 [SERVER]$ mpirun -n 32 ./hello-mpi | sort -nk5
 ```
 
-**2.2.11** In this activity, we will work on a more realistic MPI application.
+**2.2.6** In this activity, we will work on a more realistic MPI application.
 Take a look at the source file `montecarlo.c`, a sample program that estimates the
 value of π (pi) using the Monte Carlo method. For more details please check the link below:
 
