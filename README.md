@@ -26,7 +26,7 @@ familiar programming models such as OpenMP and MPI in much the same manner that
 they are used on multi-core / multi-socket systems, like the widely used Intel
 Xeon processors.
 
-This hands-on training has been designed to be a comprehensive, practical
+This hands-on, self-paced training has been designed to be a comprehensive, practical
 introduction to parallel programming based on the Xeon Phi architecture and
 programming models, aiming to demonstrate the processing power of the Intel
 Xeon Phi product family. Attendants of these training activities will start
@@ -35,7 +35,7 @@ Intel Xeon Phi processors, by connecting to the servers using the ssh protocol.
 They will verify that the second-generation Intel Xeon Phi processor is a
 self-booting processor capable of running a usual Linux-based operating system.
 
-During this introductory part, participants will learn how to compile and
+During the training activities, participants will learn how to compile and
 run simple C/C++ applications, and then compile and run example codes based on
 shared-memory parallelism with OpenMP and Cilk Plus and distributed-memory
 parallelism with MPI. They will also work on MPI application examples that
@@ -192,7 +192,6 @@ Please refer to the teaching assistant(s) for more details.
 After you connect to the remote server, set the environment variables necessary
 for the Intel development tools by running the following commands:
 
-
 ```bash
 [KNL-SERVER]$ source /opt/tools/intel/parallel_studio_xe_2018/psxevars.sh intel64
 ```
@@ -200,7 +199,6 @@ for the Intel development tools by running the following commands:
 ```bash
 [KNL-SERVER]$ source /opt/tools/intel/parallel_studio_xe_2018/compilers_and_libraries_2018/linux/mpi/intel64/bin/mpivars.sh
 ```
-
 ______
 
 ### Quick Navigation ###
