@@ -329,21 +329,27 @@ The KNL server we are using has been configured as **quadrant-cache**, which mea
 that the cluster mode is set as quadrant and the MCDRAM is set as cache memory. Clustering mode is a
 unique feature of KNL processors that allows us to divide the chip into separate virtual
 regions with the goal of keeping the interconnections inside the chip to be as local as possible,
-thus lowering the latency and increasing the bandwidth of on-die communications. In the quadrant
-clustering mode, the tiles are divided into four parts called quadrants, which are spatially local
+thus lowering the latency and increasing the bandwidth of on-die communications. In quadrant
+cluster mode, the tiles are divided into four parts called quadrants, which are spatially local
 to four groups of memory controllers. Memory addresses served by a memory controller in a quadrant
 are guaranteed to be mapped only to the tiles contained in that quadrant. One other cluster mode,
 known as hemisphere mode, functions the same way, except that the die is divided into two hemispheres
-instead of four quadrants. In addition, our system uses the on-package high bandwidt memory (HBM),
-or MCDRAM, configured as cache. In cache mode, the MCDRAM works like an Level 3 cache, which means
-that all memory access go through the MCDRAM to reach the DDR4 memory. As MCDRAM is several times
-faster than DDR4, performance will be better if most of the data comes from or go to the MCDRAM
-cache instead of the DDR4 memory.
+instead of four quadrants. The quadrant mode is transparent to software, which means that there is no
+need to do anything special to benefit from this mode. This is the reason why we have chosen this
+configuration for this training.
 
-For more information, have a look at the following references:
+For more information, have a look at the following reference:
 
 -   _Clustering Modes in Knights Landing Processors_  
     <https://colfaxresearch.com/knl-numa/>
+
+In addition, our system uses the on-package high bandwidt memory (HBM), or MCDRAM, configured as cache.
+In cache mode, the MCDRAM works like a last level cache (Level 3 in our case), which means that all
+memory access go through the MCDRAM to reach the DDR4 memory. As the MCDRAM is several times faster
+than the DDR4 memory, performance will be better if most of the data comes from or go to the MCDRAM
+cache instead of the DDR4 memory.
+
+For more information, have a look at the following reference:
 
 -   _MCDRAM as High-Bandwidth Memory (HBM) in Knights Landing Processors_  
     <https://colfaxresearch.com/knl-mcdram/>
@@ -354,183 +360,7 @@ memory usage information on a per-node basis, similar to the information found i
 
 ```bash
 [SERVER]$ numastat -m
-
-
-**1.3.2** Intel’s tool for checking the status of Xeon Phi coprocessors
-is micinfo. Use this utility to obtain detailed information about the
-Intel Xeon Phi coprocessor(s) installed in the system and the
-corresponding driver version:
-
-```bash
-[SERVER]$ micinfo
 ```
-
-For each device listed, take note of the device model (SKU: *stock-keeping
-unit*), number of cores, memory size (GDDR5 –
-<http://en.wikipedia.org/wiki/GDDR5>) and thermal information (die temperature,
-actively- or passively-cooled). Check also the memory size of the host system.
-
-The `-listdevices` option provides a shorter output, with the list of the
-Intel® Xeon Phi coprocessors available in the system:
-
-```bash
-[SERVER]$ micinfo -listdevices
-``` 
-
-(**Extra exercise:** compare the result with the output of `$ lspci | grep
-processor`).
-
-To request detailed information about a specific device, the option
-`-deviceinfo <N>` can be used. The information displayed by the `micinfo`
-command can also be narrowed down by including the option `-group <group
-name>`, where group name can be: version, board, cores, GDDR, thermal. For
-example:
-
-```bash
-[SERVER]$ micinfo -deviceInfo 0 -group cores
-[SERVER]$ micinfo -deviceInfo 1 -group thermal
-```
-
-**1.3.3** The Xeon Phi coprocessor is packaged in a PCIe card which
-includes thermal and power sensors and a system management controller
-(SMC) that monitors the sensors and manages the coprocessor. The utility
-micsmc can be used to extract information from the coprocessor SMC,
-including core temperatures; core frequency and power usage. The utility
-operates in two modes: Graphical User Interface (GUI) mode and command
-line (CLI) mode. In order to invoke the GUI mode, micsmc should be
-executed without any additional parameters. In this mode, the tool
-provides continuously updated information on Intel® Xeon Phi™ coprocessor
-core utilization, core temperature, memory usage, and power usage
-statistics. If your workstation has X11 capabilities (Linux or Mac),
-then issuing the micsmc command without any options will open a new
-window frame on your desktop, the *Coprocessor Platform Status Panel*:
-
-```bash
-[SERVER]$ micsmc &
-```
-
-In the menu bar of this new window frame, select Cards, Show All and
-take a look at the default card view – the *Utilization View* - for each
-coprocessor. Find the view-selection buttons on the upper left corner,
-which enable you to switch from the current view to one of the two other
-available views: the *Core Histogram View* and the *Historical
-Utilization View*. In particular, the Core Histogram View displays the
-computational activity of all logical cores (*threads*), measured in
-percentage utilization, of the corresponding Xeon Phi coprocessor.
-
-To close the GUI application, type `fg` in the console and then hit ^C.
-For more information, please check the documentation available at
-`/opt/intel/mic/sysmgmt/docs/en_US/` (use scp to copy the pdf file to
-your local desktop).
-
-**Note:** If your workstation does not have X11, you will get the error
-message: `micsmc-gui: cannot connect to X server`. Alternatively, you
-can use the command below:
-
-```bash
-[SERVER]$ watch -n 1 micsmc -t
-```
-
-The CLI mode is activated with command-line arguments and provides the
-same information as the graphical user interface, but in text form. It
-is thus suitable for direct execution or for scripting. For example:
-
-```bash
-[SERVER]$ micsmc -c
-[SERVER]$ micsmc -a
-```
-
-For a detailed view of all `micsmc` arguments, use option `–h` (for help).
-
-**1.3.4** The miccheck utility runs a set of diagnostic tests in order
-to verify the configuration of all the Intel® Xeon Phi™ coprocessors
-installed in the system. By default, all available tests are run on all
-Intel® Xeon Phi™ coprocessors, but a subset of tests and devices can be
-selected by using adequate arguments. Let us take a look on the outcomes
-of the command:
-
-```bash
-[SERVER]$ miccheck
-```
-
-For a detailed view of all `miccheck` arguments, use option `–h` (for help).
-
-There are other administrative tools and utilities, but they are mostly
-used for system administration purposes (e.g. updating the firmware in
-the Xeon Phi coprocessor´s flash memory) and usually require
-administrative privileges to run.
-
-**1.3.5** The Intel® Xeon Phi coprocessor is an IP-addressable PCIe
-device - managed by an independent environment provided by the MIC
-Platform Software Stack (MPSS) - that runs the Linux operating system.
-The Linux OS on the Intel Xeon Phi coprocessor supports SSH access for
-all users defined, including root, using public key authentication keys.
-In this activity we are going to interact with the Intel Xeon Phi
-coprocessors´ Linux OS via a terminal shell. From the host shell issue
-an ssh to the first coprocessor (mic0):
-
-```bash
-[SERVER]$ ssh mic0
-```
-In the coprocessor command-line shell, issue the following commands and
-check the results:
-
-```bash
-[SERVER-MIC]$ uname –a
-[SERVER-MIC]$ cat /proc/cpuinfo | grep processor | wc –l
-[SERVER-MIC]$ cat /proc/meminfo | grep MemTotal
-[SERVER-MIC]$ ip a
-[SERVER-MIC]$ cat /etc/hosts
-[SERVER-MIC]$ exit
-```
-
-By default, the first Intel Xeon Phi coprocessor in the system is
-resolved to the hostname mic0, as specified in the file `/etc/hosts`.
-Notice that the SSH server that runs on the coprocessor allows us to
-transfer files from the host to the coprocessor using the secure copy
-tool (`scp`). We are going to use this mechanism in the following
-activities to transfer executables compiled in the host system to the
-coprocessors.
-
-Close the connection with mic0 using exit (or ^D), and repeat the
-previous command sequence on the second and third coprocessors (mic1 and
-mic2). Check the number of cores, the available memory, and the IP
-address of the second coprocessor.
-
-**1.3.6** Bonus: using the command `cat`, create a simple text file in the
-host system, and then transfer it to one of the coprocessor cards using
-`scp`. Then issue an `ssh` to the corresponding card and check the file.
-Verify also if you are able to transfer the same file directly from one
-coprocessor card to another one.
-
-**1.3.7** On your desktop/workstation, open a terminal or command line 
-console and use the command ssh to login to the host **KNL-SERVER** as user traineeN (N = 01 … 20; please check with the teaching 
-assistant which number has been assigned to you):
-
-```bash
-ssh –X traineeN@KNL-SERVER
-```
-
-**1.3.8** The utility `lscpu` shows information about the CPU architecture. 
-Use this utility to obtain the amount of cores and threads available on the Intel 
-KNL processor installed in the system:
-
-```bash
-[KNL-SERVER]$ lscpu
-```
-
-**1.3.9** the utility `numactl` maps processes to specific NUMA nodes. Use this utility 
-with the parameter -H to obtain information about the NUMA nodes in the system.
-
-```bash
-[KNL-SERVER]$ numactl -H
-```
-
-The cluster mode of the KNL server we are using has been configured as SNC-4, so cores appear grouped into 
-four nodes with exactly a quarter of the on-platform memory in each node. 
-In addition, our system uses the on-package high bandwidt memory (HBM) configured as ﬂat mode, 
-which adds four more NUMA nodes with a quarter of the HBM assigned for each node.
-
 ______
 
 ### Quick Navigation ###
@@ -547,13 +377,12 @@ ______
 
 ### 2.1 Goals ###
 
-Traditionally, “Hello World” programs are used to illustrate basic
-syntax; most of the examples of this session will follow this tradition.
-The following set of activities will show you how to compile trivially
-simple source codes for native Intel Xeon Phi coprocessor execution. You
-will also learn how to offload parts of the code or specific function
-calls of an executable running on the host to the coprocessor, and will
-have the opportunity to play with simple MPI and OpenMP examples.
+Traditionally, “Hello World” programs are used to illustrate basic syntax; most of the examples
+of this session will follow this tradition. The following set of activities will show you how
+to compile trivially simple source codes for native Intel Xeon Phi coprocessor execution. You
+will also learn how to offload parts of the code or specific function calls of an executable
+running on the host to the coprocessor, and will have the opportunity to play with simple
+MPI and OpenMP examples.
 
 ### 2.1.1 Overview of Vectorization ###
 
@@ -568,29 +397,23 @@ The Vector Processing Units present in the cores of Intel Xeon and Intel Xeon Ph
 
 ### 2.2 Hands-on Activities ##
 
-**2.2.1** A development system with Intel Xeon Phi coprocessors must
-have the Intel software development tools installed, such as compilers,
-parallelization libraries and performance tuning utilities to support
-high performance code compilation. That said, before compiling and
-linking any source code, we need to be sure that 1) the host system has
-the Intel C (icc) and C++ (icpc) compilers, the libraries and the
-utilities we will use and 2) the environment is set up properly. 
+**2.2.1** A development system with Intel Xeon Phi coprocessors must have the Intel
+software development tools installed, such as compilers, parallelization libraries
+and performance tuning utilities to support high performance code compilation. That said,
+before compiling and linking any source code, we need to be sure that 1) the host system has
+the Intel C (icc) and C++ (icpc) compilers, the libraries and the utilities we will
+use and 2) the environment is set up properly. 
 
-**Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
-
-For more information, check the [**"Remote access"**](#remote_access) section.
-
-In order to verify that the compilers are installed, run the following
-commands in the host system console:
+In order to verify that the compilers are installed, run the following commands in the
+host system:
 
 ```bash
 [SERVER]$ icc -V
 [SERVER]$ icpc -V
 ```
 
-**2.2.2** Let us begin with an extremely trivial code just to check if
-everything is running fine. Take a look at the source code `hello.c`
-located at **SOURCE-DIR**, then compile and
+**2.2.2** Let us begin with a trivial code just to check if everything is running fine.
+Take a look at the source code `hello.c` located at **SOURCE-DIR**, then compile and
 execute it:
 
 ```bash
@@ -599,7 +422,7 @@ execute it:
 [SERVER]$ icc hello.c -o hello
 [SERVER]$ ./hello
 ```
-  > Hello world! I have 32 logical cores.
+  > Hello world! I have 272 logical cores.
 
 
 **Note:** All the source codes we will be using in the following
@@ -608,217 +431,7 @@ activities are located in **SOURCE-DIR**.
 For more information, check the [**"getting the source files"**](#get_repo) section.
 
 
-Now recompile it using the `–mmic` flag to make it natively executable for
-the Intel Xeon Phi coprocessor (remember to change the name of the
-executable, e.g. `hello.mic` or `hello.phi`), and try to execute it:
-
-```bash
-[SERVER]$ icc -mmic hello.c -o hello.mic
-[SERVER]$ ./hello.mic
-```
-
- > -bash: ./hello.mic: cannot execute binary file
-
-The resultant binary can only be executed on the Intel Xeon Phi
-coprocessor (why?). As we have seen before, the Intel Xeon Phi
-coprocessor is an IP-addressable device which runs an independent Linux
-OS with an SSH server daemon. Let us use scp to copy the executable
-hello.mic to any of the coprocessors, for example mic0 and mic1 (and/or
-mic2):
-
-```bash
-[SERVER]$ scp hello.mic mic0:
-[SERVER]$ scp hello.mic mic1:
-[SERVER]$ scp hello.mic mic2:
-```
-
-Connect to each coprocessor through ssh and execute the binary file
-locally:
-
-```bash
-[SERVER]$ ssh mic0
-[SERVER-MIC]$ ./hello.mic
-```
-
-  > Hello world! I have 240 logical cores.
-
-```bash
-[SERVER-MIC]$ exit
-[SERVER]$ ssh mic1
-[SERVER-MIC]$ ./hello.mic
-```
-
-  > Hello world! I have 240 logical cores.
-
-```bash
-[SERVER-MIC]$ exit
-```
-
-**2.2.3** Now we are going to run the native MIC executable in the
-coprocessors from the host system, using the `micnativeloadex` utility.
-It automatically copies the native binary to a specified coprocessor,
-checks library dependencies and also copies them prior to execution. By
-default, `micnativeloadex` redirects output from the application running
-on the coprocessor back to the host system console. The output of the
-application is redirected back to the console of the host system. The
-location of the Intel compiler runtime libraries for Intel® Xeon Phi™
-coprocessors is defined by the `SINK_LD_LIBRARY_PATH` environment
-variable, so we need to set it first:
-
-```bash
-[SERVER]$ export SINK_LD_LIBRARY_PATH=/opt/intel/lib/mic
-[SERVER]$ micnativeloadex ./hello.mic –d 0
-```
-
-> Hello world! I have 240 logical cores.
-
-  
-```bash
-[SERVER]$ micnativeloadex ./hello.mic –d 1
-```
-
-> Hello world! I have 240 logical cores.
- 
-
-```bash
-[SERVER]$ micnativeloadex ./hello.mic –d 2
-```
-
-> Hello world! I have 240 logical cores.
-  
-
-The `micnativeloadex` utility can also be used to check the library
-dependencies of the binary code, by using the option `–l`:
-
-```bash
-[SERVER]$ micnativeloadex ./hello.mic –d 0 –l
-```
-
-**Extra activity:** rebuild the code `hello.c` with the `–mmic` and `–mkl`
-compiler directives, execute the previous command and identify the extra
-libraries that are related to the Intel MKL.
-
-**2.2.4** In this activity we will run three trivial Hello World
-examples, aiming to demonstrate the explicit offload model. In this
-programming model, execution begins on the host and, based on
-user-defined code, some sections are offloaded to the coprocessor(s), if
-there is one, or run in the host if not.
-
-The first example uses the directive `#pragma offload target(mic)`,
-which informs the compiler that the segment of the code immediately
-below it (and delimited with brackets) should be executed on an Intel®
-Xeon Phi™ coprocessor. Take a look at the content of the source file
-`hello-offload1.c` in **SOURCE-DIR**, then compile
-and run it:
-
-```bash
-[SERVER]$ icc hello-offload1.c –o hello-offload1
-[SERVER]$ ./hello-offload1
-```
-
-The second example shows how to declare functions within the scope of
-`#pragma offload`. The functions should be declared with the qualifier
-`__attribute__((target(mic)))`, which instructs the compiler to
-generate code for the MIC architecture for that particular function. The
-code of the function is transferred to the coprocessor and launched when
-offload occurs. Take a careful look at the content of the source file
-`hello-offload2.c`, then compile and run it:
-
-```bash
-[SERVER]$ icc hello-offload2.c –o hello-offload2
-[SERVER]$ ./hello-offload2
-```
-
-By default, environment variables defined on the host system are
-forwarded to the coprocessors when an offload application is launched.
-In this process, the variable names are not changed; to avoid variable
-name collisions on the host and the coprocessor, we need to define the
-environment variable `MIC_ENV_PREFIX`. When this variable is set, only
-the environment variables with names beginning with the specified prefix
-are forwarded. In the forwarding process, the prefix is dropped. The
-third example below shows how this process works. Take a look at the
-content of the source file `hello-offload3.c`, then compile and run it:
-
-```bash
-[SERVER]$ icc hello-offload3.c –o hello-offload3
-[SERVER]$ ./hello-offload3
-```
-  
-Set `ENV_VAR` to a certain value, run the binary again and compare the
-output with the previous run:
-  
-```bash
-[SERVER]$ export ENV_VAR=any-value
-[SERVER]$ ./hello-offload3
-```
-  
-
-Define any value for `MIC_ENV_PREFIX` (e.g. MIC, PHI, etc), and run
-again, comparing the output with the previous runs:
-
-```bash
-[SERVER]$ export MIC_ENV_PREFIX=PHI
-[SERVER]$ ./hello-offload3
-```
-
-Now define a different value for `PHI_ENV_VAR` and run once again:
-
-```bash
-[SERVER]$ export PHI_ENV_VAR=any-other-value
-[SERVER]$ ./hello-offload3
-```
-  
-
-**Note:** to undefine an environment variable use the command `unset`:
-  
-```bash
-  unset MIC_ENV_PREFIX
-```
-
-**2.2.5** We can generate diagnostic output for offload applications
-that utilize Intel Xeon Phi coprocessors by using the environment
-variable `OFFLOAD_REPORT`, which controls the verbosity of the diagnostic
-output: `OFFLOAD_REPORT = 1` produces output including the offload
-locations and times; `OFFLOAD_REPORT = 2` adds information regarding data
-traffic. If `OFFLOAD_REPORT` is set to 0 or not defined, no diagnostic
-output is produced. Set the `OFFLOAD_REPORT` environment variable to 1,
-and 2 and run `hello-offload1`, or `hello-offload2`, or `hello-offload3`
-again, and check the results.
-
-**2.2.6** The next example shows how to offload a function that sum two numbers 
-(variables A and B) and put the result in another variable (sum). In this case it 
-is necessary to transfer the content of these variables to the coprocessor, and also 
-transfer the content of the variable sum from the coprocessor to the host. The mechanism to
-perform data transfer is using the directive in and out in pragma offload
-(#pragma offload target(mic) in (A, B) out (sum)) In this case, it is used to
-indicate the variable to be transferred from host to device before the beginning 
-of execution and out the transfer of content of variable from device to host after the execution of offload region.
-
-```bash
-[SERVER]$ export OFFLOAD_REPORT=2
-[SERVER]$ icc offloadFunction.c -o offloadFunction
-[SERVER]$ ./offloadFunction
-```
-
-The offload report shows that 16 bytes were transferred from host to device and 8 bytes from device to host.
-
-Now make a change in `offloadFunction.c` by adding a function called MyFunction2 to be executed on the 
-Intel Xeon Phi, that performs the sum of all elements of an array of double elements, and display the value of the
-sum on the host. (transfer variable C[] from host to device and variable sum from device to host)
-
-Use the following snippet to perform the sum of all elements of an array:
-
-```c
-  int cont;
-  int n=100;
-  for (cont=0; cont<n; cont++)
-    sum += C[cont];
-```
-
-**Do not forget to copy variable C using directive `in`.**
-
-
-**2.2.7** Automatic vectorization
+**2.2.3** Automatic vectorization
 
 In order to enable the compiler to vectorize the code automatically, the developer needs to use the compiler directive “-O” 
 (which stands for optimization), followed by a number - 1, 2 or 3 - that indicates the level of optimization. The 
@@ -869,7 +482,9 @@ LOOP BEGIN at vect.c(11,3)
 LOOP END  
 ```
 
-The new vector instruction set AVX-512, available on the new Xeon Phi KNL, provides support for indirection called Confliction Detection. Now perform the same compilation but using -xhost which sets up the compiler to use the highest vector instruction set available, in this case AVX-512: 
+The new vector instruction set AVX-512, available on the Xeon Phi KNL, provides support for indirection
+called Confliction Detection. Now perform the same compilation but using -xhost which sets up the
+compiler to use the highest vector instruction set available, in this case AVX-512: 
 
 ```bash
 [KNL-SERVER]$ icc vect.c -o vectAVX512 -O3 -qopt-report5 -xhost
@@ -877,89 +492,24 @@ The new vector instruction set AVX-512, available on the new Xeon Phi KNL, provi
 
 Now the loop on function hist was vectorized using AVX-512.
 
-Try to run this code on **SERVER** and note that it is not possible due to the lack of the AVX-512 instruction set on the VPU of Xeon Phi first generation.
+**2.2.9** One major difference between programming for a single system and for a cluster is that
+each cluster node has a separate memory space. Unlike multiple threads running in a shared memory
+space, communication between disjoint memory spaces usually requires the programmer to make
+explicit calls to communication routines. The explicit communications occur via messages and
+the Message Passing Interface (MPI) is the standard way to send and receive messages. MPI is
+not a programming language, but instead a set of library routines that can be called from
+C/C++ and Fortran programs. MPI programs typically employ a single-program, multiple-data (SPMD)
+approach: the same MPI application is launched on each MPI host or, in other words, each MPI host
+executes the same program. However, it does not mean that all processes perform
+the same work. At runtime, each MPI process is assigned a unique identifier called MPI rank.
+Multiple instances, or MPI ranks, of the same program run concurrently, where each rank computes
+a different part of the larger problem and uses MPI calls to communicate data between ranks.
 
-**2.2.8**  When the MCDRAM is setup in flat mode a unit of 16 GB with high bandwidth is exposed as independent NUMA nodes. 
-
-In order to explore the MCDRAM available in the Xeon Phi KNL, the developer can use a library known as `Memkind`, which provides an interface to allocate memory on the MCDRAM, and can enforce the execution of an application to the NUMA node attached to the MCDRAM.
-
-In this example, we are going to compare the execution of an application that performs matrix multiplication using DDR4 against MCDRAM in flat mode.
-
-Let us first connect to the KNL server:
-
-```bash
-ssh –X traineeN@KNL-SERVER
-```
-
-Clone the source files repository:
-
-```
-$ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
-```
-
-**Note:** All the source codes we will be using in this section are located in **SOURCE-DIR**. For more information, check the [**"getting the source files"**](#get_repo) section.
-
-
-Then compile the application:
-
-```bash
-[KNL-SERVER]$ cd SOURCE-DIR/matrix/linux
-[KNL-SERVER]$ make clean
-[KNL-SERVER]$ make icc
-```
-
-and execute the command `numactl` to identify the nodes attached to DDR4 and the nodes attached to MCDRAM:
-
-```bash
-[KNL-SERVER]$ numactl -H
-```
-
-In our server the cluster mode has been setup as SNC-4, so the first four nodes (0, 1, 2 and 3) are attached to DDR4 and the other four nodes (4, 5, 6 and 7) are attached to MCDRAM.
-
-To execute the code on DDR4 we will use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 0 to 3:
-
-```bash
-[KNL-SERVER]$ time numactl -m 0,1,2,3 ./matrix.icc
-```
-
-To Execute the code on MCDRAM, we will again use the command `numactl` with parameter "m" that enforces the NUMA nodes to execute the application on nodes 4 to 7:
-
-```bash
-[KNL-SERVER]$ time numactl -m 4,5,6,7 ./matrix.icc
-```
-
-Now compare both results. Which one showed better performance? 
-
-<a name="2-2-9"></a>
-
-**2.2.9** One major difference between programming for a single system
-and for a cluster is that each cluster node has a separate memory space.
-Unlike multiple threads running in a shared memory space, communication
-between disjoint memory spaces usually requires the programmer to make
-explicit calls to communication routines. The explicit communications
-occur via messages and the Message Passing Interface (MPI) is the
-standard way to send and receive messages. MPI is not a programming
-language, but instead a set of library routines that can be called from
-C/C++ and Fortran programs. MPI programs typically employ a
-single-program, multiple-data (SPMD) approach: the same MPI application
-is launched on each MPI host or, in other words, each MPI host executes
-the same program. However, it does not mean that all processes perform
-the same work. At runtime, each MPI process is assigned a unique
-identifier called MPI rank. Multiple instances, or MPI ranks, of the
-same program run concurrently, where each rank computes a different part
-of the larger problem and uses MPI calls to communicate data between
-ranks.
-
-**Note:** In this section we will be back using the **SERVER**. If you are connected on **KNL-SERVER**, remember to change back to **SERVER** connection. 
-
-For more information, check the [**"Remote access"**](#remote_access) section.
-
-Let us start with a trivially simple “Hello World” application for MPI.
-Take a look at the hello-mpi.c source code. MPI implementations
-typically provide compiler wrappers (e.g. `mpicc`, `mpiicc`, `mpiicpc`, etc)
-to simplify the process of building MPI programs, and utilities (e.g.
-`mpirun`, `mpiexec`) to launch them. In order to verify that the wrappers
-and utilities are all set, run the following commands:
+Let us start with a trivially simple “Hello World” application for MPI. Take a look at the
+hello-mpi.c source code. MPI implementations typically provide compiler wrappers (e.g. `mpicc`,
+`mpiicc`, `mpiicpc`, etc) to simplify the process of building MPI programs, and utilities (e.g.
+`mpirun`, `mpiexec`) to launch them. In order to verify that the wrappers and utilities are
+all set, run the following commands:
 
 ```bash 
 [SERVER]$ mpiicc -v
@@ -976,45 +526,25 @@ source code and the mpirun utility to run the binary in the host system:
 ```
 
 Notice that the output is not ordered by rank; this occurs because each
-logical thread executes independently. 
-
-**2.2.10** In this activity we work with a slightly more complex Hello
-World MPI code, which runs in the host system but offloads parts of the
-code to two coprocessors in such a way that each thread also says
-“hello”. This is accomplished by means of OpenMP. The number of threads
-will be controlled by the environment variable `PHI_OMP_NUM_THREADS`.
-The information contained in this environment variable should be passed
-to the coprocessors, so we also need to tell the compiler that any
-variable starting with PHI refers to the coprocessors. We can do this by
-using the variable `MIC_ENV_PREFIX`. Take a look at code
-`hello-mpi-omp-offload.c` and try to understand it; then compile it, and
-launch the binary. Check the result.
+logical thread executes independently. To obtain an ordered output, we can pipe the
+result to the Linux command know as 'sort', which will rearrange the lines in a text
+file so that they are sorted, numerically and alphabetically.
 
 ```bash
-[SERVER]$ mpiicc -qopenmp -o hello-mpi-omp-offload hello-mpi-omp-offload.c
-[SERVER]$ export MIC_ENV_PREFIX=PHI
-[SERVER]$ export PHI_OMP_NUM_THREADS=4
-[SERVER]$ mpirun -n 4 ./hello-mpi-omp-offload
+[SERVER]$ mpirun -n 32 ./hello-mpi | sort -nk5
 ```
-<a name="2-2-11"></a>
 
-**2.2.11** In this final activity, we will work on a more
-realistic MPI application. Take a look at the source file `montecarlo.c`,
-a sample program that estimates de value of π (pi) using the Monte Carlo
-method. For more details please check the link below:
+**2.2.11** In this activity, we will work on a more realistic MPI application.
+Take a look at the source file `montecarlo.c`, a sample program that estimates the
+value of π (pi) using the Monte Carlo method. For more details please check the link below:
 
 <http://software.intel.com/en-us/articles/using-the-intel-mpi-library-on-intel-xeon-phi-coprocessor-systems>
 
-Let us start by generating binaries for the Xeon processors and the Xeon
-Phi coprocessors, and then transfer the corresponding binary to the
-coprocessors:
+Let us start by generating the binary for the Xeon Phi processor:
 
 ```bash 
 [SERVER]$ mpiicc montecarlo.c -o montecarlo
 [SERVER]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
-[SERVER]$ scp montecarlo.mic mic0:
-[SERVER]$ scp montecarlo.mic mic1:
-[SERVER]$ scp montecarlo.mic mic2:
 ```
 
 We are going to learn how we can launch an MPI job on the coprocessors
