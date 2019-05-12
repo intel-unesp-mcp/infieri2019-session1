@@ -286,26 +286,69 @@ $ ssh –X traineeN@SERVER
 ```
 
 **1.3.2** The utility `lscpu` shows information about the CPU architecture. 
-Use this utility to obtain the amount of cores and threads available on the Intel 
-KNL processor installed in the system:
+Use this utility to obtain the processor model, the amount of cores and the number of threads per
+core available on the Intel KNL processor installed in the system:
 
 ```bash
 [SERVER]$ lscpu
 ```
 
-**1.3.3** The utility `numactl` maps processes to specific NUMA nodes. Use this utility 
-with the parameter -H to obtain information about the NUMA nodes in the system.
+**1.3.3** In highly parallel processors such as the KNL, parallelism is present at two levels: task
+parallelism and data parallelism. Task parallelism comes from the massive number of cores in the processor.
+Data parallelism comes from support for **vector instructions**, which make every core of the processor
+a single instruction multiple data (SIMD) processor. The 1st generation Intel Xeon Phi processors,
+released in 2012 and code-named Knights Corner (KNC), were first Intel architecture processors to
+support 512-bit vectors. The 2nd generation Intel Xeon Phi processors, released in 2016 and code-named
+Knights Landing (KNL), also support 512-bit vectors, but in a new instruction set called Intel Advanced
+Vector Extensions 512 (Intel AVX-512).Let us run again the utility `lscpu` to obtain the AVX512 instructions
+available for the KNL processor we are using. We are going to use the Linux `pipe`and `grep` commands.
+The pipe command allows us to use two or more commands such that output of one command serves as input
+to the next, like a pipeline. The symbol '|' denotes a pipe. The `grep` command works like a filter,
+searching a long string of characters for a particular pattern of characters, and displays or highlights all
+lines that contain that pattern.
 
 ```bash
-[SERVER]$ numactl -H
+[SERVER]$ lscpu | grep avx512
 ```
 
-The cluster mode of the KNL server we are using has been configured as SNC-4, so cores appear grouped into 
-four nodes with exactly a quarter of the on-platform memory in each node. 
-In addition, our system uses the on-package high bandwidt memory (HBM) configured as ﬂat mode, 
-which adds four more NUMA nodes with a quarter of the HBM assigned for each node.
+How many AVX512 instructions does the KNL support? Identify each of them. For more information, have
+a look at the following reference:
 
-**1.3.4** The utility `numastat` displays memory statistics (such as allocation hits and misses)
+-   _Guide to Automatic Vectorization with Intel AVX-512 Instructions in Knights Landing Processors_  
+    <https://colfaxresearch.com/knl-avx512/>
+
+
+**1.3.4** The utility `numactl` maps processes to specific NUMA nodes. Use this utility 
+with the parameter --hardware (or -H) to obtain information about the NUMA nodes in the system.
+
+```bash
+[SERVER]$ numactl --hardware
+```
+
+The KNL server we are using has been configured as **quadrant-cache**, which means
+that the cluster mode is set as quadrant and the MCDRAM is set as cache memory. Clustering mode is a
+unique feature of KNL processors that allows us to divide the chip into separate virtual
+regions with the goal of keeping the interconnections inside the chip to be as local as possible,
+thus lowering the latency and increasing the bandwidth of on-die communications. In the quadrant
+clustering mode, the tiles are divided into four parts called quadrants, which are spatially local
+to four groups of memory controllers. Memory addresses served by a memory controller in a quadrant
+are guaranteed to be mapped only to the tiles contained in that quadrant. One other cluster mode,
+known as hemisphere mode, functions the same way, except that the die is divided into two hemispheres
+instead of four quadrants. In addition, our system uses the on-package high bandwidt memory (HBM),
+or MCDRAM, configured as cache. In cache mode, the MCDRAM works like an Level 3 cache, which means
+that all memory access go through the MCDRAM to reach the DDR4 memory. As MCDRAM is several times
+faster than DDR4, performance will be better if most of the data comes from or go to the MCDRAM
+cache instead of the DDR4 memory.
+
+For more information, have a look at the following references:
+
+-   _Clustering Modes in Knights Landing Processors_  
+    <https://colfaxresearch.com/knl-numa/>
+
+-   _MCDRAM as High-Bandwidth Memory (HBM) in Knights Landing Processors_  
+    <https://colfaxresearch.com/knl-mcdram/>
+
+**1.3.5** The utility `numastat` displays memory statistics (such as allocation hits and misses)
 for processes and the operating system on a per-NUMA-node basis. The option -m displays system-wide
 memory usage information on a per-node basis, similar to the information found in /proc/meminfo.
 
