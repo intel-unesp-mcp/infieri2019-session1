@@ -67,8 +67,9 @@ on tuning parallel applications.
 
 ## Before you start
 
-Please read carefully the introduction and the first section, 'KNL Architecture Overview',
-of the paper referenced below, which will give you an overview of the Intel Xeon Phi processor.
+Please read carefully the introduction and the first section - 'KNL Architecture Overview' - of the
+paper referenced below, which provides a summary of the essential features of the second-generation
+Intel Xeon Phi processor.
 
 Sodani, Avinash et. al., *Knights Landing: Second-Generation Intel Xeon Phi Product*.
 IEEE Micro. 36. 34-46. 10.1109/MM.2016.25.
