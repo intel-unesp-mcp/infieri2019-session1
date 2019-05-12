@@ -6,8 +6,8 @@
 
 **April 2019**
 
-Unesp Center for Scientific Computing
-São Paulo State University (Universidade Estadual Paulista)
+UNESP Center for Scientific Computing (an Intel Modern Code Partner)  
+São Paulo State University (Universidade Estadual Paulista - UNESP)
 
 São Paulo, Brazil
 
