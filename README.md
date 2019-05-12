@@ -294,13 +294,14 @@ core available on the Intel KNL processor installed in the system:
 ```
 
 **1.3.3** In highly parallel processors such as the KNL, parallelism can be explored at least in three levels: data
-parallelism with vector instructions, task parallelism in shared memory with threads, and process parallelism
-in distributed memory with message passing. Data parallelism comes from support for **vector instructions**,
-which make every core of the processor a single instruction multiple data (SIMD) processor. The 1st generation
-Intel Xeon Phi processors, released in 2013 and code-named Knights Corner (KNC), were first Intel architecture
-processors to support 512-bit vectors. The 2nd generation Intel Xeon Phi processors, released in 2016 and code-named
-Knights Landing (KNL), also support 512-bit vectors, but in a new instruction set called Intel Advanced
-Vector Extensions 512 (Intel AVX-512).
+parallelism with vector instructions (vectorization), task parallelism within a single server with multiple threads
+(e.g. OpenMP), and process parallelism in distributed servers with message passing (e.g. MPI). Data parallelism
+comes from support for **vector instructions**, which make every core of the processor a single instruction multiple
+data (SIMD) processor. The 1st generation Intel Xeon Phi processors, released in 2013 and code-named Knights Corner
+(KNC), were first Intel architecture processors to support 512-bit vectors. The 2nd generation Intel Xeon Phi
+processors, released in 2016 and code-named Knights Landing (KNL), also support 512-bit vectors, but in a new
+instruction set called Intel Advanced Vector Extensions 512 (Intel AVX-512).
+
 Let us run again the utility `lscpu` to obtain the AVX512 instructions available for the KNL processor we are using.
 We are going to use the Linux `pipe`and `grep` commands. The pipe command allows us to use two or more commands
 such that output of one command serves as input to the next, like a pipeline. The symbol '|' denotes a pipe.
@@ -325,17 +326,18 @@ with the parameter --hardware (or -H) to obtain information about the NUMA nodes
 [SERVER]$ numactl --hardware
 ```
 
-The KNL server we are using has been configured as **quadrant-cache**, which means
-that the cluster mode is set as quadrant and the MCDRAM is set as cache memory. Clustering mode is a
-unique feature of KNL processors that allows us to divide the chip into separate virtual
-regions with the goal of keeping the interconnections inside the chip to be as local as possible,
-thus lowering the latency and increasing the bandwidth of on-die communications. In quadrant
-cluster mode, the tiles are divided into four parts called quadrants, which are spatially local
-to four groups of memory controllers. Memory addresses served by a memory controller in a quadrant
-are guaranteed to be mapped only to the tiles contained in that quadrant. One other cluster mode,
-known as hemisphere mode, functions the same way, except that the die is divided into two hemispheres
-instead of four quadrants. The quadrant mode is transparent to software, which means that there is no
-need to do anything special to benefit from this mode. This is the reason why we have chosen this
+The KNL servers we are using are configured as **quadrant-cache**, which means that the cluster mode
+is set as quadrant and the MCDRAM is set as cache memory. Clustering mode is a unique feature of KNL
+processors that allows us to divide the chip into separate virtual regions with the goal of keeping the
+interconnections inside the chip to be as local as possible, thus lowering the latency and increasing
+the bandwidth of on-die communications. When the KNL is configured in quadrant cluster mode, the tiles
+are divided into four virtual regions called quadrants, which are spatially local to the four groups
+of memory controllers. Memory addresses served by a memory controller in a specific quadrant
+are guaranteed to be mapped only to the tiles contained in that quadrant. In the quadrant cluster mode there
+is only one NUMA memory mode, numbered zero. The output of `numactl -H` for KNL configured as all-to-all and
+hemisphere are identical to the quadrant mode. Tha most complex example is when the cluster mode is set to
+SNC-4 and the memory mode is set to flat. The quadrant mode is transparent to software, which means that there is
+no need to do anything special to benefit from this mode. This is the reason why we have chosen this
 configuration for this training.
 
 For more information, have a look at the following reference:
