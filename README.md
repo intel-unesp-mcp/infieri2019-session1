@@ -292,6 +292,9 @@ core available on the Intel KNL processor installed in the system:
 [KNL-SERVER]$ lscpu
 ```
 
+On the "Useful References" topic above, check the last one, "Intel® Xeon Phi™ x200 Product Family". Navigate through
+this web page and find the complete product specification for the KNL processor we are using in this set of exercises.
+
 **1.3.3** In highly parallel processors such as the KNL, parallelism can be explored at least in three levels: data
 parallelism with vector instructions (vectorization), task parallelism within a single server with multiple threads
 (e.g. OpenMP), and process parallelism in distributed servers with message passing (e.g. MPI). Data parallelism
@@ -362,6 +365,9 @@ memory usage information on a per-node basis, similar to the information found i
 ```bash
 [KNL-SERVER]$ numastat -m
 ```
+
+The instructor / teaching assistant will help you to have access to a different server which is configured in a
+distinc way, so you can compare the outputs of the commands `numactl` and `numastat`. Please ask for his assistance.
 ______
 
 ### Quick Navigation ###
