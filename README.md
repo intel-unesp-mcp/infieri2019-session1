@@ -366,8 +366,8 @@ memory usage information on a per-node basis, similar to the information found i
 [KNL-SERVER]$ numastat -m
 ```
 
-The instructor / teaching assistant will help you to have access to a different server which is configured in a
-distinc way, so you can compare the outputs of the commands `numactl` and `numastat`. Please ask for his assistance.
+The instructor will help you to have access to a different server which is configured in a distinc way,
+so you can compare the outputs of the commands `numactl` and `numastat`. Please ask for his assistance.
 ______
 
 ### Quick Navigation ###
@@ -599,16 +599,6 @@ Let us start by generating the binary for the Xeon Phi processor:
 
 ```bash 
 [KNL-SERVER]$ mpiicc montecarlo.c -o montecarlo
-[KNL-SERVER]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
-```
-
-We are going to learn how we can launch an MPI job on the coprocessors
-from the host system. First we need to set an additional environment
-variable on the host, `I_MPI_MIC`, to enable the MPI communication
-between host and coprocessors (valid values are: enable|yes|on|1):
-
-```bash
-[KNL-SERVER]$ export I_MPI_MIC=enable
 ```
 
 Now execute the application on the host and then on the coprocessors,
@@ -617,12 +607,12 @@ number of MPI processes, respectively (be patient, execution time is
 longer compared to the previous exercises):
 
 ```bash
-[KNL-SERVER]$ mpirun -host localhost -n 32 ./montecarlo
-[KNL-SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic
-[KNL-SERVER]$ mpirun -host mic1 -n 240 ./montecarlo.mic
-[KNL-SERVER]$ mpirun -host mic2 -n 240 ./montecarlo.mic
-[KNL-SERVER]$ mpirun -host mic3 -n 240 ./montecarlo.mic
-[KNL-SERVER]$ mpirun -host mic4 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host localhost -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl02 -n 64 ~/montecarlo.mic
+[KNL-SERVER]$ mpirun -host knl03 -n 64 ~/montecarlo.mic
+[KNL-SERVER]$ mpirun -host knl04 -n 64 ~/montecarlo.mic
+[KNL-SERVER]$ mpirun -host knl05 -n 64 ~/montecarlo.mic
+[KNL-SERVER]$ mpirun -host knl06 -n 64 ~/montecarlo.mic
 ```
   
 In order to start the application on two coprocessors simultaneously, we
@@ -630,13 +620,14 @@ can specify the list of hosts and their respective parameters using the
 separator `:`, as shown below:
 
 ```bash
-[KNL-SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic : -host mic1 –n 240 ./montecarlo.mic : -host mic2 –n 240
+[KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo : -host knl02 –n 64 ~/montecarlo
 ```
 
 Using this syntax, let us now execute the MPI application using all available threads:
 
 ```bash
-[KNL-SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 ./montecarlo.mic : -host mic1 -n 240 ./montecarlo.mic : -host mic2 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo : -host knl02 -n 64 ~/montecarlo : -host
+knl03 -n 64 ~/montecarlo : -host knl04 -n 64 ~/montecarlo
 ```
 ______
 
