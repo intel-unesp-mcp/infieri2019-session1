@@ -87,7 +87,7 @@ on-die interconnect, and an integrated on-package network fabric. These features
 the Knights Landing processor to provide significant performance improvement for
 computationally intensive and bandwidth-bound workloads while still providing good
 performance on unoptimized legacy workloads, without requiring any special way of
-programming other than the standard CPU programming model."
+programming other than the standard CPU programming model."   
 ______
 
 ## Navigation
@@ -281,7 +281,7 @@ as user traineeN (N = 01 … 30; please check with the teaching assistant
 which number has been assigned to you):
 
 ```bash
-$ ssh –X traineeN@SERVER
+$ ssh –X traineeN@KNL-SERVER
 ```
 
 **1.3.2** The utility `lscpu` shows information about the CPU architecture. 
@@ -289,7 +289,7 @@ Use this utility to obtain the processor model, the amount of cores and the numb
 core available on the Intel KNL processor installed in the system:
 
 ```bash
-[SERVER]$ lscpu
+[KNL-SERVER]$ lscpu
 ```
 
 **1.3.3** In highly parallel processors such as the KNL, parallelism can be explored at least in three levels: data
@@ -308,7 +308,7 @@ The `grep` command works like a filter, searching a long string of characters fo
 characters, and displays or highlights all lines that contain that pattern.
 
 ```bash
-[SERVER]$ lscpu | grep avx512
+[KNL-SERVER]$ lscpu | grep avx512
 ```
 
 How many AVX512 instructions does the KNL support? Identify each of them. For more information, have
@@ -322,7 +322,7 @@ a look at the following reference:
 with the parameter --hardware (or -H) to obtain information about the NUMA nodes in the system.
 
 ```bash
-[SERVER]$ numactl --hardware
+[KNL-SERVER]$ numactl --hardware
 ```
 
 The KNL servers we are using are configured as **quadrant-cache**, which means that the cluster mode
@@ -360,7 +360,7 @@ for processes and the operating system on a per-NUMA-node basis. The option -m d
 memory usage information on a per-node basis, similar to the information found in /proc/meminfo.
 
 ```bash
-[SERVER]$ numastat -m
+[KNL-SERVER]$ numastat -m
 ```
 ______
 
@@ -409,8 +409,8 @@ In order to verify that the compilers are installed, run the following commands 
 host system:
 
 ```bash
-[SERVER]$ icc -V
-[SERVER]$ icpc -V
+[KNL-SERVER]$ icc -V
+[KNL-SERVER]$ icpc -V
 ```
 
 **2.2.2** Let us begin with a trivial code just to check if everything is running fine.
@@ -418,10 +418,10 @@ Take a look at the source code `hello.c` located at **SOURCE-DIR**, then compile
 execute it:
 
 ```bash
-[SERVER]$ cd SOURCE-DIR
-[SERVER]$ cat ./hello.c
-[SERVER]$ icc hello.c -o hello
-[SERVER]$ ./hello
+[KNL-SERVER]$ cd SOURCE-DIR
+[KNL-SERVER]$ cat ./hello.c
+[KNL-SERVER]$ icc hello.c -o hello
+[KNL-SERVER]$ ./hello
 ```
   > Hello world! I have 272 logical cores.
 
@@ -440,7 +440,7 @@ that shows the optimizations performed for each loop and information in case any
 In this next example we will compile the code `vect.c` using the compiler directive `-O3` and `-qopt-report`.
 
 ```bash
-[SERVER]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
+[KNL-SERVER]$ icc vect.c -o vectAVX512 -O3 -qopt-report5
 ```
 
 Open the vectorization report `vect.optrpt` and search for `loop` on main function. This loop was automaticaly vectorized, but the loop on `hist` function was not, due to data dependencies. The indirection in the index of variable samples inside function `hist` inhibited vectorization. Note the following message on the vectorization report:
@@ -562,17 +562,17 @@ hello-mpi.c source code. MPI implementations typically provide compiler wrappers
 all set, run the following commands:
 
 ```bash 
-[SERVER]$ mpiicc -v
-[SERVER]$ mpiicpc -v
-[SERVER]$ mpirun -info
+[KNL-SERVER]$ mpiicc -v
+[KNL-SERVER]$ mpiicpc -v
+[KNL-SERVER]$ mpirun -info
 ```
 
 Let us start by using the mpiicc wrapper to compile the hello-mpi.c
 source code and the mpirun utility to run the binary in the host system:
 
 ```bash
-[SERVER]$ mpiicc hello-mpi.c -o hello-mpi
-[SERVER]$ mpirun -n 32 ./hello-mpi
+[KNL-SERVER]$ mpiicc hello-mpi.c -o hello-mpi
+[KNL-SERVER]$ mpirun -n 32 ./hello-mpi
 ```
 
 Notice that the output is not ordered by rank; this occurs because each logical thread executes
@@ -580,7 +580,7 @@ independently. As we have already seen, to obtain an ordered output, we can pipe
 the Linux command `sort`:
 
 ```bash
-[SERVER]$ mpirun -n 32 ./hello-mpi | sort -nk5
+[KNL-SERVER]$ mpirun -n 32 ./hello-mpi | sort -nk5
 ```
 
 **2.2.6** In this activity, we will work on a more realistic MPI application.
@@ -592,8 +592,8 @@ value of π (pi) using the Monte Carlo method. For more details please check the
 Let us start by generating the binary for the Xeon Phi processor:
 
 ```bash 
-[SERVER]$ mpiicc montecarlo.c -o montecarlo
-[SERVER]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
+[KNL-SERVER]$ mpiicc montecarlo.c -o montecarlo
+[KNL-SERVER]$ mpiicc -mmic montecarlo.c -o montecarlo.mic
 ```
 
 We are going to learn how we can launch an MPI job on the coprocessors
@@ -602,7 +602,7 @@ variable on the host, `I_MPI_MIC`, to enable the MPI communication
 between host and coprocessors (valid values are: enable|yes|on|1):
 
 ```bash
-[SERVER]$ export I_MPI_MIC=enable
+[KNL-SERVER]$ export I_MPI_MIC=enable
 ```
 
 Now execute the application on the host and then on the coprocessors,
@@ -611,12 +611,12 @@ number of MPI processes, respectively (be patient, execution time is
 longer compared to the previous exercises):
 
 ```bash
-[SERVER]$ mpirun -host localhost -n 32 ./montecarlo
-[SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic
-[SERVER]$ mpirun -host mic1 -n 240 ./montecarlo.mic
-[SERVER]$ mpirun -host mic2 -n 240 ./montecarlo.mic
-[SERVER]$ mpirun -host mic3 -n 240 ./montecarlo.mic
-[SERVER]$ mpirun -host mic4 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host localhost -n 32 ./montecarlo
+[KNL-SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host mic1 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host mic2 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host mic3 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host mic4 -n 240 ./montecarlo.mic
 ```
   
 In order to start the application on two coprocessors simultaneously, we
@@ -624,13 +624,13 @@ can specify the list of hosts and their respective parameters using the
 separator `:`, as shown below:
 
 ```bash
-[SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic : -host mic1 –n 240 ./montecarlo.mic : -host mic2 –n 240
+[KNL-SERVER]$ mpirun -host mic0 -n 240 ./montecarlo.mic : -host mic1 –n 240 ./montecarlo.mic : -host mic2 –n 240
 ```
 
 Using this syntax, let us now execute the MPI application using all available threads:
 
 ```bash
-[SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 ./montecarlo.mic : -host mic1 -n 240 ./montecarlo.mic : -host mic2 -n 240 ./montecarlo.mic
+[KNL-SERVER]$ mpirun -host localhost -n 32 ./montecarlo : -host mic0 -n 240 ./montecarlo.mic : -host mic1 -n 240 ./montecarlo.mic : -host mic2 -n 240 ./montecarlo.mic
 ```
 ______
 
