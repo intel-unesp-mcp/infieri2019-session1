@@ -601,21 +601,32 @@ Let us start by generating the binary for the Xeon Phi processor:
 [KNL-SERVER]$ mpiicc montecarlo.c -o montecarlo
 ```
 
-Now execute the application on the host and then on the coprocessors,
-using the the flags `–host` and `–n`, which specifies the host name and the
-number of MPI processes, respectively (be patient, execution time is
-longer compared to the previous exercises):
+Execute the application on your host, using the the flags `–host` and `–n`, which specifies the host name and the
+number of MPI processes, respectively (be patient, execution time is longer compared to the previous exercises):
 
 ```bash
-[KNL-SERVER]$ mpirun -host localhost -n 64 ~/montecarlo
-[KNL-SERVER]$ mpirun -host knl02 -n 64 ~/montecarlo.mic
-[KNL-SERVER]$ mpirun -host knl03 -n 64 ~/montecarlo.mic
-[KNL-SERVER]$ mpirun -host knl04 -n 64 ~/montecarlo.mic
-[KNL-SERVER]$ mpirun -host knl05 -n 64 ~/montecarlo.mic
-[KNL-SERVER]$ mpirun -host knl06 -n 64 ~/montecarlo.mic
+[KNL-SERVER]$ mpirun -host knlXX -n 64 ~/montecarlo
+```
+
+Now we are going to execute the montecarlo application on distinct hosts. To do this we need to copy
+the executable file to the other servers:
+
+```bash
+[KNL-SERVER]$ for i in {01..06}; do scp montecarlo knl$i:~; done
+```
+
+To check that we can start and run the application on all hosts, let us execute it on each host individually: 
+
+```bash
+[KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl02 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl03 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl04 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl05 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl06 -n 64 ~/montecarlo
 ```
   
-In order to start the application on two coprocessors simultaneously, we
+In order to start the application on more than one host simultaneously, we
 can specify the list of hosts and their respective parameters using the
 separator `:`, as shown below:
 
@@ -623,11 +634,10 @@ separator `:`, as shown below:
 [KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo : -host knl02 –n 64 ~/montecarlo
 ```
 
-Using this syntax, let us now execute the MPI application using all available threads:
+Using this syntax, let us now execute the montecarlo application using all available servers simultaneously:
 
 ```bash
-[KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo : -host knl02 -n 64 ~/montecarlo : -host
-knl03 -n 64 ~/montecarlo : -host knl04 -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knl01 -n 64 ~/montecarlo : -host knl02 -n 64 ~/montecarlo : -host knl03 -n 64 ~/montecarlo : -host knl04 -n 64 ~/montecarlo : -host knl05 -n 64 ~/montecarlo : -host knl06 -n 64 ~/montecarlo
 ```
 ______
 
