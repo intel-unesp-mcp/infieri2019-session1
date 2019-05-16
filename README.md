@@ -655,11 +655,11 @@ ______
 
 ### 3.1 Goals ###
 
-In this part we will follow the virtual workshop training entitled 'Getting started on KNL',
-provided by the Cornell University Center for Advanced Computing (CAC), which emphasises some prominent
-characteristics of the Intel KNL processor architecture. The virtual workshop includes short,
-relevant exercises to highlight some features that we have already touched in Part 1 and Part 2
-of the present training.
+Just as a recap and to reinforce the knowledge that we have acquired so far, in this part we will follow the virtual
+workshop training entitled 'Getting started on KNL', provided by the Cornell University Center for Advanced
+Computing (CAC), which emphasises some prominent characteristics of the Intel KNL processor architecture. The
+virtual workshop includes short, relevant exercises to highlight some features that we have already touched
+in Part 1 and Part 2 of the present training.
 
 ### 3.2 Hands-on Activities ###
 
