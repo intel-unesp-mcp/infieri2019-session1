@@ -512,7 +512,7 @@ curly brackets in parallel, using all the threads available on the system.
 Now compile source code and run the generated executable file:
 
 ```bash
-[KNL-SERVER]$ icc -qopenmp -o hello-imp  hello-omp.c
+[KNL-SERVER]$ icc -qopenmp -o hello-omp  hello-omp.c
 [KNL-SERVER]$ ./hello-omp
 ```
 
