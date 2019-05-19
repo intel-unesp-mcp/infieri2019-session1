@@ -612,7 +612,7 @@ Execute the application on your host, using the the flags `–host` and `–n`, 
 number of MPI processes, respectively (be patient, execution time is longer compared to the previous exercises):
 
 ```bash
-[KNL-SERVER]$ mpirun -host knlXX -n 64 ~/montecarlo
+[KNL-SERVER]$ mpirun -host knlXX -n 64 ./montecarlo
 ```
 
 Now we are going to execute the montecarlo application on distinct hosts. To do this we need to copy
