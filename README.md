@@ -181,9 +181,14 @@ the host system console:
 $ git clone https://github.com/intel-unesp-mcp/infieri-2017-basic.git
 ```
 
-The source files will be available at the `infieri-2017-basic/src` directory.
+The source files will be available at the `infieri-2017-basic/src` directory:
 
-From now on, the full path for these files will be referred as **SOURCE-DIR**.
+```bash
+$ cd infieri-2017-basic/src
+$ pwd
+```
+
+From now on, the full path for these files (as indicated by the command pwd) will be referred as **SOURCE-DIR**.
 
 Please refer to the teaching assistant(s) for more details.
 
