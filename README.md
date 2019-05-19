@@ -185,10 +185,9 @@ The source files will be available at the `infieri-2017-basic/src` directory:
 
 ```bash
 $ cd infieri-2017-basic/src
-$ pwd
 ```
 
-From now on, the full path for these files (as indicated by the command `pwd`) will be referred as **SOURCE-DIR**.
+From now on, the full path for these files will be referred as **SOURCE-DIR**.
 
 Please refer to the teaching assistant(s) for more details.
 
