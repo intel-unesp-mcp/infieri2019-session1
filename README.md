@@ -188,7 +188,7 @@ $ cd infieri-2017-basic/src
 $ pwd
 ```
 
-From now on, the full path for these files (as indicated by the command pwd) will be referred as **SOURCE-DIR**.
+From now on, the full path for these files (as indicated by the command `pwd`) will be referred as **SOURCE-DIR**.
 
 Please refer to the teaching assistant(s) for more details.
 
@@ -237,9 +237,12 @@ memory bandwidth. The novelties of Intel KNL are the following:
 
 -	Increase in the number of cores: distinct KNL models have 64, 68 or 72 cores;
 -	Improvement on the size of the Vector Processing Units (VPU): each core provides two units of 512 bits;
--	Improvements on the vector instruction set: KNL provides support to a new instruction set known as AVX-512, that offers new functionalities for vectorization but is fully compatible with previous versions;
--	KNL is available both as a processor or as a coprocessor, maintaining compatibility with applications compiled for the Intel Xeon;
--	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random access memory (MCDRAM), that complements DDR4.
+-	Improvements on the vector instruction set: KNL provides support to a new instruction set known as AVX-512,
+that offers new functionalities for vectorization but is fully compatible with previous versions;
+-	KNL is available both as a processor or as a coprocessor, maintaining compatibility with applications
+compiled for the Intel Xeon;
+-	An Integrated on-package High-bandwidth memory (HBM) with 16 GB based on the multi-channel dynamic random
+access memory (MCDRAM).
 
 Each core of the KNL architecture has two 512-bit VPUs, L1 cache and is capable
 of executing four threads. Cores are organized in tiles, each one consisting of
