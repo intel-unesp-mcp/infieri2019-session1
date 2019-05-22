@@ -531,7 +531,7 @@ rearrange the lines in a text file so that they are sorted, numerically and alph
 The output can be ordered using the following command:
 
 ```bash
-[KNL-SERVER]$ ./hello-omp | sort -nk5
+[KNL-SERVER]$ ./hello-omp | sort -nk6
 ```
 
 We can set the maximum number
